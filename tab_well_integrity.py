@@ -35,8 +35,8 @@ def set_style(width, textAlign="left", bold=None, border=False):
 def create_barrier_dropdown():
     return dcc.Dropdown(
                             options=[
-                                {"label": "Primary", "value": "primary"},
-                                {"label": "Secondary", "value": "secondary"}
+                                {"label": "Primary", "value": "Primary"},
+                                {"label": "Secondary", "value": "Secondary"}
                             ],
                             value="",      # default selection
                             clearable=False,
@@ -47,8 +47,8 @@ def create_barrier_dropdown():
 def create_retrievable_dropdown(id_name):
     return dcc.Dropdown(
                             options=[
-                                {"label": "Yes", "value": "yes"},
-                                {"label": "No", "value": "no"}
+                                {"label": "Yes", "value": "Yes"},
+                                {"label": "No", "value": "No"}
                             ],
                             id=id_name,
                             value="",      # default selection
@@ -60,9 +60,9 @@ def create_retrievable_dropdown(id_name):
 def create_answer_dropdown(id_name):
     return dcc.Dropdown(
                             options=[
-                                {"label": "Yes", "value": "yes"},
-                                {"label": "No", "value": "no"},
-                                {"label": "Unknown", "value": "unknown"},
+                                {"label": "Yes", "value": "Yes"},
+                                {"label": "No", "value": "No"},
+                                {"label": "Unknown", "value": "Unknown"},
                             ],
                             id=id_name,
                             value="",      # default selection
@@ -74,9 +74,9 @@ def create_answer_dropdown(id_name):
 def create_impact_dropdown(id_name):
     dp_down = dcc.Dropdown(
                             options=[
-                                {"label": "Low", "value": "low"},
-                                {"label": "Medium", "value": "medium"},
-                                {"label": "High", "value": "high"},
+                                {"label": "Low", "value": "Low"},
+                                {"label": "Medium", "value": "Medium"},
+                                {"label": "High", "value": "High"},
                             ],
                             value=None,      # default selection
                             clearable=False,
@@ -617,23 +617,18 @@ tab_well_integrity = dcc.Tab(
                                 html.Td(create_barrier_dropdown(), style=set_style(cw_3, textAlign="center")),
                                 html.Td(create_retrievable_dropdown("retrievable-16"), style=set_style(cw_4)),
                                 html.Tr([
-                                        html.Td("1. Is the tubing string inspected and free of any defect (e.g. corrosion) as per applicable requirements?", style=set_style(cw_6)),
+                                        html.Td("1. Are all x-mas tree components inspected and free of any defect (e.g. corrosion) as per applicable requirements?", style=set_style(cw_6)),
                                         html.Td(create_answer_dropdown("q-16-1"), style=set_style(cw_8, textAlign="right"))
                                     ]
                                 ),
                                 html.Tr([
-                                        html.Td("2. Has the tubing string been verified through functional testing (e.g. pressure testing) as required by applicable standards, guidelines, or regulations?", style=set_style(cw_6)),
+                                        html.Td("2. Have all x-mas tree components been verified through functional testing (e.g. pressure testing) as required by applicable standards, guidelines, or regulations?", style=set_style(cw_6)),
                                         html.Td(create_answer_dropdown("q-16-2"), style=set_style(cw_8, textAlign="right"))
                                     ]
                                 ),
                                 html.Tr([
-                                        html.Td("3. Does the tubing string contain gas-tight (premium) connections?", style=set_style(cw_6)),
+                                        html.Td("3. Are all x-mas tree materials compatible and designed for hydrogen environment? E.g. metal-to-metal seals, less connections", style=set_style(cw_6)),
                                         html.Td(create_answer_dropdown("q-16-3"), style=set_style(cw_8, textAlign="right"))
-                                    ]
-                                ),
-                                html.Tr([
-                                        html.Td("4. Is the tubing string material compatible with the expected operating conditions?", style=set_style(cw_6)),
-                                        html.Td(create_answer_dropdown("q-16-4"), style=set_style(cw_8, textAlign="right"))
                                     ]
                                 ),
                                 html.Td("", id="a-ffs-16", style=set_style(cw_7, textAlign="center")),
@@ -722,9 +717,9 @@ tab_well_integrity = dcc.Tab(
 )
 def change_impact_color(value):
     mapping = {
-        "low": "#43c5437f",
-        "medium": "#fff13081",
-        "high": "#c027277b"
+        "Low": "#43c5437f",
+        "Medium": "#fff13081",
+        "High": "#c027277b"
     }
     style={
         "width": "24px",
@@ -746,9 +741,9 @@ def change_impact_color(value):
 )
 def qualified_FFS_1(input):
     mapping = {
-        "yes": {"bg_color": "#43c54381", "tx_color": "#000000", "text": "Yes"},
-        "no": {"bg_color": "#c0272783", "tx_color": "#FFFFFF", "text": "No"},
-        "unknown": {"bg_color": "#4E4E4E", "tx_color": "#FFFFFF", "text": "Unknown"},
+        "Yes": {"bg_color": "#43c54381", "tx_color": "#000000", "text": "Yes"},
+        "No": {"bg_color": "#c0272783", "tx_color": "#FFFFFF", "text": "No"},
+        "Unknown": {"bg_color": "#4E4E4E", "tx_color": "#FFFFFF", "text": "Unknown"},
         "": {"bg_color": "#f5f5f5", "tx_color": "#FFFFFF", "text": ""},
     }
     style = {
@@ -758,7 +753,7 @@ def qualified_FFS_1(input):
         "fontWeight": "bold",
         "backgroundColor": "#4E4E4E"
     }
-    selected = mapping.get(input, mapping["unknown"])
+    selected = mapping.get(input, mapping["Unknown"])
     style["backgroundColor"] = selected["bg_color"]
     style["color"] = selected["tx_color"]
     style["fontWeight"] = "bold"
@@ -773,9 +768,9 @@ def qualified_FFS_1(input):
 )
 def material_compatibility_1(input):
     mapping = {
-        "yes": {"bg_color": "#43c54381", "tx_color": "#000000", "text": "Yes"},
-        "no": {"bg_color": "#c0272783", "tx_color": "#FFFFFF", "text": "No"},
-        "unknown": {"bg_color": "#4E4E4E", "tx_color": "#FFFFFF", "text": "Unknown"},
+        "Yes": {"bg_color": "#43c54381", "tx_color": "#000000", "text": "Yes"},
+        "No": {"bg_color": "#c0272783", "tx_color": "#FFFFFF", "text": "No"},
+        "Unknown": {"bg_color": "#4E4E4E", "tx_color": "#FFFFFF", "text": "Unknown"},
         "": {"bg_color": "#f5f5f5", "tx_color": "#FFFFFF", "text": ""},
     }
     style = {
@@ -785,7 +780,7 @@ def material_compatibility_1(input):
         "fontWeight": "bold",
         "backgroundColor": "#4E4E4E"
     }
-    selected = mapping.get(input, mapping["unknown"])
+    selected = mapping.get(input, mapping["Unknown"])
     style["backgroundColor"] = selected["bg_color"]
     style["color"] = selected["tx_color"]
     style["fontWeight"] = "bold"
@@ -804,12 +799,12 @@ def mitigation_1(H, I, is_retrievable):
     if H == "Unknown" or I == "Unknown":
         text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
     elif H == "Yes" and I == "Yes":
-        text, bg_color, txt_color = "No or minor", "#a2c543", "#000000"
+        text, bg_color, txt_color = "No or minor", "#43c543", "#000000"
     elif H == "No" or I == "No":
-        if is_retrievable == "no":
+        if is_retrievable == "No":
             text, bg_color, txt_color = "Severe", "#c02727", "#FFFFFF"
-        elif is_retrievable == "yes":
-            text, bg_color, txt_color = "Minor", "#43c543", "#000000"
+        elif is_retrievable == "Yes":
+            text, bg_color, txt_color = "Minor", "#a2c543", "#000000"
         else:
             text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
     else:
@@ -834,11 +829,11 @@ def mitigation_1(H, I, is_retrievable):
     Input(component_id="q-2-2", component_property="value"),
 )
 def qualified_FFS_2(q1, q2):
-    if q1 == "unknown" or q2 == "unknown":
+    if q1 == "Unknown" or q2 == "Unknown":
         text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
-    elif q1 == "yes" and q2 == "yes":
+    elif q1 == "Yes" and q2 == "Yes":
         text, bg_color, txt_color = "Yes", "#43c54381", "#000000"
-    elif q1 == "no" or q2 == "no":
+    elif q1 == "No" or q2 == "No":
         text, bg_color, txt_color = "No", "#c0272783", "#FFFFFF"
     else:
         text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
@@ -860,11 +855,11 @@ def qualified_FFS_2(q1, q2):
     Input(component_id="q-2-3", component_property="value")
 )
 def material_compatibility_2(q3):
-    if q3 == "yes":
+    if q3 == "Yes":
         text, bg_color, txt_color = "Yes", "#43c54381", "#000000"
-    elif q3 == "no":
+    elif q3 == "No":
         text, bg_color, txt_color = "No", "#c0272783", "#FFFFFF"
-    elif q3 == "unknown":
+    elif q3 == "Unknown":
         text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
     else:
         text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
@@ -891,12 +886,12 @@ def mitigation_2(q_ffs, q_mit, is_retrievable):
     if q_ffs == "Unknown" or q_mit == "Unknown":
         text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
     elif q_ffs == "Yes" and q_mit == "Yes":
-        text, bg_color, txt_color = "No or minor", "#a2c543", "#000000"
+        text, bg_color, txt_color = "No or minor", "#43c543", "#000000"
     elif q_ffs == "No" or q_mit == "No":
-        if is_retrievable == "no":
+        if is_retrievable == "No":
             text, bg_color, txt_color = "Severe", "#c02727", "#FFFFFF"
-        elif is_retrievable == "yes":
-            text, bg_color, txt_color = "Minor", "#43c543", "#000000"
+        elif is_retrievable == "Yes":
+            text, bg_color, txt_color = "Minor", "#a2c543", "#000000"
         else:
             text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
     else:
@@ -917,47 +912,52 @@ def mitigation_2(q_ffs, q_mit, is_retrievable):
 @callback(
     Output(component_id="a-ffs-3", component_property="children"),
     Output(component_id="a-ffs-3", component_property="style"),
-    Input(component_id="q-3-2", component_property="value")
+    Input(component_id="q-3-1", component_property="value"),
+    Input(component_id="q-3-2", component_property="value"),
 )
-def qualified_FFS_3(input):
-    mapping = {
-        "yes": {"bg_color": "#43c54381", "tx_color": "#000000", "text": "Yes"},
-        "no": {"bg_color": "#c0272783", "tx_color": "#FFFFFF", "text": "No"},
-        "unknown": {"bg_color": "#4E4E4E", "tx_color": "#FFFFFF", "text": "Unknown"},
-        "": {"bg_color": "#f5f5f5", "tx_color": "#FFFFFF", "text": ""},
-    }
+def qualified_FFS_3(q31, q32):
+    if q31 == "Unknown" or q32 == "Unknown":
+        text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
+    elif q31 == "Yes" and q32 == "Yes":
+        text, bg_color, txt_color = "Yes", "#43c54381", "#000000"
+    elif q31 == "No" or q32 == "No":
+        text, bg_color, txt_color = "No", "#c0272783", "#FFFFFF"
+    else:
+        text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
     style = {
-        "textAlign": "center", "verticalAlign": "middle", "borderRadius": "5px", "fontWeight": "bold", "backgroundColor": "#4E4E4E"
+        "textAlign": "center",
+        "verticalAlign": "middle",
+        "borderRadius": "5px",
+        "fontWeight": "bold",
+        "color": txt_color,
+        "backgroundColor": bg_color
     }
-    selected = mapping.get(input, mapping["unknown"])
-    style["backgroundColor"] = selected["bg_color"]
-    style["color"] = selected["tx_color"]
-    style["fontWeight"] = "bold"
-    style["transition"] = "background-color 200ms ease"
-    return selected["text"], style
+    return text, style
 
 
 @callback(
     Output(component_id="a-compat-3", component_property="children"),
     Output(component_id="a-compat-3", component_property="style"),
-    Input(component_id="q-3-1", component_property="value")
+    Input(component_id="q-3-3", component_property="value")
 )
-def material_compatibility_3(input):
-    mapping = {
-        "yes": {"bg_color": "#43c54381", "tx_color": "#000000", "text": "Yes"},
-        "no": {"bg_color": "#c0272783", "tx_color": "#FFFFFF", "text": "No"},
-        "unknown": {"bg_color": "#4E4E4E", "tx_color": "#FFFFFF", "text": "Unknown"},
-        "": {"bg_color": "#f5f5f5", "tx_color": "#FFFFFF", "text": ""},
-    }
+def material_compatibility_3(q33):
+    if q33 == "Yes":
+        text, bg_color, txt_color = "Yes", "#43c54381", "#000000"
+    elif q33 == "No":
+        text, bg_color, txt_color = "No", "#c0272783", "#FFFFFF"
+    elif q33 == "Unknown":
+        text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
+    else:
+        text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
     style = {
-        "textAlign": "center", "verticalAlign": "middle", "borderRadius": "5px", "fontWeight": "bold", "backgroundColor": "#4E4E4E"
+        "textAlign": "center",
+        "verticalAlign": "middle",
+        "borderRadius": "5px",
+        "fontWeight": "bold",
+        "color": txt_color,
+        "backgroundColor": bg_color
     }
-    selected = mapping.get(input, mapping["unknown"])
-    style["backgroundColor"] = selected["bg_color"]
-    style["color"] = selected["tx_color"]
-    style["fontWeight"] = "bold"
-    style["transition"] = "background-color 200ms ease"
-    return selected["text"], style
+    return text, style
 
 
 @callback(
@@ -967,16 +967,17 @@ def material_compatibility_3(input):
     Input(component_id="a-compat-3", component_property="children"),
     Input(component_id="retrievable-3", component_property="value")
 )
-def mitigation_3(H, I, is_retrievable):
-    if H == "Unknown" or I == "Unknown":
+def mitigation_3(q_ffs, q_mit, is_retrievable):
+    print(q_ffs, q_mit, is_retrievable)
+    if q_ffs == "Unknown" or q_mit == "Unknown":
         text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
-    elif H == "Yes" and I == "Yes":
-        text, bg_color, txt_color = "No or minor", "#a2c543", "#000000"
-    elif H == "No" or I == "No":
-        if is_retrievable == "no":
+    elif q_ffs == "Yes" and q_mit == "Yes":
+        text, bg_color, txt_color = "No or minor", "#43c543", "#000000"
+    elif q_ffs == "No" or q_mit == "No":
+        if is_retrievable == "No":
             text, bg_color, txt_color = "Severe", "#c02727", "#FFFFFF"
-        elif is_retrievable == "yes":
-            text, bg_color, txt_color = "Minor", "#43c543", "#000000"
+        elif is_retrievable == "Yes":
+            text, bg_color, txt_color = "Minor", "#a2c543", "#000000"
         else:
             text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
     else:
@@ -997,47 +998,52 @@ def mitigation_3(H, I, is_retrievable):
 @callback(
     Output(component_id="a-ffs-4", component_property="children"),
     Output(component_id="a-ffs-4", component_property="style"),
-    Input(component_id="q-4-2", component_property="value")
+    Input(component_id="q-4-1", component_property="value"),
+    Input(component_id="q-4-2", component_property="value"),
 )
-def qualified_FFS_4(input):
-    mapping = {
-        "yes": {"bg_color": "#43c54381", "tx_color": "#000000", "text": "Yes"},
-        "no": {"bg_color": "#c0272783", "tx_color": "#FFFFFF", "text": "No"},
-        "unknown": {"bg_color": "#4E4E4E", "tx_color": "#FFFFFF", "text": "Unknown"},
-        "": {"bg_color": "#f5f5f5", "tx_color": "#FFFFFF", "text": ""},
-    }
+def qualified_FFS_4(q41, q42):
+    if q41 == "Unknown" or q42 == "Unknown":
+        text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
+    elif q41 == "Yes" and q42 == "Yes":
+        text, bg_color, txt_color = "Yes", "#43c54381", "#000000"
+    elif q41 == "No" or q42 == "No":
+        text, bg_color, txt_color = "No", "#c0272783", "#FFFFFF"
+    else:
+        text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
     style = {
-        "textAlign": "center", "verticalAlign": "middle", "borderRadius": "5px", "fontWeight": "bold", "backgroundColor": "#4E4E4E"
+        "textAlign": "center",
+        "verticalAlign": "middle",
+        "borderRadius": "5px",
+        "fontWeight": "bold",
+        "color": txt_color,
+        "backgroundColor": bg_color
     }
-    selected = mapping.get(input, mapping["unknown"])
-    style["backgroundColor"] = selected["bg_color"]
-    style["color"] = selected["tx_color"]
-    style["fontWeight"] = "bold"
-    style["transition"] = "background-color 200ms ease"
-    return selected["text"], style
+    return text, style
 
 
 @callback(
     Output(component_id="a-compat-4", component_property="children"),
     Output(component_id="a-compat-4", component_property="style"),
-    Input(component_id="q-4-1", component_property="value")
+    Input(component_id="q-4-3", component_property="value")
 )
-def material_compatibility_4(input):
-    mapping = {
-        "yes": {"bg_color": "#43c54381", "tx_color": "#000000", "text": "Yes"},
-        "no": {"bg_color": "#c0272783", "tx_color": "#FFFFFF", "text": "No"},
-        "unknown": {"bg_color": "#4E4E4E", "tx_color": "#FFFFFF", "text": "Unknown"},
-        "": {"bg_color": "#f5f5f5", "tx_color": "#FFFFFF", "text": ""},
-    }
+def material_compatibility_4(q43):
+    if q43 == "Yes":
+        text, bg_color, txt_color = "Yes", "#43c54381", "#000000"
+    elif q43 == "No":
+        text, bg_color, txt_color = "No", "#c0272783", "#FFFFFF"
+    elif q43 == "Unknown":
+        text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
+    else:
+        text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
     style = {
-        "textAlign": "center", "verticalAlign": "middle", "borderRadius": "5px", "fontWeight": "bold", "backgroundColor": "#4E4E4E"
+        "textAlign": "center",
+        "verticalAlign": "middle",
+        "borderRadius": "5px",
+        "fontWeight": "bold",
+        "color": txt_color,
+        "backgroundColor": bg_color
     }
-    selected = mapping.get(input, mapping["unknown"])
-    style["backgroundColor"] = selected["bg_color"]
-    style["color"] = selected["tx_color"]
-    style["fontWeight"] = "bold"
-    style["transition"] = "background-color 200ms ease"
-    return selected["text"], style
+    return text, style
 
 
 @callback(
@@ -1047,16 +1053,16 @@ def material_compatibility_4(input):
     Input(component_id="a-compat-4", component_property="children"),
     Input(component_id="retrievable-4", component_property="value")
 )
-def mitigation_4(H, I, is_retrievable):
-    if H == "Unknown" or I == "Unknown":
+def mitigation_4(q_ffs, q_mit, is_retrievable):
+    if q_ffs == "Unknown" or q_mit == "Unknown":
         text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
-    elif H == "Yes" and I == "Yes":
-        text, bg_color, txt_color = "No or minor", "#a2c543", "#000000"
-    elif H == "No" or I == "No":
-        if is_retrievable == "no":
+    elif q_ffs == "Yes" and q_mit == "Yes":
+        text, bg_color, txt_color = "No or minor", "#43c543", "#000000"
+    elif q_ffs == "No" or q_mit == "No":
+        if is_retrievable == "No":
             text, bg_color, txt_color = "Severe", "#c02727", "#FFFFFF"
-        elif is_retrievable == "yes":
-            text, bg_color, txt_color = "Minor", "#43c543", "#000000"
+        elif is_retrievable == "Yes":
+            text, bg_color, txt_color = "Minor", "#a2c543", "#000000"
         else:
             text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
     else:
@@ -1077,47 +1083,52 @@ def mitigation_4(H, I, is_retrievable):
 @callback(
     Output(component_id="a-ffs-5", component_property="children"),
     Output(component_id="a-ffs-5", component_property="style"),
+    Input(component_id="q-5-1", component_property="value"),
     Input(component_id="q-5-2", component_property="value")
 )
-def qualified_FFS_5(input):
-    mapping = {
-        "yes": {"bg_color": "#43c54381", "tx_color": "#000000", "text": "Yes"},
-        "no": {"bg_color": "#c0272783", "tx_color": "#FFFFFF", "text": "No"},
-        "unknown": {"bg_color": "#4E4E4E", "tx_color": "#FFFFFF", "text": "Unknown"},
-        "": {"bg_color": "#f5f5f5", "tx_color": "#FFFFFF", "text": ""},
-    }
+def qualified_FFS_5(q51, q52):
+    if q51 == "Unknown" or q52 == "Unknown":
+        text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
+    elif q51 == "Yes" and q52 == "Yes":
+        text, bg_color, txt_color = "Yes", "#43c54381", "#000000"
+    elif q51 == "No" or q52 == "No":
+        text, bg_color, txt_color = "No", "#c0272783", "#FFFFFF"
+    else:
+        text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
     style = {
-        "textAlign": "center", "verticalAlign": "middle", "borderRadius": "5px", "fontWeight": "bold", "backgroundColor": "#4E4E4E"
+        "textAlign": "center",
+        "verticalAlign": "middle",
+        "borderRadius": "5px",
+        "fontWeight": "bold",
+        "color": txt_color,
+        "backgroundColor": bg_color
     }
-    selected = mapping.get(input, mapping["unknown"])
-    style["backgroundColor"] = selected["bg_color"]
-    style["color"] = selected["tx_color"]
-    style["fontWeight"] = "bold"
-    style["transition"] = "background-color 200ms ease"
-    return selected["text"], style
+    return text, style
 
 
 @callback(
     Output(component_id="a-compat-5", component_property="children"),
     Output(component_id="a-compat-5", component_property="style"),
-    Input(component_id="q-5-1", component_property="value")
+    Input(component_id="q-5-3", component_property="value")
 )
-def material_compatibility_5(input):
-    mapping = {
-        "yes": {"bg_color": "#43c54381", "tx_color": "#000000", "text": "Yes"},
-        "no": {"bg_color": "#c0272783", "tx_color": "#FFFFFF", "text": "No"},
-        "unknown": {"bg_color": "#4E4E4E", "tx_color": "#FFFFFF", "text": "Unknown"},
-        "": {"bg_color": "#f5f5f5", "tx_color": "#FFFFFF", "text": ""},
-    }
+def material_compatibility_5(q53):
+    if q53 == "Yes":
+        text, bg_color, txt_color = "Yes", "#43c54381", "#000000"
+    elif q53 == "No":
+        text, bg_color, txt_color = "No", "#c0272783", "#FFFFFF"
+    elif q53 == "Unknown":
+        text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
+    else:
+        text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
     style = {
-        "textAlign": "center", "verticalAlign": "middle", "borderRadius": "5px", "fontWeight": "bold", "backgroundColor": "#4E4E4E"
+        "textAlign": "center",
+        "verticalAlign": "middle",
+        "borderRadius": "5px",
+        "fontWeight": "bold",
+        "color": txt_color,
+        "backgroundColor": bg_color
     }
-    selected = mapping.get(input, mapping["unknown"])
-    style["backgroundColor"] = selected["bg_color"]
-    style["color"] = selected["tx_color"]
-    style["fontWeight"] = "bold"
-    style["transition"] = "background-color 200ms ease"
-    return selected["text"], style
+    return text, style
 
 
 @callback(
@@ -1127,16 +1138,16 @@ def material_compatibility_5(input):
     Input(component_id="a-compat-5", component_property="children"),
     Input(component_id="retrievable-5", component_property="value")
 )
-def mitigation_5(H, I, is_retrievable):
-    if H == "Unknown" or I == "Unknown":
+def mitigation_5(q_ffs, q_mit, is_retrievable):
+    if q_ffs == "Unknown" or q_mit == "Unknown":
         text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
-    elif H == "Yes" and I == "Yes":
-        text, bg_color, txt_color = "No or minor", "#a2c543", "#000000"
-    elif H == "No" or I == "No":
-        if is_retrievable == "no":
+    elif q_ffs == "Yes" and q_mit == "Yes":
+        text, bg_color, txt_color = "No or minor", "#43c543", "#000000"
+    elif q_ffs == "No" or q_mit == "No":
+        if is_retrievable == "No":
             text, bg_color, txt_color = "Severe", "#c02727", "#FFFFFF"
-        elif is_retrievable == "yes":
-            text, bg_color, txt_color = "Minor", "#43c543", "#000000"
+        elif is_retrievable == "Yes":
+            text, bg_color, txt_color = "Minor", "#a2c543", "#000000"
         else:
             text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
     else:
@@ -1157,47 +1168,51 @@ def mitigation_5(H, I, is_retrievable):
 @callback(
     Output(component_id="a-ffs-6", component_property="children"),
     Output(component_id="a-ffs-6", component_property="style"),
-    Input(component_id="q-6-2", component_property="value")
+    Input(component_id="q-6-1", component_property="value")
 )
-def qualified_FFS_6(input):
-    mapping = {
-        "yes": {"bg_color": "#43c54381", "tx_color": "#000000", "text": "Yes"},
-        "no": {"bg_color": "#c0272783", "tx_color": "#FFFFFF", "text": "No"},
-        "unknown": {"bg_color": "#4E4E4E", "tx_color": "#FFFFFF", "text": "Unknown"},
-        "": {"bg_color": "#f5f5f5", "tx_color": "#FFFFFF", "text": ""},
-    }
+def qualified_FFS_6(q61):
+    if q61 == "Yes":
+        text, bg_color, txt_color = "Yes", "#43c54381", "#000000"
+    elif q61 == "No":
+        text, bg_color, txt_color = "No", "#c0272783", "#FFFFFF"
+    elif q61 == "Unknown":
+        text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
+    else:
+        text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
     style = {
-        "textAlign": "center", "verticalAlign": "middle", "borderRadius": "5px", "fontWeight": "bold", "backgroundColor": "#4E4E4E"
+        "textAlign": "center",
+        "verticalAlign": "middle",
+        "borderRadius": "5px",
+        "fontWeight": "bold",
+        "color": txt_color,
+        "backgroundColor": bg_color
     }
-    selected = mapping.get(input, mapping["unknown"])
-    style["backgroundColor"] = selected["bg_color"]
-    style["color"] = selected["tx_color"]
-    style["fontWeight"] = "bold"
-    style["transition"] = "background-color 200ms ease"
-    return selected["text"], style
+    return text, style
 
 
 @callback(
     Output(component_id="a-compat-6", component_property="children"),
     Output(component_id="a-compat-6", component_property="style"),
-    Input(component_id="q-6-1", component_property="value")
+    Input(component_id="q-6-2", component_property="value")
 )
-def material_compatibility_6(input):
-    mapping = {
-        "yes": {"bg_color": "#43c54381", "tx_color": "#000000", "text": "Yes"},
-        "no": {"bg_color": "#c0272783", "tx_color": "#FFFFFF", "text": "No"},
-        "unknown": {"bg_color": "#4E4E4E", "tx_color": "#FFFFFF", "text": "Unknown"},
-        "": {"bg_color": "#f5f5f5", "tx_color": "#FFFFFF", "text": ""},
-    }
+def material_compatibility_6(q62):
+    if q62 == "yes":
+        text, bg_color, txt_color = "Yes", "#43c54381", "#000000"
+    elif q62 == "no":
+        text, bg_color, txt_color = "No", "#c0272783", "#FFFFFF"
+    elif q62 == "unknown":
+        text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
+    else:
+        text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
     style = {
-        "textAlign": "center", "verticalAlign": "middle", "borderRadius": "5px", "fontWeight": "bold", "backgroundColor": "#4E4E4E"
+        "textAlign": "center",
+        "verticalAlign": "middle",
+        "borderRadius": "5px",
+        "fontWeight": "bold",
+        "color": txt_color,
+        "backgroundColor": bg_color
     }
-    selected = mapping.get(input, mapping["unknown"])
-    style["backgroundColor"] = selected["bg_color"]
-    style["color"] = selected["tx_color"]
-    style["fontWeight"] = "bold"
-    style["transition"] = "background-color 200ms ease"
-    return selected["text"], style
+    return text, style
 
 
 @callback(
@@ -1207,16 +1222,16 @@ def material_compatibility_6(input):
     Input(component_id="a-compat-6", component_property="children"),
     Input(component_id="retrievable-6", component_property="value")
 )
-def mitigation_6(H, I, is_retrievable):
-    if H == "Unknown" or I == "Unknown":
+def mitigation_6(q_ffs, q_mit, is_retrievable):
+    if q_ffs == "Unknown" or q_mit == "Unknown":
         text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
-    elif H == "Yes" and I == "Yes":
-        text, bg_color, txt_color = "No or minor", "#a2c543", "#000000"
-    elif H == "No" or I == "No":
-        if is_retrievable == "no":
+    elif q_ffs == "Yes" and q_mit == "Yes":
+        text, bg_color, txt_color = "No or minor", "#43c543", "#000000"
+    elif q_ffs == "No" or q_mit == "No":
+        if is_retrievable == "No":
             text, bg_color, txt_color = "Severe", "#c02727", "#FFFFFF"
-        elif is_retrievable == "yes":
-            text, bg_color, txt_color = "Minor", "#43c543", "#000000"
+        elif is_retrievable == "Yes":
+            text, bg_color, txt_color = "Minor", "#a2c543", "#000000"
         else:
             text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
     else:
@@ -1237,47 +1252,52 @@ def mitigation_6(H, I, is_retrievable):
 @callback(
     Output(component_id="a-ffs-7", component_property="children"),
     Output(component_id="a-ffs-7", component_property="style"),
+    Input(component_id="q-7-1", component_property="value"),
     Input(component_id="q-7-2", component_property="value")
 )
-def qualified_FFS_7(input):
-    mapping = {
-        "yes": {"bg_color": "#43c54381", "tx_color": "#000000", "text": "Yes"},
-        "no": {"bg_color": "#c0272783", "tx_color": "#FFFFFF", "text": "No"},
-        "unknown": {"bg_color": "#4E4E4E", "tx_color": "#FFFFFF", "text": "Unknown"},
-        "": {"bg_color": "#f5f5f5", "tx_color": "#FFFFFF", "text": ""},
-    }
+def qualified_FFS_7(q71, q72):
+    if q71 == "Unknown" or q72 == "Unknown":
+        text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
+    elif q71 == "Yes" and q72 == "Yes":
+        text, bg_color, txt_color = "Yes", "#43c54381", "#000000"
+    elif q71 == "No" or q72 == "No":
+        text, bg_color, txt_color = "No", "#c0272783", "#FFFFFF"
+    else:
+        text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
     style = {
-        "textAlign": "center", "verticalAlign": "middle", "borderRadius": "5px", "fontWeight": "bold", "backgroundColor": "#4E4E4E"
+        "textAlign": "center",
+        "verticalAlign": "middle",
+        "borderRadius": "5px",
+        "fontWeight": "bold",
+        "color": txt_color,
+        "backgroundColor": bg_color
     }
-    selected = mapping.get(input, mapping["unknown"])
-    style["backgroundColor"] = selected["bg_color"]
-    style["color"] = selected["tx_color"]
-    style["fontWeight"] = "bold"
-    style["transition"] = "background-color 200ms ease"
-    return selected["text"], style
+    return text, style
 
 
 @callback(
     Output(component_id="a-compat-7", component_property="children"),
     Output(component_id="a-compat-7", component_property="style"),
-    Input(component_id="q-7-1", component_property="value")
+    Input(component_id="q-7-3", component_property="value")
 )
-def material_compatibility_7(input):
-    mapping = {
-        "yes": {"bg_color": "#43c54381", "tx_color": "#000000", "text": "Yes"},
-        "no": {"bg_color": "#c0272783", "tx_color": "#FFFFFF", "text": "No"},
-        "unknown": {"bg_color": "#4E4E4E", "tx_color": "#FFFFFF", "text": "Unknown"},
-        "": {"bg_color": "#f5f5f5", "tx_color": "#FFFFFF", "text": ""},
-    }
+def material_compatibility_7(q73):
+    if q73 == "Yes":
+        text, bg_color, txt_color = "Yes", "#43c54381", "#000000"
+    elif q73 == "No":
+        text, bg_color, txt_color = "No", "#c0272783", "#FFFFFF"
+    elif q73 == "Unknown":
+        text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
+    else:
+        text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
     style = {
-        "textAlign": "center", "verticalAlign": "middle", "borderRadius": "5px", "fontWeight": "bold", "backgroundColor": "#4E4E4E"
+        "textAlign": "center",
+        "verticalAlign": "middle",
+        "borderRadius": "5px",
+        "fontWeight": "bold",
+        "color": txt_color,
+        "backgroundColor": bg_color
     }
-    selected = mapping.get(input, mapping["unknown"])
-    style["backgroundColor"] = selected["bg_color"]
-    style["color"] = selected["tx_color"]
-    style["fontWeight"] = "bold"
-    style["transition"] = "background-color 200ms ease"
-    return selected["text"], style
+    return text, style
 
 
 @callback(
@@ -1287,16 +1307,16 @@ def material_compatibility_7(input):
     Input(component_id="a-compat-7", component_property="children"),
     Input(component_id="retrievable-7", component_property="value")
 )
-def mitigation_7(H, I, is_retrievable):
-    if H == "Unknown" or I == "Unknown":
+def mitigation_7(q_ffs, q_mit, is_retrievable):
+    if q_ffs == "Unknown" or q_mit == "Unknown":
         text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
-    elif H == "Yes" and I == "Yes":
-        text, bg_color, txt_color = "No or minor", "#a2c543", "#000000"
-    elif H == "No" or I == "No":
-        if is_retrievable == "no":
+    elif q_ffs == "Yes" and q_mit == "Yes":
+        text, bg_color, txt_color = "No or minor", "#43c543", "#000000"
+    elif q_ffs == "No" or q_mit == "No":
+        if is_retrievable == "No":
             text, bg_color, txt_color = "Severe", "#c02727", "#FFFFFF"
-        elif is_retrievable == "yes":
-            text, bg_color, txt_color = "Minor", "#43c543", "#000000"
+        elif is_retrievable == "Yes":
+            text, bg_color, txt_color = "Minor", "#a2c543", "#000000"
         else:
             text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
     else:
@@ -1317,47 +1337,52 @@ def mitigation_7(H, I, is_retrievable):
 @callback(
     Output(component_id="a-ffs-8", component_property="children"),
     Output(component_id="a-ffs-8", component_property="style"),
-    Input(component_id="q-8-2", component_property="value")
+    Input(component_id="q-8-1", component_property="value"),
+    Input(component_id="q-8-2", component_property="value"),
 )
-def qualified_FFS_8(input):
-    mapping = {
-        "yes": {"bg_color": "#43c54381", "tx_color": "#000000", "text": "Yes"},
-        "no": {"bg_color": "#c0272783", "tx_color": "#FFFFFF", "text": "No"},
-        "unknown": {"bg_color": "#4E4E4E", "tx_color": "#FFFFFF", "text": "Unknown"},
-        "": {"bg_color": "#f5f5f5", "tx_color": "#FFFFFF", "text": ""},
-    }
+def qualified_FFS_8(q81, q82):
+    if q81 == "Unknown" or q82 == "Unknown":
+        text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
+    elif q81 == "Yes" and q82 == "Yes":
+        text, bg_color, txt_color = "Yes", "#43c54381", "#000000"
+    elif q81 == "No" or q82 == "No":
+        text, bg_color, txt_color = "No", "#c0272783", "#FFFFFF"
+    else:
+        text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
     style = {
-        "textAlign": "center", "verticalAlign": "middle", "borderRadius": "5px", "fontWeight": "bold", "backgroundColor": "#4E4E4E"
+        "textAlign": "center",
+        "verticalAlign": "middle",
+        "borderRadius": "5px",
+        "fontWeight": "bold",
+        "color": txt_color,
+        "backgroundColor": bg_color
     }
-    selected = mapping.get(input, mapping["unknown"])
-    style["backgroundColor"] = selected["bg_color"]
-    style["color"] = selected["tx_color"]
-    style["fontWeight"] = "bold"
-    style["transition"] = "background-color 200ms ease"
-    return selected["text"], style
+    return text, style
 
 
 @callback(
     Output(component_id="a-compat-8", component_property="children"),
     Output(component_id="a-compat-8", component_property="style"),
-    Input(component_id="q-8-1", component_property="value")
+    Input(component_id="q-8-3", component_property="value")
 )
-def material_compatibility_8(input):
-    mapping = {
-        "yes": {"bg_color": "#43c54381", "tx_color": "#000000", "text": "Yes"},
-        "no": {"bg_color": "#c0272783", "tx_color": "#FFFFFF", "text": "No"},
-        "unknown": {"bg_color": "#4E4E4E", "tx_color": "#FFFFFF", "text": "Unknown"},
-        "": {"bg_color": "#f5f5f5", "tx_color": "#FFFFFF", "text": ""},
-    }
+def material_compatibility_8(q83):
+    if q83 == "Yes":
+        text, bg_color, txt_color = "Yes", "#43c54381", "#000000"
+    elif q83 == "No":
+        text, bg_color, txt_color = "No", "#c0272783", "#FFFFFF"
+    elif q83 == "Unknown":
+        text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
+    else:
+        text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
     style = {
-        "textAlign": "center", "verticalAlign": "middle", "borderRadius": "5px", "fontWeight": "bold", "backgroundColor": "#4E4E4E"
+        "textAlign": "center",
+        "verticalAlign": "middle",
+        "borderRadius": "5px",
+        "fontWeight": "bold",
+        "color": txt_color,
+        "backgroundColor": bg_color
     }
-    selected = mapping.get(input, mapping["unknown"])
-    style["backgroundColor"] = selected["bg_color"]
-    style["color"] = selected["tx_color"]
-    style["fontWeight"] = "bold"
-    style["transition"] = "background-color 200ms ease"
-    return selected["text"], style
+    return text, style
 
 
 @callback(
@@ -1367,16 +1392,16 @@ def material_compatibility_8(input):
     Input(component_id="a-compat-8", component_property="children"),
     Input(component_id="retrievable-8", component_property="value")
 )
-def mitigation_8(H, I, is_retrievable):
-    if H == "Unknown" or I == "Unknown":
+def mitigation_8(q_ffs, q_mit, is_retrievable):
+    if q_ffs == "Unknown" or q_mit == "Unknown":
         text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
-    elif H == "Yes" and I == "Yes":
-        text, bg_color, txt_color = "No or minor", "#a2c543", "#000000"
-    elif H == "No" or I == "No":
-        if is_retrievable == "no":
+    elif q_ffs == "Yes" and q_mit == "Yes":
+        text, bg_color, txt_color = "No or minor", "#43c543", "#000000"
+    elif q_ffs == "No" or q_mit == "No":
+        if is_retrievable == "No":
             text, bg_color, txt_color = "Severe", "#c02727", "#FFFFFF"
-        elif is_retrievable == "yes":
-            text, bg_color, txt_color = "Minor", "#43c543", "#000000"
+        elif is_retrievable == "Yes":
+            text, bg_color, txt_color = "Minor", "#a2c543", "#000000"
         else:
             text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
     else:
@@ -1397,47 +1422,52 @@ def mitigation_8(H, I, is_retrievable):
 @callback(
     Output(component_id="a-ffs-9", component_property="children"),
     Output(component_id="a-ffs-9", component_property="style"),
+    Input(component_id="q-9-1", component_property="value"),
     Input(component_id="q-9-2", component_property="value")
 )
-def qualified_FFS_9(input):
-    mapping = {
-        "yes": {"bg_color": "#43c54381", "tx_color": "#000000", "text": "Yes"},
-        "no": {"bg_color": "#c0272783", "tx_color": "#FFFFFF", "text": "No"},
-        "unknown": {"bg_color": "#4E4E4E", "tx_color": "#FFFFFF", "text": "Unknown"},
-        "": {"bg_color": "#f5f5f5", "tx_color": "#FFFFFF", "text": ""},
-    }
+def qualified_FFS_9(q91, q92):
+    if q91 == "Unknown" or q92 == "Unknown":
+        text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
+    elif q91 == "Yes" and q92 == "Yes":
+        text, bg_color, txt_color = "Yes", "#43c54381", "#000000"
+    elif q91 == "No" or q92 == "No":
+        text, bg_color, txt_color = "No", "#c0272783", "#FFFFFF"
+    else:
+        text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
     style = {
-        "textAlign": "center", "verticalAlign": "middle", "borderRadius": "5px", "fontWeight": "bold", "backgroundColor": "#4E4E4E"
+        "textAlign": "center",
+        "verticalAlign": "middle",
+        "borderRadius": "5px",
+        "fontWeight": "bold",
+        "color": txt_color,
+        "backgroundColor": bg_color
     }
-    selected = mapping.get(input, mapping["unknown"])
-    style["backgroundColor"] = selected["bg_color"]
-    style["color"] = selected["tx_color"]
-    style["fontWeight"] = "bold"
-    style["transition"] = "background-color 200ms ease"
-    return selected["text"], style
+    return text, style
 
 
 @callback(
     Output(component_id="a-compat-9", component_property="children"),
     Output(component_id="a-compat-9", component_property="style"),
-    Input(component_id="q-9-1", component_property="value")
+    Input(component_id="q-9-3", component_property="value")
 )
-def material_compatibility_9(input):
-    mapping = {
-        "yes": {"bg_color": "#43c54381", "tx_color": "#000000", "text": "Yes"},
-        "no": {"bg_color": "#c0272783", "tx_color": "#FFFFFF", "text": "No"},
-        "unknown": {"bg_color": "#4E4E4E", "tx_color": "#FFFFFF", "text": "Unknown"},
-        "": {"bg_color": "#f5f5f5", "tx_color": "#FFFFFF", "text": ""},
-    }
+def material_compatibility_9(q93):
+    if q93 == "Yes":
+        text, bg_color, txt_color = "Yes", "#43c54381", "#000000"
+    elif q93 == "No":
+        text, bg_color, txt_color = "No", "#c0272783", "#FFFFFF"
+    elif q93 == "Unknown":
+        text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
+    else:
+        text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
     style = {
-        "textAlign": "center", "verticalAlign": "middle", "borderRadius": "5px", "fontWeight": "bold", "backgroundColor": "#4E4E4E"
+        "textAlign": "center",
+        "verticalAlign": "middle",
+        "borderRadius": "5px",
+        "fontWeight": "bold",
+        "color": txt_color,
+        "backgroundColor": bg_color
     }
-    selected = mapping.get(input, mapping["unknown"])
-    style["backgroundColor"] = selected["bg_color"]
-    style["color"] = selected["tx_color"]
-    style["fontWeight"] = "bold"
-    style["transition"] = "background-color 200ms ease"
-    return selected["text"], style
+    return text, style
 
 
 @callback(
@@ -1447,16 +1477,16 @@ def material_compatibility_9(input):
     Input(component_id="a-compat-9", component_property="children"),
     Input(component_id="retrievable-9", component_property="value")
 )
-def mitigation_9(H, I, is_retrievable):
-    if H == "Unknown" or I == "Unknown":
+def mitigation_9(q_ffs, q_mit, is_retrievable):
+    if q_ffs == "Unknown" or q_mit == "Unknown":
         text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
-    elif H == "Yes" and I == "Yes":
-        text, bg_color, txt_color = "No or minor", "#a2c543", "#000000"
-    elif H == "No" or I == "No":
-        if is_retrievable == "no":
+    elif q_ffs == "Yes" and q_mit == "Yes":
+        text, bg_color, txt_color = "No or minor", "#43c543", "#000000"
+    elif q_ffs == "No" or q_mit == "No":
+        if is_retrievable == "No":
             text, bg_color, txt_color = "Severe", "#c02727", "#FFFFFF"
-        elif is_retrievable == "yes":
-            text, bg_color, txt_color = "Minor", "#43c543", "#000000"
+        elif is_retrievable == "Yes":
+            text, bg_color, txt_color = "Minor", "#a2c543", "#000000"
         else:
             text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
     else:
@@ -1477,47 +1507,52 @@ def mitigation_9(H, I, is_retrievable):
 @callback(
     Output(component_id="a-ffs-10", component_property="children"),
     Output(component_id="a-ffs-10", component_property="style"),
+    Input(component_id="q-10-1", component_property="value"),
     Input(component_id="q-10-2", component_property="value")
 )
-def qualified_FFS_10(input):
-    mapping = {
-        "yes": {"bg_color": "#43c54381", "tx_color": "#000000", "text": "Yes"},
-        "no": {"bg_color": "#c0272783", "tx_color": "#FFFFFF", "text": "No"},
-        "unknown": {"bg_color": "#4E4E4E", "tx_color": "#FFFFFF", "text": "Unknown"},
-        "": {"bg_color": "#f5f5f5", "tx_color": "#FFFFFF", "text": ""},
-    }
+def qualified_FFS_10(q101, q102):
+    if q101 == "Unknown" or q102 == "Unknown":
+        text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
+    elif q101 == "Yes" and q102 == "Yes":
+        text, bg_color, txt_color = "Yes", "#43c54381", "#000000"
+    elif q101 == "No" or q102 == "No":
+        text, bg_color, txt_color = "No", "#c0272783", "#FFFFFF"
+    else:
+        text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
     style = {
-        "textAlign": "center", "verticalAlign": "middle", "borderRadius": "5px", "fontWeight": "bold", "backgroundColor": "#4E4E4E"
+        "textAlign": "center",
+        "verticalAlign": "middle",
+        "borderRadius": "5px",
+        "fontWeight": "bold",
+        "color": txt_color,
+        "backgroundColor": bg_color
     }
-    selected = mapping.get(input, mapping["unknown"])
-    style["backgroundColor"] = selected["bg_color"]
-    style["color"] = selected["tx_color"]
-    style["fontWeight"] = "bold"
-    style["transition"] = "background-color 200ms ease"
-    return selected["text"], style
+    return text, style
 
 
 @callback(
     Output(component_id="a-compat-10", component_property="children"),
     Output(component_id="a-compat-10", component_property="style"),
-    Input(component_id="q-10-1", component_property="value")
+    Input(component_id="q-10-3", component_property="value")
 )
-def material_compatibility_10(input):
-    mapping = {
-        "yes": {"bg_color": "#43c54381", "tx_color": "#000000", "text": "Yes"},
-        "no": {"bg_color": "#c0272783", "tx_color": "#FFFFFF", "text": "No"},
-        "unknown": {"bg_color": "#4E4E4E", "tx_color": "#FFFFFF", "text": "Unknown"},
-        "": {"bg_color": "#f5f5f5", "tx_color": "#FFFFFF", "text": ""},
-    }
+def material_compatibility_10(q103):
+    if q103 == "Yes":
+        text, bg_color, txt_color = "Yes", "#43c54381", "#000000"
+    elif q103 == "No":
+        text, bg_color, txt_color = "No", "#c0272783", "#FFFFFF"
+    elif q103 == "Unknown":
+        text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
+    else:
+        text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
     style = {
-        "textAlign": "center", "verticalAlign": "middle", "borderRadius": "5px", "fontWeight": "bold", "backgroundColor": "#4E4E4E"
+        "textAlign": "center",
+        "verticalAlign": "middle",
+        "borderRadius": "5px",
+        "fontWeight": "bold",
+        "color": txt_color,
+        "backgroundColor": bg_color
     }
-    selected = mapping.get(input, mapping["unknown"])
-    style["backgroundColor"] = selected["bg_color"]
-    style["color"] = selected["tx_color"]
-    style["fontWeight"] = "bold"
-    style["transition"] = "background-color 200ms ease"
-    return selected["text"], style
+    return text, style
 
 
 @callback(
@@ -1527,16 +1562,16 @@ def material_compatibility_10(input):
     Input(component_id="a-compat-10", component_property="children"),
     Input(component_id="retrievable-10", component_property="value")
 )
-def mitigation_10(H, I, is_retrievable):
-    if H == "Unknown" or I == "Unknown":
+def mitigation_10(q_ffs, q_mit, is_retrievable):
+    if q_ffs == "Unknown" or q_mit == "Unknown":
         text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
-    elif H == "Yes" and I == "Yes":
-        text, bg_color, txt_color = "No or minor", "#a2c543", "#000000"
-    elif H == "No" or I == "No":
-        if is_retrievable == "no":
+    elif q_ffs == "Yes" and q_mit == "Yes":
+        text, bg_color, txt_color = "No or minor", "#43c543", "#000000"
+    elif q_ffs == "No" or q_mit == "No":
+        if is_retrievable == "No":
             text, bg_color, txt_color = "Severe", "#c02727", "#FFFFFF"
-        elif is_retrievable == "yes":
-            text, bg_color, txt_color = "Minor", "#43c543", "#000000"
+        elif is_retrievable == "Yes":
+            text, bg_color, txt_color = "Minor", "#a2c543", "#000000"
         else:
             text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
     else:
@@ -1557,47 +1592,52 @@ def mitigation_10(H, I, is_retrievable):
 @callback(
     Output(component_id="a-ffs-11", component_property="children"),
     Output(component_id="a-ffs-11", component_property="style"),
+    Input(component_id="q-11-1", component_property="value"),
     Input(component_id="q-11-2", component_property="value")
 )
-def qualified_FFS_11(input):
-    mapping = {
-        "yes": {"bg_color": "#43c54381", "tx_color": "#000000", "text": "Yes"},
-        "no": {"bg_color": "#c0272783", "tx_color": "#FFFFFF", "text": "No"},
-        "unknown": {"bg_color": "#4E4E4E", "tx_color": "#FFFFFF", "text": "Unknown"},
-        "": {"bg_color": "#f5f5f5", "tx_color": "#FFFFFF", "text": ""},
-    }
+def qualified_FFS_11(q111, q112):
+    if q111 == "Unknown" or q112 == "Unknown":
+        text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
+    elif q111 == "Yes" and q112 == "Yes":
+        text, bg_color, txt_color = "Yes", "#43c54381", "#000000"
+    elif q111 == "No" or q112 == "No":
+        text, bg_color, txt_color = "No", "#c0272783", "#FFFFFF"
+    else:
+        text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
     style = {
-        "textAlign": "center", "verticalAlign": "middle", "borderRadius": "5px", "fontWeight": "bold", "backgroundColor": "#4E4E4E"
+        "textAlign": "center",
+        "verticalAlign": "middle",
+        "borderRadius": "5px",
+        "fontWeight": "bold",
+        "color": txt_color,
+        "backgroundColor": bg_color
     }
-    selected = mapping.get(input, mapping["unknown"])
-    style["backgroundColor"] = selected["bg_color"]
-    style["color"] = selected["tx_color"]
-    style["fontWeight"] = "bold"
-    style["transition"] = "background-color 200ms ease"
-    return selected["text"], style
+    return text, style
 
 
 @callback(
     Output(component_id="a-compat-11", component_property="children"),
     Output(component_id="a-compat-11", component_property="style"),
-    Input(component_id="q-11-1", component_property="value")
+    Input(component_id="q-11-3", component_property="value")
 )
-def material_compatibility_11(input):
-    mapping = {
-        "yes": {"bg_color": "#43c54381", "tx_color": "#000000", "text": "Yes"},
-        "no": {"bg_color": "#c0272783", "tx_color": "#FFFFFF", "text": "No"},
-        "unknown": {"bg_color": "#4E4E4E", "tx_color": "#FFFFFF", "text": "Unknown"},
-        "": {"bg_color": "#f5f5f5", "tx_color": "#FFFFFF", "text": ""},
-    }
+def material_compatibility_11(q113):
+    if q113 == "Yes":
+        text, bg_color, txt_color = "Yes", "#43c54381", "#000000"
+    elif q113 == "No":
+        text, bg_color, txt_color = "No", "#c0272783", "#FFFFFF"
+    elif q113 == "Unknown":
+        text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
+    else:
+        text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
     style = {
-        "textAlign": "center", "verticalAlign": "middle", "borderRadius": "5px", "fontWeight": "bold", "backgroundColor": "#4E4E4E"
+        "textAlign": "center",
+        "verticalAlign": "middle",
+        "borderRadius": "5px",
+        "fontWeight": "bold",
+        "color": txt_color,
+        "backgroundColor": bg_color
     }
-    selected = mapping.get(input, mapping["unknown"])
-    style["backgroundColor"] = selected["bg_color"]
-    style["color"] = selected["tx_color"]
-    style["fontWeight"] = "bold"
-    style["transition"] = "background-color 200ms ease"
-    return selected["text"], style
+    return text, style
 
 
 @callback(
@@ -1607,16 +1647,16 @@ def material_compatibility_11(input):
     Input(component_id="a-compat-11", component_property="children"),
     Input(component_id="retrievable-11", component_property="value")
 )
-def mitigation_11(H, I, is_retrievable):
-    if H == "Unknown" or I == "Unknown":
+def mitigation_11(q_ffs, q_mit, is_retrievable):
+    if q_ffs == "Unknown" or q_mit == "Unknown":
         text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
-    elif H == "Yes" and I == "Yes":
-        text, bg_color, txt_color = "No or minor", "#a2c543", "#000000"
-    elif H == "No" or I == "No":
-        if is_retrievable == "no":
+    elif q_ffs == "Yes" and q_mit == "Yes":
+        text, bg_color, txt_color = "No or minor", "#43c543", "#000000"
+    elif q_ffs == "No" or q_mit == "No":
+        if is_retrievable == "No":
             text, bg_color, txt_color = "Severe", "#c02727", "#FFFFFF"
-        elif is_retrievable == "yes":
-            text, bg_color, txt_color = "Minor", "#43c543", "#000000"
+        elif is_retrievable == "Yes":
+            text, bg_color, txt_color = "Minor", "#a2c543", "#000000"
         else:
             text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
     else:
@@ -1637,47 +1677,52 @@ def mitigation_11(H, I, is_retrievable):
 @callback(
     Output(component_id="a-ffs-12", component_property="children"),
     Output(component_id="a-ffs-12", component_property="style"),
+    Input(component_id="q-12-1", component_property="value"),
     Input(component_id="q-12-2", component_property="value")
 )
-def qualified_FFS_12(input):
-    mapping = {
-        "yes": {"bg_color": "#43c54381", "tx_color": "#000000", "text": "Yes"},
-        "no": {"bg_color": "#c0272783", "tx_color": "#FFFFFF", "text": "No"},
-        "unknown": {"bg_color": "#4E4E4E", "tx_color": "#FFFFFF", "text": "Unknown"},
-        "": {"bg_color": "#f5f5f5", "tx_color": "#FFFFFF", "text": ""},
-    }
+def qualified_FFS_12(q121, q122):
+    if q121 == "Unknown" or q122 == "Unknown":
+        text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
+    elif q121 == "Yes" and q122 == "Yes":
+        text, bg_color, txt_color = "Yes", "#43c54381", "#000000"
+    elif q121 == "No" or q122 == "No":
+        text, bg_color, txt_color = "No", "#c0272783", "#FFFFFF"
+    else:
+        text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
     style = {
-        "textAlign": "center", "verticalAlign": "middle", "borderRadius": "5px", "fontWeight": "bold", "backgroundColor": "#4E4E4E"
+        "textAlign": "center",
+        "verticalAlign": "middle",
+        "borderRadius": "5px",
+        "fontWeight": "bold",
+        "color": txt_color,
+        "backgroundColor": bg_color
     }
-    selected = mapping.get(input, mapping["unknown"])
-    style["backgroundColor"] = selected["bg_color"]
-    style["color"] = selected["tx_color"]
-    style["fontWeight"] = "bold"
-    style["transition"] = "background-color 200ms ease"
-    return selected["text"], style
+    return text, style
 
 
 @callback(
     Output(component_id="a-compat-12", component_property="children"),
     Output(component_id="a-compat-12", component_property="style"),
-    Input(component_id="q-12-1", component_property="value")
+    Input(component_id="q-12-3", component_property="value")
 )
-def material_compatibility_12(input):
-    mapping = {
-        "yes": {"bg_color": "#43c54381", "tx_color": "#000000", "text": "Yes"},
-        "no": {"bg_color": "#c0272783", "tx_color": "#FFFFFF", "text": "No"},
-        "unknown": {"bg_color": "#4E4E4E", "tx_color": "#FFFFFF", "text": "Unknown"},
-        "": {"bg_color": "#f5f5f5", "tx_color": "#FFFFFF", "text": ""},
-    }
+def material_compatibility_12(q123):
+    if q123 == "Yes":
+        text, bg_color, txt_color = "Yes", "#43c54381", "#000000"
+    elif q123 == "No":
+        text, bg_color, txt_color = "No", "#c0272783", "#FFFFFF"
+    elif q123 == "Unknown":
+        text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
+    else:
+        text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
     style = {
-        "textAlign": "center", "verticalAlign": "middle", "borderRadius": "5px", "fontWeight": "bold", "backgroundColor": "#4E4E4E"
+        "textAlign": "center",
+        "verticalAlign": "middle",
+        "borderRadius": "5px",
+        "fontWeight": "bold",
+        "color": txt_color,
+        "backgroundColor": bg_color
     }
-    selected = mapping.get(input, mapping["unknown"])
-    style["backgroundColor"] = selected["bg_color"]
-    style["color"] = selected["tx_color"]
-    style["fontWeight"] = "bold"
-    style["transition"] = "background-color 200ms ease"
-    return selected["text"], style
+    return text, style
 
 
 @callback(
@@ -1687,16 +1732,16 @@ def material_compatibility_12(input):
     Input(component_id="a-compat-12", component_property="children"),
     Input(component_id="retrievable-12", component_property="value")
 )
-def mitigation_12(H, I, is_retrievable):
-    if H == "Unknown" or I == "Unknown":
+def mitigation_12(q_ffs, q_mit, is_retrievable):
+    if q_ffs == "Unknown" or q_mit == "Unknown":
         text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
-    elif H == "Yes" and I == "Yes":
-        text, bg_color, txt_color = "No or minor", "#a2c543", "#000000"
-    elif H == "No" or I == "No":
-        if is_retrievable == "no":
+    elif q_ffs == "Yes" and q_mit == "Yes":
+        text, bg_color, txt_color = "No or minor", "#43c543", "#000000"
+    elif q_ffs == "No" or q_mit == "No":
+        if is_retrievable == "No":
             text, bg_color, txt_color = "Severe", "#c02727", "#FFFFFF"
-        elif is_retrievable == "yes":
-            text, bg_color, txt_color = "Minor", "#43c543", "#000000"
+        elif is_retrievable == "Yes":
+            text, bg_color, txt_color = "Minor", "#a2c543", "#000000"
         else:
             text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
     else:
@@ -1717,47 +1762,52 @@ def mitigation_12(H, I, is_retrievable):
 @callback(
     Output(component_id="a-ffs-13", component_property="children"),
     Output(component_id="a-ffs-13", component_property="style"),
+    Input(component_id="q-13-1", component_property="value"),
     Input(component_id="q-13-2", component_property="value")
 )
-def qualified_FFS_13(input):
-    mapping = {
-        "yes": {"bg_color": "#43c54381", "tx_color": "#000000", "text": "Yes"},
-        "no": {"bg_color": "#c0272783", "tx_color": "#FFFFFF", "text": "No"},
-        "unknown": {"bg_color": "#4E4E4E", "tx_color": "#FFFFFF", "text": "Unknown"},
-        "": {"bg_color": "#f5f5f5", "tx_color": "#FFFFFF", "text": ""},
-    }
+def qualified_FFS_13(q131, q132):
+    if q131 == "Unknown" or q132 == "Unknown":
+        text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
+    elif q131 == "Yes" and q132 == "Yes":
+        text, bg_color, txt_color = "Yes", "#43c54381", "#000000"
+    elif q131 == "No" or q132 == "No":
+        text, bg_color, txt_color = "No", "#c0272783", "#FFFFFF"
+    else:
+        text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
     style = {
-        "textAlign": "center", "verticalAlign": "middle", "borderRadius": "5px", "fontWeight": "bold", "backgroundColor": "#4E4E4E"
+        "textAlign": "center",
+        "verticalAlign": "middle",
+        "borderRadius": "5px",
+        "fontWeight": "bold",
+        "color": txt_color,
+        "backgroundColor": bg_color
     }
-    selected = mapping.get(input, mapping["unknown"])
-    style["backgroundColor"] = selected["bg_color"]
-    style["color"] = selected["tx_color"]
-    style["fontWeight"] = "bold"
-    style["transition"] = "background-color 200ms ease"
-    return selected["text"], style
+    return text, style
 
 
 @callback(
     Output(component_id="a-compat-13", component_property="children"),
     Output(component_id="a-compat-13", component_property="style"),
-    Input(component_id="q-13-1", component_property="value")
+    Input(component_id="q-13-3", component_property="value")
 )
-def material_compatibility_13(input):
-    mapping = {
-        "yes": {"bg_color": "#43c54381", "tx_color": "#000000", "text": "Yes"},
-        "no": {"bg_color": "#c0272783", "tx_color": "#FFFFFF", "text": "No"},
-        "unknown": {"bg_color": "#4E4E4E", "tx_color": "#FFFFFF", "text": "Unknown"},
-        "": {"bg_color": "#f5f5f5", "tx_color": "#FFFFFF", "text": ""},
-    }
+def material_compatibility_13(q133):
+    if q133 == "Yes":
+        text, bg_color, txt_color = "Yes", "#43c54381", "#000000"
+    elif q133 == "No":
+        text, bg_color, txt_color = "No", "#c0272783", "#FFFFFF"
+    elif q133 == "Unknown":
+        text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
+    else:
+        text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
     style = {
-        "textAlign": "center", "verticalAlign": "middle", "borderRadius": "5px", "fontWeight": "bold", "backgroundColor": "#4E4E4E"
+        "textAlign": "center",
+        "verticalAlign": "middle",
+        "borderRadius": "5px",
+        "fontWeight": "bold",
+        "color": txt_color,
+        "backgroundColor": bg_color
     }
-    selected = mapping.get(input, mapping["unknown"])
-    style["backgroundColor"] = selected["bg_color"]
-    style["color"] = selected["tx_color"]
-    style["fontWeight"] = "bold"
-    style["transition"] = "background-color 200ms ease"
-    return selected["text"], style
+    return text, style
 
 
 @callback(
@@ -1767,16 +1817,16 @@ def material_compatibility_13(input):
     Input(component_id="a-compat-13", component_property="children"),
     Input(component_id="retrievable-13", component_property="value")
 )
-def mitigation_13(H, I, is_retrievable):
-    if H == "Unknown" or I == "Unknown":
+def mitigation_13(q_ffs, q_mit, is_retrievable):
+    if q_ffs == "Unknown" or q_mit == "Unknown":
         text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
-    elif H == "Yes" and I == "Yes":
-        text, bg_color, txt_color = "No or minor", "#a2c543", "#000000"
-    elif H == "No" or I == "No":
-        if is_retrievable == "no":
+    elif q_ffs == "Yes" and q_mit == "Yes":
+        text, bg_color, txt_color = "No or minor", "#43c543", "#000000"
+    elif q_ffs == "No" or q_mit == "No":
+        if is_retrievable == "No":
             text, bg_color, txt_color = "Severe", "#c02727", "#FFFFFF"
-        elif is_retrievable == "yes":
-            text, bg_color, txt_color = "Minor", "#43c543", "#000000"
+        elif is_retrievable == "Yes":
+            text, bg_color, txt_color = "Minor", "#a2c543", "#000000"
         else:
             text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
     else:
@@ -1797,47 +1847,53 @@ def mitigation_13(H, I, is_retrievable):
 @callback(
     Output(component_id="a-ffs-14", component_property="children"),
     Output(component_id="a-ffs-14", component_property="style"),
-    Input(component_id="q-14-2", component_property="value")
+    Input(component_id="q-14-1", component_property="value"),
+    Input(component_id="q-14-2", component_property="value"),
+    Input(component_id="q-14-3", component_property="value"),
 )
-def qualified_FFS_14(input):
-    mapping = {
-        "yes": {"bg_color": "#43c54381", "tx_color": "#000000", "text": "Yes"},
-        "no": {"bg_color": "#c0272783", "tx_color": "#FFFFFF", "text": "No"},
-        "unknown": {"bg_color": "#4E4E4E", "tx_color": "#FFFFFF", "text": "Unknown"},
-        "": {"bg_color": "#f5f5f5", "tx_color": "#FFFFFF", "text": ""},
-    }
+def qualified_FFS_14(q141, q142, q143):
+    if q141 == "Unknown" or q142 == "Unknown" or q143 == "Unknown":
+        text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
+    elif q141 == "Yes" and q142 == "Yes" and q143 == "Yes":
+        text, bg_color, txt_color = "Yes", "#43c54381", "#000000"
+    elif q141 == "No" or q142 == "No" or q143 == "No":
+        text, bg_color, txt_color = "No", "#c0272783", "#FFFFFF"
+    else:
+        text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
     style = {
-        "textAlign": "center", "verticalAlign": "middle", "borderRadius": "5px", "fontWeight": "bold", "backgroundColor": "#4E4E4E"
+        "textAlign": "center",
+        "verticalAlign": "middle",
+        "borderRadius": "5px",
+        "fontWeight": "bold",
+        "color": txt_color,
+        "backgroundColor": bg_color
     }
-    selected = mapping.get(input, mapping["unknown"])
-    style["backgroundColor"] = selected["bg_color"]
-    style["color"] = selected["tx_color"]
-    style["fontWeight"] = "bold"
-    style["transition"] = "background-color 200ms ease"
-    return selected["text"], style
+    return text, style
 
 
 @callback(
     Output(component_id="a-compat-14", component_property="children"),
     Output(component_id="a-compat-14", component_property="style"),
-    Input(component_id="q-14-1", component_property="value")
+    Input(component_id="q-14-4", component_property="value")
 )
-def material_compatibility_14(input):
-    mapping = {
-        "yes": {"bg_color": "#43c54381", "tx_color": "#000000", "text": "Yes"},
-        "no": {"bg_color": "#c0272783", "tx_color": "#FFFFFF", "text": "No"},
-        "unknown": {"bg_color": "#4E4E4E", "tx_color": "#FFFFFF", "text": "Unknown"},
-        "": {"bg_color": "#f5f5f5", "tx_color": "#FFFFFF", "text": ""},
-    }
+def material_compatibility_14(q144):
+    if q144 == "Yes":
+        text, bg_color, txt_color = "Yes", "#43c54381", "#000000"
+    elif q144 == "No":
+        text, bg_color, txt_color = "No", "#c0272783", "#FFFFFF"
+    elif q144 == "Unknown":
+        text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
+    else:
+        text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
     style = {
-        "textAlign": "center", "verticalAlign": "middle", "borderRadius": "5px", "fontWeight": "bold", "backgroundColor": "#4E4E4E"
+        "textAlign": "center",
+        "verticalAlign": "middle",
+        "borderRadius": "5px",
+        "fontWeight": "bold",
+        "color": txt_color,
+        "backgroundColor": bg_color
     }
-    selected = mapping.get(input, mapping["unknown"])
-    style["backgroundColor"] = selected["bg_color"]
-    style["color"] = selected["tx_color"]
-    style["fontWeight"] = "bold"
-    style["transition"] = "background-color 200ms ease"
-    return selected["text"], style
+    return text, style
 
 
 @callback(
@@ -1847,16 +1903,16 @@ def material_compatibility_14(input):
     Input(component_id="a-compat-14", component_property="children"),
     Input(component_id="retrievable-14", component_property="value")
 )
-def mitigation_14(H, I, is_retrievable):
-    if H == "Unknown" or I == "Unknown":
+def mitigation_14(q_ffs, q_mit, is_retrievable):
+    if q_ffs == "Unknown" or q_mit == "Unknown":
         text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
-    elif H == "Yes" and I == "Yes":
-        text, bg_color, txt_color = "No or minor", "#a2c543", "#000000"
-    elif H == "No" or I == "No":
-        if is_retrievable == "no":
+    elif q_ffs == "Yes" and q_mit == "Yes":
+        text, bg_color, txt_color = "No or minor", "#43c543", "#000000"
+    elif q_ffs == "No" or q_mit == "No":
+        if is_retrievable == "No":
             text, bg_color, txt_color = "Severe", "#c02727", "#FFFFFF"
-        elif is_retrievable == "yes":
-            text, bg_color, txt_color = "Minor", "#43c543", "#000000"
+        elif is_retrievable == "Yes":
+            text, bg_color, txt_color = "Minor", "#a2c543", "#000000"
         else:
             text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
     else:
@@ -1877,47 +1933,53 @@ def mitigation_14(H, I, is_retrievable):
 @callback(
     Output(component_id="a-ffs-15", component_property="children"),
     Output(component_id="a-ffs-15", component_property="style"),
-    Input(component_id="q-15-2", component_property="value")
+    Input(component_id="q-15-1", component_property="value"),
+    Input(component_id="q-15-2", component_property="value"),
+    Input(component_id="q-15-3", component_property="value")
 )
-def qualified_FFS_15(input):
-    mapping = {
-        "yes": {"bg_color": "#43c54381", "tx_color": "#000000", "text": "Yes"},
-        "no": {"bg_color": "#c0272783", "tx_color": "#FFFFFF", "text": "No"},
-        "unknown": {"bg_color": "#4E4E4E", "tx_color": "#FFFFFF", "text": "Unknown"},
-        "": {"bg_color": "#f5f5f5", "tx_color": "#FFFFFF", "text": ""},
-    }
+def qualified_FFS_15(q151, q152, q153):
+    if q151 == "Unknown" or q152 == "Unknown" or q153 == "Unknown":
+        text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
+    elif q151 == "Yes" and q152 == "Yes" and q153 == "Yes":
+        text, bg_color, txt_color = "Yes", "#43c54381", "#000000"
+    elif q151 == "No" or q152 == "No" or q153 == "No":
+        text, bg_color, txt_color = "No", "#c0272783", "#FFFFFF"
+    else:
+        text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
     style = {
-        "textAlign": "center", "verticalAlign": "middle", "borderRadius": "5px", "fontWeight": "bold", "backgroundColor": "#4E4E4E"
+        "textAlign": "center",
+        "verticalAlign": "middle",
+        "borderRadius": "5px",
+        "fontWeight": "bold",
+        "color": txt_color,
+        "backgroundColor": bg_color
     }
-    selected = mapping.get(input, mapping["unknown"])
-    style["backgroundColor"] = selected["bg_color"]
-    style["color"] = selected["tx_color"]
-    style["fontWeight"] = "bold"
-    style["transition"] = "background-color 200ms ease"
-    return selected["text"], style
+    return text, style
 
 
 @callback(
     Output(component_id="a-compat-15", component_property="children"),
     Output(component_id="a-compat-15", component_property="style"),
-    Input(component_id="q-15-1", component_property="value")
+    Input(component_id="q-15-4", component_property="value")
 )
-def material_compatibility_15(input):
-    mapping = {
-        "yes": {"bg_color": "#43c54381", "tx_color": "#000000", "text": "Yes"},
-        "no": {"bg_color": "#c0272783", "tx_color": "#FFFFFF", "text": "No"},
-        "unknown": {"bg_color": "#4E4E4E", "tx_color": "#FFFFFF", "text": "Unknown"},
-        "": {"bg_color": "#f5f5f5", "tx_color": "#FFFFFF", "text": ""},
-    }
+def material_compatibility_15(q154):
+    if q154 == "Yes":
+        text, bg_color, txt_color = "Yes", "#43c54381", "#000000"
+    elif q154 == "No":
+        text, bg_color, txt_color = "No", "#c0272783", "#FFFFFF"
+    elif q154 == "Unknown":
+        text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
+    else:
+        text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
     style = {
-        "textAlign": "center", "verticalAlign": "middle", "borderRadius": "5px", "fontWeight": "bold", "backgroundColor": "#4E4E4E"
+        "textAlign": "center",
+        "verticalAlign": "middle",
+        "borderRadius": "5px",
+        "fontWeight": "bold",
+        "color": txt_color,
+        "backgroundColor": bg_color
     }
-    selected = mapping.get(input, mapping["unknown"])
-    style["backgroundColor"] = selected["bg_color"]
-    style["color"] = selected["tx_color"]
-    style["fontWeight"] = "bold"
-    style["transition"] = "background-color 200ms ease"
-    return selected["text"], style
+    return text, style
 
 
 @callback(
@@ -1927,16 +1989,16 @@ def material_compatibility_15(input):
     Input(component_id="a-compat-15", component_property="children"),
     Input(component_id="retrievable-15", component_property="value")
 )
-def mitigation_15(H, I, is_retrievable):
-    if H == "Unknown" or I == "Unknown":
+def mitigation_15(q_ffs, q_mit, is_retrievable):
+    if q_ffs == "Unknown" or q_mit == "Unknown":
         text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
-    elif H == "Yes" and I == "Yes":
-        text, bg_color, txt_color = "No or minor", "#a2c543", "#000000"
-    elif H == "No" or I == "No":
-        if is_retrievable == "no":
+    elif q_ffs == "Yes" and q_mit == "Yes":
+        text, bg_color, txt_color = "No or minor", "#43c543", "#000000"
+    elif q_ffs == "No" or q_mit == "No":
+        if is_retrievable == "No":
             text, bg_color, txt_color = "Severe", "#c02727", "#FFFFFF"
-        elif is_retrievable == "yes":
-            text, bg_color, txt_color = "Minor", "#43c543", "#000000"
+        elif is_retrievable == "Yes":
+            text, bg_color, txt_color = "Minor", "#a2c543", "#000000"
         else:
             text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
     else:
@@ -1957,47 +2019,52 @@ def mitigation_15(H, I, is_retrievable):
 @callback(
     Output(component_id="a-ffs-16", component_property="children"),
     Output(component_id="a-ffs-16", component_property="style"),
-    Input(component_id="q-16-2", component_property="value")
+    Input(component_id="q-16-1", component_property="value"),
+    Input(component_id="q-16-2", component_property="value"),
 )
-def qualified_FFS_16(input):
-    mapping = {
-        "yes": {"bg_color": "#43c54381", "tx_color": "#000000", "text": "Yes"},
-        "no": {"bg_color": "#c0272783", "tx_color": "#FFFFFF", "text": "No"},
-        "unknown": {"bg_color": "#4E4E4E", "tx_color": "#FFFFFF", "text": "Unknown"},
-        "": {"bg_color": "#f5f5f5", "tx_color": "#FFFFFF", "text": ""},
-    }
+def qualified_FFS_16(q161, q162):
+    if q161 == "Unknown" or q162 == "Unknown":
+        text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
+    elif q161 == "Yes" and q162 == "Yes":
+        text, bg_color, txt_color = "Yes", "#43c54381", "#000000"
+    elif q161 == "No" or q162 == "No":
+        text, bg_color, txt_color = "No", "#c0272783", "#FFFFFF"
+    else:
+        text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
     style = {
-        "textAlign": "center", "verticalAlign": "middle", "borderRadius": "5px", "fontWeight": "bold", "backgroundColor": "#4E4E4E"
+        "textAlign": "center",
+        "verticalAlign": "middle",
+        "borderRadius": "5px",
+        "fontWeight": "bold",
+        "color": txt_color,
+        "backgroundColor": bg_color
     }
-    selected = mapping.get(input, mapping["unknown"])
-    style["backgroundColor"] = selected["bg_color"]
-    style["color"] = selected["tx_color"]
-    style["fontWeight"] = "bold"
-    style["transition"] = "background-color 200ms ease"
-    return selected["text"], style
+    return text, style
 
 
 @callback(
     Output(component_id="a-compat-16", component_property="children"),
     Output(component_id="a-compat-16", component_property="style"),
-    Input(component_id="q-16-1", component_property="value")
+    Input(component_id="q-16-3", component_property="value")
 )
-def material_compatibility_16(input):
-    mapping = {
-        "yes": {"bg_color": "#43c54381", "tx_color": "#000000", "text": "Yes"},
-        "no": {"bg_color": "#c0272783", "tx_color": "#FFFFFF", "text": "No"},
-        "unknown": {"bg_color": "#4E4E4E", "tx_color": "#FFFFFF", "text": "Unknown"},
-        "": {"bg_color": "#f5f5f5", "tx_color": "#FFFFFF", "text": ""},
-    }
+def material_compatibility_16(q163):
+    if q163 == "Yes":
+        text, bg_color, txt_color = "Yes", "#43c54381", "#000000"
+    elif q163 == "No":
+        text, bg_color, txt_color = "No", "#c0272783", "#FFFFFF"
+    elif q163 == "Unknown":
+        text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
+    else:
+        text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
     style = {
-        "textAlign": "center", "verticalAlign": "middle", "borderRadius": "5px", "fontWeight": "bold", "backgroundColor": "#4E4E4E"
+        "textAlign": "center",
+        "verticalAlign": "middle",
+        "borderRadius": "5px",
+        "fontWeight": "bold",
+        "color": txt_color,
+        "backgroundColor": bg_color
     }
-    selected = mapping.get(input, mapping["unknown"])
-    style["backgroundColor"] = selected["bg_color"]
-    style["color"] = selected["tx_color"]
-    style["fontWeight"] = "bold"
-    style["transition"] = "background-color 200ms ease"
-    return selected["text"], style
+    return text, style
 
 
 @callback(
@@ -2007,16 +2074,16 @@ def material_compatibility_16(input):
     Input(component_id="a-compat-16", component_property="children"),
     Input(component_id="retrievable-16", component_property="value")
 )
-def mitigation_16(H, I, is_retrievable):
-    if H == "Unknown" or I == "Unknown":
+def mitigation_16(q_ffs, q_mit, is_retrievable):
+    if q_ffs == "Unknown" or q_mit == "Unknown":
         text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
-    elif H == "Yes" and I == "Yes":
-        text, bg_color, txt_color = "No or minor", "#a2c543", "#000000"
-    elif H == "No" or I == "No":
-        if is_retrievable == "no":
+    elif q_ffs == "Yes" and q_mit == "Yes":
+        text, bg_color, txt_color = "No or minor", "#43c543", "#000000"
+    elif q_ffs == "No" or q_mit == "No":
+        if is_retrievable == "No":
             text, bg_color, txt_color = "Severe", "#c02727", "#FFFFFF"
-        elif is_retrievable == "yes":
-            text, bg_color, txt_color = "Minor", "#43c543", "#000000"
+        elif is_retrievable == "Yes":
+            text, bg_color, txt_color = "Minor", "#a2c543", "#000000"
         else:
             text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
     else:
@@ -2037,47 +2104,52 @@ def mitigation_16(H, I, is_retrievable):
 @callback(
     Output(component_id="a-ffs-17", component_property="children"),
     Output(component_id="a-ffs-17", component_property="style"),
+    Input(component_id="q-17-1", component_property="value"),
     Input(component_id="q-17-2", component_property="value")
 )
-def qualified_FFS_17(input):
-    mapping = {
-        "yes": {"bg_color": "#43c54381", "tx_color": "#000000", "text": "Yes"},
-        "no": {"bg_color": "#c0272783", "tx_color": "#FFFFFF", "text": "No"},
-        "unknown": {"bg_color": "#4E4E4E", "tx_color": "#FFFFFF", "text": "Unknown"},
-        "": {"bg_color": "#f5f5f5", "tx_color": "#FFFFFF", "text": ""},
-    }
+def qualified_FFS_17(q171, q172):
+    if q171 == "Unknown" or q172 == "Unknown":
+        text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
+    elif q171 == "Yes" and q172 == "Yes":
+        text, bg_color, txt_color = "Yes", "#43c54381", "#000000"
+    elif q171 == "No" or q172 == "No":
+        text, bg_color, txt_color = "No", "#c0272783", "#FFFFFF"
+    else:
+        text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
     style = {
-        "textAlign": "center", "verticalAlign": "middle", "borderRadius": "5px", "fontWeight": "bold", "backgroundColor": "#4E4E4E"
+        "textAlign": "center",
+        "verticalAlign": "middle",
+        "borderRadius": "5px",
+        "fontWeight": "bold",
+        "color": txt_color,
+        "backgroundColor": bg_color
     }
-    selected = mapping.get(input, mapping["unknown"])
-    style["backgroundColor"] = selected["bg_color"]
-    style["color"] = selected["tx_color"]
-    style["fontWeight"] = "bold"
-    style["transition"] = "background-color 200ms ease"
-    return selected["text"], style
+    return text, style
 
 
 @callback(
     Output(component_id="a-compat-17", component_property="children"),
     Output(component_id="a-compat-17", component_property="style"),
-    Input(component_id="q-17-1", component_property="value")
+    Input(component_id="q-17-3", component_property="value")
 )
-def material_compatibility_17(input):
-    mapping = {
-        "yes": {"bg_color": "#43c54381", "tx_color": "#000000", "text": "Yes"},
-        "no": {"bg_color": "#c0272783", "tx_color": "#FFFFFF", "text": "No"},
-        "unknown": {"bg_color": "#4E4E4E", "tx_color": "#FFFFFF", "text": "Unknown"},
-        "": {"bg_color": "#f5f5f5", "tx_color": "#FFFFFF", "text": ""},
-    }
+def material_compatibility_17(q173):
+    if q173 == "Yes":
+        text, bg_color, txt_color = "Yes", "#43c54381", "#000000"
+    elif q173 == "No":
+        text, bg_color, txt_color = "No", "#c0272783", "#FFFFFF"
+    elif q173 == "Unknown":
+        text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
+    else:
+        text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
     style = {
-        "textAlign": "center", "verticalAlign": "middle", "borderRadius": "5px", "fontWeight": "bold", "backgroundColor": "#4E4E4E"
+        "textAlign": "center",
+        "verticalAlign": "middle",
+        "borderRadius": "5px",
+        "fontWeight": "bold",
+        "color": txt_color,
+        "backgroundColor": bg_color
     }
-    selected = mapping.get(input, mapping["unknown"])
-    style["backgroundColor"] = selected["bg_color"]
-    style["color"] = selected["tx_color"]
-    style["fontWeight"] = "bold"
-    style["transition"] = "background-color 200ms ease"
-    return selected["text"], style
+    return text, style
 
 
 @callback(
@@ -2087,16 +2159,16 @@ def material_compatibility_17(input):
     Input(component_id="a-compat-17", component_property="children"),
     Input(component_id="retrievable-17", component_property="value")
 )
-def mitigation_17(H, I, is_retrievable):
-    if H == "Unknown" or I == "Unknown":
+def mitigation_17(q_ffs, q_mit, is_retrievable):
+    if q_ffs == "Unknown" or q_mit == "Unknown":
         text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
-    elif H == "Yes" and I == "Yes":
-        text, bg_color, txt_color = "No or minor", "#a2c543", "#000000"
-    elif H == "No" or I == "No":
-        if is_retrievable == "no":
+    elif q_ffs == "Yes" and q_mit == "Yes":
+        text, bg_color, txt_color = "No or minor", "#43c543", "#000000"
+    elif q_ffs == "No" or q_mit == "No":
+        if is_retrievable == "No":
             text, bg_color, txt_color = "Severe", "#c02727", "#FFFFFF"
-        elif is_retrievable == "yes":
-            text, bg_color, txt_color = "Minor", "#43c543", "#000000"
+        elif is_retrievable == "Yes":
+            text, bg_color, txt_color = "Minor", "#a2c543", "#000000"
         else:
             text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
     else:
@@ -2117,47 +2189,52 @@ def mitigation_17(H, I, is_retrievable):
 @callback(
     Output(component_id="a-ffs-18", component_property="children"),
     Output(component_id="a-ffs-18", component_property="style"),
+    Input(component_id="q-18-1", component_property="value"),
     Input(component_id="q-18-2", component_property="value")
 )
-def qualified_FFS_18(input):
-    mapping = {
-        "yes": {"bg_color": "#43c54381", "tx_color": "#000000", "text": "Yes"},
-        "no": {"bg_color": "#c0272783", "tx_color": "#FFFFFF", "text": "No"},
-        "unknown": {"bg_color": "#4E4E4E", "tx_color": "#FFFFFF", "text": "Unknown"},
-        "": {"bg_color": "#f5f5f5", "tx_color": "#FFFFFF", "text": ""},
-    }
+def qualified_FFS_18(q181, q182):
+    if q181 == "Unknown" or q182 == "Unknown":
+        text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
+    elif q181 == "Yes" and q182 == "Yes":
+        text, bg_color, txt_color = "Yes", "#43c54381", "#000000"
+    elif q181 == "No" or q182 == "No":
+        text, bg_color, txt_color = "No", "#c0272783", "#FFFFFF"
+    else:
+        text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
     style = {
-        "textAlign": "center", "verticalAlign": "middle", "borderRadius": "5px", "fontWeight": "bold", "backgroundColor": "#4E4E4E"
+        "textAlign": "center",
+        "verticalAlign": "middle",
+        "borderRadius": "5px",
+        "fontWeight": "bold",
+        "color": txt_color,
+        "backgroundColor": bg_color
     }
-    selected = mapping.get(input, mapping["unknown"])
-    style["backgroundColor"] = selected["bg_color"]
-    style["color"] = selected["tx_color"]
-    style["fontWeight"] = "bold"
-    style["transition"] = "background-color 200ms ease"
-    return selected["text"], style
+    return text, style
 
 
 @callback(
     Output(component_id="a-compat-18", component_property="children"),
     Output(component_id="a-compat-18", component_property="style"),
-    Input(component_id="q-18-1", component_property="value")
+    Input(component_id="q-18-3", component_property="value")
 )
-def material_compatibility_18(input):
-    mapping = {
-        "yes": {"bg_color": "#43c54381", "tx_color": "#000000", "text": "Yes"},
-        "no": {"bg_color": "#c0272783", "tx_color": "#FFFFFF", "text": "No"},
-        "unknown": {"bg_color": "#4E4E4E", "tx_color": "#FFFFFF", "text": "Unknown"},
-        "": {"bg_color": "#f5f5f5", "tx_color": "#FFFFFF", "text": ""},
-    }
+def material_compatibility_18(q183):
+    if q183 == "Yes":
+        text, bg_color, txt_color = "Yes", "#43c54381", "#000000"
+    elif q183 == "No":
+        text, bg_color, txt_color = "No", "#c0272783", "#FFFFFF"
+    elif q183 == "Unknown":
+        text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
+    else:
+        text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
     style = {
-        "textAlign": "center", "verticalAlign": "middle", "borderRadius": "5px", "fontWeight": "bold", "backgroundColor": "#4E4E4E"
+        "textAlign": "center",
+        "verticalAlign": "middle",
+        "borderRadius": "5px",
+        "fontWeight": "bold",
+        "color": txt_color,
+        "backgroundColor": bg_color
     }
-    selected = mapping.get(input, mapping["unknown"])
-    style["backgroundColor"] = selected["bg_color"]
-    style["color"] = selected["tx_color"]
-    style["fontWeight"] = "bold"
-    style["transition"] = "background-color 200ms ease"
-    return selected["text"], style
+    return text, style
 
 
 @callback(
@@ -2167,16 +2244,16 @@ def material_compatibility_18(input):
     Input(component_id="a-compat-18", component_property="children"),
     Input(component_id="retrievable-18", component_property="value")
 )
-def mitigation_18(H, I, is_retrievable):
-    if H == "Unknown" or I == "Unknown":
+def mitigation_18(q_ffs, q_mit, is_retrievable):
+    if q_ffs == "Unknown" or q_mit == "Unknown":
         text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
-    elif H == "Yes" and I == "Yes":
-        text, bg_color, txt_color = "No or minor", "#a2c543", "#000000"
-    elif H == "No" or I == "No":
-        if is_retrievable == "no":
+    elif q_ffs == "Yes" and q_mit == "Yes":
+        text, bg_color, txt_color = "No or minor", "#43c543", "#000000"
+    elif q_ffs == "No" or q_mit == "No":
+        if is_retrievable == "No":
             text, bg_color, txt_color = "Severe", "#c02727", "#FFFFFF"
-        elif is_retrievable == "yes":
-            text, bg_color, txt_color = "Minor", "#43c543", "#000000"
+        elif is_retrievable == "Yes":
+            text, bg_color, txt_color = "Minor", "#a2c543", "#000000"
         else:
             text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
     else:
