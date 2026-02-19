@@ -6,5 +6,6 @@ readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
     "dash",
-    "pandas"
+    "dash-bootstrap-components>=2.0.4",
+    "pandas",
 ]

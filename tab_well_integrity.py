@@ -1,7 +1,26 @@
 from dash import dcc, html, callback, Output, Input, MATCH
 
+def bid(tab, barrier):
+    id = {"tab": tab, "barrier": barrier}
+    return id
 
-cw_1 = 1
+def rid(tab, retrievable):
+    id = {"tab": tab, "retrievable": retrievable}
+    return id
+
+def qid(tab, question):
+    id = {"tab": tab, "question": question}
+    return id
+
+def fid(type, name):
+    id = {"tab": type, "name": name}
+    return id
+
+def gid(type, name, i):
+    id = {"tab": type, "name": name, "i": i}
+    return id
+
+cw_1 = 2
 cw_2 = 10
 cw_3 = 3
 cw_4 = 3
@@ -32,12 +51,13 @@ def set_style(width, textAlign="left", bold=None, border=False):
     }
     return style
 
-def create_barrier_dropdown():
+def create_barrier_dropdown(id_name):
     return dcc.Dropdown(
                             options=[
                                 {"label": "Primary", "value": "Primary"},
                                 {"label": "Secondary", "value": "Secondary"}
                             ],
+                            id=id_name,
                             value="",      # default selection
                             clearable=False,
                             style={"width": "130px", "textAlign": "center"},
@@ -110,7 +130,7 @@ tab_well_integrity = dcc.Tab(
     value = "well-integrity",
     children = [
         html.Div(
-            style={"maxWidth": "2000px", "margin": "1px auto", "fontFamily": "system-ui"},
+            style={"maxWidth": "2000px", "margin": "16px auto", "fontFamily": "system-ui"},
             children=[
                 html.Table(
                     children=[
@@ -136,23 +156,23 @@ tab_well_integrity = dcc.Tab(
                             html.Tr([
                                 html.Td("1)", style=set_style(cw_1, textAlign="left")),
                                 html.Td("Primary caprock", style=set_style(cw_2, textAlign="left")),
-                                html.Td(create_barrier_dropdown(), style=set_style(cw_3, textAlign="center")),
-                                html.Td(create_retrievable_dropdown("retrievable-1"), style=set_style(cw_4)),
+                                html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-1")), style=set_style(cw_3, textAlign="center")),
+                                html.Td(create_retrievable_dropdown(rid("well_integrity", "retrievable-1")), style=set_style(cw_4)),
                                 html.Tr([
                                         html.Td("1. Are there impermeable formations that can constitute a (primary) caprock?", style=set_style(cw_6)),
-                                        html.Td(create_answer_dropdown("q-1-1"), style=set_style(cw_8, textAlign="right"))
+                                        html.Td(create_answer_dropdown(qid("well_integrity", "q-1-1")), style=set_style(cw_8, textAlign="right"))
                                     ]
                                 ),
                                 html.Tr([
                                         html.Td("2. Is the fracture gradient higher than the maximum anticipated operating pressure?", style=set_style(cw_6)),
-                                        html.Td(create_answer_dropdown("q-1-2"), style=set_style(cw_8, textAlign="right"))
+                                        html.Td(create_answer_dropdown(qid("well_integrity", "q-1-2")), style=set_style(cw_8, textAlign="right"))
                                     ]
                                 ),
                                 html.Td("", id="a-ffs-1", style=set_style(cw_7, textAlign="center")),
                                 html.Td("", id="a-compat-1", style=set_style(cw_8, textAlign="center")),
                                 html.Td("", id="mit-1", style=set_style(cw_9, textAlign="center")),
-                                html.Td(create_impact_dropdown({"type": "integrity-impact", "i": 1}), style=set_style(cw_10, textAlign="center")),
-                                html.Td(create_color_square({"type": "integrity-impact-color", "i": 1}), style=set_style(cw_11, textAlign="center")),
+                                html.Td(create_impact_dropdown(gid("well_integrity", "impact", 1)), style=set_style(cw_10, textAlign="center")),
+                                html.Td(create_color_square(gid("well_integrity", "impact-color", 1)), style=set_style(cw_11, textAlign="center")),
                             ]),
 
                             ################# Element 2 #################
@@ -162,28 +182,28 @@ tab_well_integrity = dcc.Tab(
                             html.Tr([
                                 html.Td("2)", style=set_style(cw_1, textAlign="left")),
                                 html.Td("Production casing / liner", style=set_style(cw_2, textAlign="left")),
-                                html.Td(create_barrier_dropdown(), style=set_style(cw_3, textAlign="center")),
-                                html.Td(create_retrievable_dropdown("retrievable-2"), style=set_style(cw_4)),
+                                html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-2")), style=set_style(cw_3, textAlign="center")),
+                                html.Td(create_retrievable_dropdown(rid("well_integrity", "retrievable-2")), style=set_style(cw_4)),
                                 html.Tr([
                                         html.Td("1. Is the casing inspected and free of any defects (e.g. corrosion) as per applicable requirements?", style=set_style(cw_6)),
-                                        html.Td(create_answer_dropdown("q-2-1"), style=set_style(cw_8, textAlign="right"))
+                                        html.Td(create_answer_dropdown(qid("well_integrity", "q-2-1")), style=set_style(cw_8, textAlign="right"))
                                     ]
                                 ),
                                 html.Tr([
                                         html.Td("2. Does the production casing/liner contain gas-tight (premium) connections?", style=set_style(cw_6)),
-                                        html.Td(create_answer_dropdown("q-2-2"), style=set_style(cw_8, textAlign="right"))
+                                        html.Td(create_answer_dropdown(qid("well_integrity", "q-2-2")), style=set_style(cw_8, textAlign="right"))
                                     ]
                                 ),
                                 html.Tr([
                                         html.Td("3. Is the casing material compatible with the expected operating conditions?", style=set_style(cw_6)),
-                                        html.Td(create_answer_dropdown("q-2-3"), style=set_style(cw_8, textAlign="right"))
+                                        html.Td(create_answer_dropdown(qid("well_integrity", "q-2-3")), style=set_style(cw_8, textAlign="right"))
                                     ]
                                 ),
                                 html.Td("", id="a-ffs-2", style=set_style(cw_7, textAlign="center")),
                                 html.Td("", id="a-compat-2", style=set_style(cw_8, textAlign="center")),
                                 html.Td("", id="mit-2", style=set_style(cw_9, textAlign="center")),
-                                html.Td(create_impact_dropdown({"type": "integrity-impact", "i": 2}), style=set_style(cw_10, textAlign="center")),
-                                html.Td(create_color_square({"type": "integrity-impact-color", "i": 2}), style=set_style(cw_11, textAlign="center")),
+                                html.Td(create_impact_dropdown(gid("well_integrity", "impact", 2)), style=set_style(cw_10, textAlign="center")),
+                                html.Td(create_color_square(gid("well_integrity", "impact-color", 2)), style=set_style(cw_11, textAlign="center")),
                             ]),
 
                             ################# Element 3 #################
@@ -193,28 +213,28 @@ tab_well_integrity = dcc.Tab(
                             html.Tr([
                                 html.Td("3)", style=set_style(cw_1, textAlign="left")),
                                 html.Td("Cement behind the production casing / Liner", style=set_style(cw_2, textAlign="left")),
-                                html.Td(create_barrier_dropdown(), style=set_style(cw_3, textAlign="center")),
-                                html.Td(create_retrievable_dropdown("retrievable-3"), style=set_style(cw_4)),
+                                html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-3")), style=set_style(cw_3, textAlign="center")),
+                                html.Td(create_retrievable_dropdown(rid("well_integrity", "retrievable-3")), style=set_style(cw_4)),
                                 html.Tr([
                                         html.Td("1. Is the production casing/liner(lap) cemented across the caprock?", style=set_style(cw_6)),
-                                        html.Td(create_answer_dropdown("q-3-1"), style=set_style(cw_8, textAlign="right"))
+                                        html.Td(create_answer_dropdown(qid("well_integrity", "q-3-1")), style=set_style(cw_8, textAlign="right"))
                                     ]
                                 ),
                                 html.Tr([
                                         html.Td("2. Is there sufficient cement length of good quality to provide zonal isolation?", style=set_style(cw_6)),
-                                        html.Td(create_answer_dropdown("q-3-2"), style=set_style(cw_8, textAlign="right"))
+                                        html.Td(create_answer_dropdown(qid("well_integrity", "q-3-2")), style=set_style(cw_8, textAlign="right"))
                                     ]
                                 ),
                                 html.Tr([
                                         html.Td("3. Is the cement type compatible with expected operating conditions? E.g., Portland API class G cement.", style=set_style(cw_6)),
-                                        html.Td(create_answer_dropdown("q-3-3"), style=set_style(cw_8, textAlign="right"))
+                                        html.Td(create_answer_dropdown(qid("well_integrity", "q-3-3")), style=set_style(cw_8, textAlign="right"))
                                     ]
                                 ),
                                 html.Td("", id="a-ffs-3", style=set_style(cw_7, textAlign="center")),
                                 html.Td("", id="a-compat-3", style=set_style(cw_8, textAlign="center")),
                                 html.Td("", id="mit-3", style=set_style(cw_9, textAlign="center")),
-                                html.Td(create_impact_dropdown({"type": "integrity-impact", "i": 3}), style=set_style(cw_10, textAlign="center")),
-                                html.Td(create_color_square({"type": "integrity-impact-color", "i": 3}), style=set_style(cw_11, textAlign="center")),
+                                html.Td(create_impact_dropdown(gid("well_integrity", "impact", 3)), style=set_style(cw_10, textAlign="center")),
+                                html.Td(create_color_square(gid("well_integrity", "impact-color", 3)), style=set_style(cw_11, textAlign="center")),
                             ]),
                             
                             ################# Skip to 6 #################
@@ -229,28 +249,28 @@ tab_well_integrity = dcc.Tab(
                             html.Tr([
                                 html.Td("4)", style=set_style(cw_1, textAlign="left")),
                                 html.Td("Overlapping casing behing the production casing / liner", style=set_style(cw_2, textAlign="left")),
-                                html.Td(create_barrier_dropdown(), style=set_style(cw_3, textAlign="center")),
-                                html.Td(create_retrievable_dropdown("retrievable-4"), style=set_style(cw_4)),
+                                html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-4")), style=set_style(cw_3, textAlign="center")),
+                                html.Td(create_retrievable_dropdown(rid("well_integrity", "retrievable-4")), style=set_style(cw_4)),
                                 html.Tr([
                                         html.Td("1. Is the casing inspected and free of any defects (e.g. corrosion) as per applicable requirements?", style=set_style(cw_6)),
-                                        html.Td(create_answer_dropdown("q-4-1"), style=set_style(cw_8, textAlign="right"))
+                                        html.Td(create_answer_dropdown(qid("well_integrity", "q-4-1")), style=set_style(cw_8, textAlign="right"))
                                     ]
                                 ),
                                 html.Tr([
                                         html.Td("2. Does the casing contain gas-tight (premium) connections?", style=set_style(cw_6)),
-                                        html.Td(create_answer_dropdown("q-4-2"), style=set_style(cw_8, textAlign="right"))
+                                        html.Td(create_answer_dropdown(qid("well_integrity", "q-4-2")), style=set_style(cw_8, textAlign="right"))
                                     ]
                                 ),
                                 html.Tr([
                                         html.Td("3. Is the casing material compatible with the expected operating conditions? ", style=set_style(cw_6)),
-                                        html.Td(create_answer_dropdown("q-4-3"), style=set_style(cw_8, textAlign="right"))
+                                        html.Td(create_answer_dropdown(qid("well_integrity", "q-4-3")), style=set_style(cw_8, textAlign="right"))
                                     ]
                                 ),
                                 html.Td("", id="a-ffs-4", style=set_style(cw_7, textAlign="center")),
                                 html.Td("", id="a-compat-4", style=set_style(cw_8, textAlign="center")),
                                 html.Td("", id="mit-4", style=set_style(cw_9, textAlign="center")),
-                                html.Td(create_impact_dropdown({"type": "integrity-impact", "i": 4}), style=set_style(cw_10, textAlign="center")),
-                                html.Td(create_color_square({"type": "integrity-impact-color", "i": 4}), style=set_style(cw_11, textAlign="center")),
+                                html.Td(create_impact_dropdown(gid("well_integrity", "impact", 4)), style=set_style(cw_10, textAlign="center")),
+                                html.Td(create_color_square(gid("well_integrity", "impact-color", 4)), style=set_style(cw_11, textAlign="center")),
                             ]),
 
                             ################# Element 5 #################
@@ -260,28 +280,28 @@ tab_well_integrity = dcc.Tab(
                             html.Tr([
                                 html.Td("5)", style=set_style(cw_1, textAlign="left")),
                                 html.Td("Overlapping casing behing the production casing / liner", style=set_style(cw_2, textAlign="left")),
-                                html.Td(create_barrier_dropdown(), style=set_style(cw_3, textAlign="center")),
-                                html.Td(create_retrievable_dropdown("retrievable-5"), style=set_style(cw_4)),
+                                html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-5")), style=set_style(cw_3, textAlign="center")),
+                                html.Td(create_retrievable_dropdown(rid("well_integrity", "retrievable-5")), style=set_style(cw_4)),
                                 html.Tr([
                                         html.Td("1. Is the casing inspected and free of any defects (e.g. corrosion) as per applicable requirements?", style=set_style(cw_6)),
-                                        html.Td(create_answer_dropdown("q-5-1"), style=set_style(cw_8, textAlign="right"))
+                                        html.Td(create_answer_dropdown(qid("well_integrity", "q-5-1")), style=set_style(cw_8, textAlign="right"))
                                     ]
                                 ),
                                 html.Tr([
                                         html.Td("2. Does the casing contain gas-tight (premium) connections?", style=set_style(cw_6)),
-                                        html.Td(create_answer_dropdown("q-5-2"), style=set_style(cw_8, textAlign="right"))
+                                        html.Td(create_answer_dropdown(qid("well_integrity", "q-5-2")), style=set_style(cw_8, textAlign="right"))
                                     ]
                                 ),
                                 html.Tr([
                                         html.Td("3. Is the casing material compatible with the expected operating conditions? ", style=set_style(cw_6)),
-                                        html.Td(create_answer_dropdown("q-5-3"), style=set_style(cw_8, textAlign="right"))
+                                        html.Td(create_answer_dropdown(qid("well_integrity", "q-5-3")), style=set_style(cw_8, textAlign="right"))
                                     ]
                                 ),
                                 html.Td("", id="a-ffs-5", style=set_style(cw_7, textAlign="center")),
                                 html.Td("", id="a-compat-5", style=set_style(cw_8, textAlign="center")),
                                 html.Td("", id="mit-5", style=set_style(cw_9, textAlign="center")),
-                                html.Td(create_impact_dropdown({"type": "integrity-impact", "i": 5}), style=set_style(cw_10, textAlign="center")),
-                                html.Td(create_color_square({"type": "integrity-impact-color", "i": 5}), style=set_style(cw_11, textAlign="center")),
+                                html.Td(create_impact_dropdown(gid("well_integrity", "impact", 5)), style=set_style(cw_10, textAlign="center")),
+                                html.Td(create_color_square(gid("well_integrity", "impact-color", 5)), style=set_style(cw_11, textAlign="center")),
                             ]),
 
                             ################# Element 6 #################
@@ -291,23 +311,23 @@ tab_well_integrity = dcc.Tab(
                             html.Tr([
                                 html.Td("6)", style=set_style(cw_1, textAlign="left")),
                                 html.Td("Secondary caprock", style=set_style(cw_2, textAlign="left")),
-                                html.Td(create_barrier_dropdown(), style=set_style(cw_3, textAlign="center")),
-                                html.Td(create_retrievable_dropdown("retrievable-6"), style=set_style(cw_4)),
+                                html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-6")), style=set_style(cw_3, textAlign="center")),
+                                html.Td(create_retrievable_dropdown(rid("well_integrity", "retrievable-6")), style=set_style(cw_4)),
                                 html.Tr([
                                         html.Td("1. Are there impermeable formations that can constitute an additional (secondary) caprock?", style=set_style(cw_6)),
-                                        html.Td(create_answer_dropdown("q-6-1"), style=set_style(cw_8, textAlign="right"))
+                                        html.Td(create_answer_dropdown(qid("well_integrity", "q-6-1")), style=set_style(cw_8, textAlign="right"))
                                     ]
                                 ),
                                 html.Tr([
                                         html.Td("2. Is the fracture gradient higher than the maximum anticipated operating pressure? ", style=set_style(cw_6)),
-                                        html.Td(create_answer_dropdown("q-6-2"), style=set_style(cw_8, textAlign="right"))
+                                        html.Td(create_answer_dropdown(qid("well_integrity", "q-6-2")), style=set_style(cw_8, textAlign="right"))
                                     ]
                                 ),
                                 html.Td("", id="a-ffs-6", style=set_style(cw_7, textAlign="center")),
                                 html.Td("", id="a-compat-6", style=set_style(cw_8, textAlign="center")),
                                 html.Td("", id="mit-6", style=set_style(cw_9, textAlign="center")),
-                                html.Td(create_impact_dropdown({"type": "integrity-impact", "i": 6}), style=set_style(cw_10, textAlign="center")),
-                                html.Td(create_color_square({"type": "integrity-impact-color", "i": 6}), style=set_style(cw_11, textAlign="center")),
+                                html.Td(create_impact_dropdown(gid("well_integrity", "impact", 6)), style=set_style(cw_10, textAlign="center")),
+                                html.Td(create_color_square(gid("well_integrity", "impact-color", 6)), style=set_style(cw_11, textAlign="center")),
                             ]),
 
                             ################# Element 7 #################
@@ -317,28 +337,28 @@ tab_well_integrity = dcc.Tab(
                             html.Tr([
                                 html.Td("7)", style=set_style(cw_1, textAlign="left")),
                                 html.Td("Casing string across the secondary caprock", style=set_style(cw_2, textAlign="left")),
-                                html.Td(create_barrier_dropdown(), style=set_style(cw_3, textAlign="center")),
-                                html.Td(create_retrievable_dropdown("retrievable-7"), style=set_style(cw_4)),
+                                html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-7")), style=set_style(cw_3, textAlign="center")),
+                                html.Td(create_retrievable_dropdown(rid("well_integrity", "retrievable-7")), style=set_style(cw_4)),
                                 html.Tr([
                                         html.Td("1. Is the casing inspected and free of any defects (e.g. corrosion) as per applicable requirements?", style=set_style(cw_6)),
-                                        html.Td(create_answer_dropdown("q-7-1"), style=set_style(cw_8, textAlign="right"))
+                                        html.Td(create_answer_dropdown(qid("well_integrity", "q-7-1")), style=set_style(cw_8, textAlign="right"))
                                     ]
                                 ),
                                 html.Tr([
                                         html.Td("2. Does the casing contain gas-tight (premium) connections?", style=set_style(cw_6)),
-                                        html.Td(create_answer_dropdown("q-7-2"), style=set_style(cw_8, textAlign="right"))
+                                        html.Td(create_answer_dropdown(qid("well_integrity", "q-7-2")), style=set_style(cw_8, textAlign="right"))
                                     ]
                                 ),
                                 html.Tr([
                                         html.Td("3. Is the casing material compatible with the expected operating conditions? ", style=set_style(cw_6)),
-                                        html.Td(create_answer_dropdown("q-7-3"), style=set_style(cw_8, textAlign="right"))
+                                        html.Td(create_answer_dropdown(qid("well_integrity", "q-7-3")), style=set_style(cw_8, textAlign="right"))
                                     ]
                                 ),
                                 html.Td("", id="a-ffs-7", style=set_style(cw_7, textAlign="center")),
                                 html.Td("", id="a-compat-7", style=set_style(cw_8, textAlign="center")),
                                 html.Td("", id="mit-7", style=set_style(cw_9, textAlign="center")),
-                                html.Td(create_impact_dropdown({"type": "integrity-impact", "i": 7}), style=set_style(cw_10, textAlign="center")),
-                                html.Td(create_color_square({"type": "integrity-impact-color", "i": 7}), style=set_style(cw_11, textAlign="center")),
+                                html.Td(create_impact_dropdown(gid("well_integrity", "impact", 7)), style=set_style(cw_10, textAlign="center")),
+                                html.Td(create_color_square(gid("well_integrity", "impact-color", 7)), style=set_style(cw_11, textAlign="center")),
                             ]),
 
                             ################# Element 8 #################
@@ -348,28 +368,28 @@ tab_well_integrity = dcc.Tab(
                             html.Tr([
                                 html.Td("8)", style=set_style(cw_1, textAlign="left")),
                                 html.Td("Cement behind the casing string across the secondary caprock", style=set_style(cw_2, textAlign="left")),
-                                html.Td(create_barrier_dropdown(), style=set_style(cw_3, textAlign="center")),
-                                html.Td(create_retrievable_dropdown("retrievable-8"), style=set_style(cw_4)),
+                                html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-8")), style=set_style(cw_3, textAlign="center")),
+                                html.Td(create_retrievable_dropdown(rid("well_integrity", "retrievable-8")), style=set_style(cw_4)),
                                 html.Tr([
                                         html.Td("1. Is the casing cemented across the secondary caprock?", style=set_style(cw_6)),
-                                        html.Td(create_answer_dropdown("q-8-1"), style=set_style(cw_8, textAlign="right"))
+                                        html.Td(create_answer_dropdown(qid("well_integrity", "q-8-1")), style=set_style(cw_8, textAlign="right"))
                                     ]
                                 ),
                                 html.Tr([
                                         html.Td("2. Is there sufficient cement length of good quality to provide zonal isolation?", style=set_style(cw_6)),
-                                        html.Td(create_answer_dropdown("q-8-2"), style=set_style(cw_8, textAlign="right"))
+                                        html.Td(create_answer_dropdown(qid("well_integrity", "q-8-2")), style=set_style(cw_8, textAlign="right"))
                                     ]
                                 ),
                                 html.Tr([
                                         html.Td("3. Is the cement type compatible with expected operating conditions?", style=set_style(cw_6)),
-                                        html.Td(create_answer_dropdown("q-8-3"), style=set_style(cw_8, textAlign="right"))
+                                        html.Td(create_answer_dropdown(qid("well_integrity", "q-8-3")), style=set_style(cw_8, textAlign="right"))
                                     ]
                                 ),
                                 html.Td("", id="a-ffs-8", style=set_style(cw_7, textAlign="center")),
                                 html.Td("", id="a-compat-8", style=set_style(cw_8, textAlign="center")),
                                 html.Td("", id="mit-8", style=set_style(cw_9, textAlign="center")),
-                                html.Td(create_impact_dropdown({"type": "integrity-impact", "i": 8}), style=set_style(cw_10, textAlign="center")),
-                                html.Td(create_color_square({"type": "integrity-impact-color", "i": 8}), style=set_style(cw_11, textAlign="center")),
+                                html.Td(create_impact_dropdown(gid("well_integrity", "impact", 8)), style=set_style(cw_10, textAlign="center")),
+                                html.Td(create_color_square(gid("well_integrity", "impact-color", 8)), style=set_style(cw_11, textAlign="center")),
                             ]),
                             
                             ################# Skip to 11 #################
@@ -387,28 +407,28 @@ tab_well_integrity = dcc.Tab(
                             html.Tr([
                                 html.Td("9)", style=set_style(cw_1, textAlign="left")),
                                 html.Td("Overlapping casing behing the production casing / liner", style=set_style(cw_2, textAlign="left")),
-                                html.Td(create_barrier_dropdown(), style=set_style(cw_3, textAlign="center")),
-                                html.Td(create_retrievable_dropdown("retrievable-9"), style=set_style(cw_4)),
+                                html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-9")), style=set_style(cw_3, textAlign="center")),
+                                html.Td(create_retrievable_dropdown(rid("well_integrity", "retrievable-9")), style=set_style(cw_4)),
                                 html.Tr([
                                         html.Td("1. Is the casing inspected and free of any defects (e.g. corrosion) as per applicable requirements?", style=set_style(cw_6)),
-                                        html.Td(create_answer_dropdown("q-9-1"), style=set_style(cw_8, textAlign="right"))
+                                        html.Td(create_answer_dropdown(qid("well_integrity", "q-9-1")), style=set_style(cw_8, textAlign="right"))
                                     ]
                                 ),
                                 html.Tr([
                                         html.Td("2. Does the casing contain gas-tight (premium) connections?", style=set_style(cw_6)),
-                                        html.Td(create_answer_dropdown("q-9-2"), style=set_style(cw_8, textAlign="right"))
+                                        html.Td(create_answer_dropdown(qid("well_integrity", "q-9-2")), style=set_style(cw_8, textAlign="right"))
                                     ]
                                 ),
                                 html.Tr([
                                         html.Td("3. Is the casing material compatible with the expected operating conditions?", style=set_style(cw_6)),
-                                        html.Td(create_answer_dropdown("q-9-3"), style=set_style(cw_8, textAlign="right"))
+                                        html.Td(create_answer_dropdown(qid("well_integrity", "q-9-3")), style=set_style(cw_8, textAlign="right"))
                                     ]
                                 ),
                                 html.Td("", id="a-ffs-9", style=set_style(cw_7, textAlign="center")),
                                 html.Td("", id="a-compat-9", style=set_style(cw_8, textAlign="center")),
                                 html.Td("", id="mit-9", style=set_style(cw_9, textAlign="center")),
-                                html.Td(create_impact_dropdown({"type": "integrity-impact", "i": 9}), style=set_style(cw_10, textAlign="center")),
-                                html.Td(create_color_square({"type": "integrity-impact-color", "i": 9}), style=set_style(cw_11, textAlign="center")),
+                                html.Td(create_impact_dropdown(gid("well_integrity", "impact", 9)), style=set_style(cw_10, textAlign="center")),
+                                html.Td(create_color_square(gid("well_integrity", "impact-color", 9)), style=set_style(cw_11, textAlign="center")),
                             ]),
 
                             ################# Element 10 #################
@@ -418,28 +438,28 @@ tab_well_integrity = dcc.Tab(
                             html.Tr([
                                 html.Td("10)", style=set_style(cw_1, textAlign="left")),
                                 html.Td("Cement behind the overlapping casing", style=set_style(cw_2, textAlign="left")),
-                                html.Td(create_barrier_dropdown(), style=set_style(cw_3, textAlign="center")),
-                                html.Td(create_retrievable_dropdown("retrievable-10"), style=set_style(cw_4)),
+                                html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-10")), style=set_style(cw_3, textAlign="center")),
+                                html.Td(create_retrievable_dropdown(rid("well_integrity", "retrievable-10")), style=set_style(cw_4)),
                                 html.Tr([
                                         html.Td("1. Is the overlapping casing cemented across the caprock?", style=set_style(cw_6)),
-                                        html.Td(create_answer_dropdown("q-10-1"), style=set_style(cw_8, textAlign="right"))
+                                        html.Td(create_answer_dropdown(qid("well_integrity", "q-10-1")), style=set_style(cw_8, textAlign="right"))
                                     ]
                                 ),
                                 html.Tr([
                                         html.Td("2. Is there sufficient cement length of good quality to provide zonal isolation? ", style=set_style(cw_6)),
-                                        html.Td(create_answer_dropdown("q-10-2"), style=set_style(cw_8, textAlign="right"))
+                                        html.Td(create_answer_dropdown(qid("well_integrity", "q-10-2")), style=set_style(cw_8, textAlign="right"))
                                     ]
                                 ),
                                 html.Tr([
                                         html.Td("3. Is the cement type compatible with expected operating conditions? ", style=set_style(cw_6)),
-                                        html.Td(create_answer_dropdown("q-10-3"), style=set_style(cw_8, textAlign="right"))
+                                        html.Td(create_answer_dropdown(qid("well_integrity", "q-10-3")), style=set_style(cw_8, textAlign="right"))
                                     ]
                                 ),
                                 html.Td("", id="a-ffs-10", style=set_style(cw_7, textAlign="center")),
                                 html.Td("", id="a-compat-10", style=set_style(cw_8, textAlign="center")),
                                 html.Td("", id="mit-10", style=set_style(cw_9, textAlign="center")),
-                                html.Td(create_impact_dropdown({"type": "integrity-impact", "i": 10}), style=set_style(cw_10, textAlign="center")),
-                                html.Td(create_color_square({"type": "integrity-impact-color", "i": 10}), style=set_style(cw_11, textAlign="center")),
+                                html.Td(create_impact_dropdown(gid("well_integrity", "impact", 10)), style=set_style(cw_10, textAlign="center")),
+                                html.Td(create_color_square(gid("well_integrity", "impact-color", 10)), style=set_style(cw_11, textAlign="center")),
                             ]),
 
                             ################# Element 11 #################
@@ -449,28 +469,28 @@ tab_well_integrity = dcc.Tab(
                             html.Tr([
                                 html.Td("11)", style=set_style(cw_1, textAlign="left")),
                                 html.Td("Wellhead", style=set_style(cw_2, textAlign="left")),
-                                html.Td(create_barrier_dropdown(), style=set_style(cw_3, textAlign="center")),
-                                html.Td(create_retrievable_dropdown("retrievable-11"), style=set_style(cw_4)),
+                                html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-11")), style=set_style(cw_3, textAlign="center")),
+                                html.Td(create_retrievable_dropdown(rid("well_integrity", "retrievable-11")), style=set_style(cw_4)),
                                 html.Tr([
                                         html.Td("1. Are all wellhead components inspected and free of any defect (e.g. corrosion) as per applicable requirements?", style=set_style(cw_6)),
-                                        html.Td(create_answer_dropdown("q-11-1"), style=set_style(cw_8, textAlign="right"))
+                                        html.Td(create_answer_dropdown(qid("well_integrity", "q-11-1")), style=set_style(cw_8, textAlign="right"))
                                     ]
                                 ),
                                 html.Tr([
                                         html.Td("2. Have all wellhead components been verified through functional testing (e.g. pressure testing) as required by applicable standards, guidelines, or regulations?", style=set_style(cw_6)),
-                                        html.Td(create_answer_dropdown("q-11-2"), style=set_style(cw_8, textAlign="right"))
+                                        html.Td(create_answer_dropdown(qid("well_integrity", "q-11-2")), style=set_style(cw_8, textAlign="right"))
                                     ]
                                 ),
                                 html.Tr([
                                         html.Td("3. Are all  materials compatible and designed for hydrogen environment? E.g. metal-to-metal seals, less connections", style=set_style(cw_6)),
-                                        html.Td(create_answer_dropdown("q-11-3"), style=set_style(cw_8, textAlign="right"))
+                                        html.Td(create_answer_dropdown(qid("well_integrity", "q-11-3")), style=set_style(cw_8, textAlign="right"))
                                     ]
                                 ),
                                 html.Td("", id="a-ffs-11", style=set_style(cw_7, textAlign="center")),
                                 html.Td("", id="a-compat-11", style=set_style(cw_8, textAlign="center")),
                                 html.Td("", id="mit-11", style=set_style(cw_9, textAlign="center")),
-                                html.Td(create_impact_dropdown({"type": "integrity-impact", "i": 11}), style=set_style(cw_10, textAlign="center")),
-                                html.Td(create_color_square({"type": "integrity-impact-color", "i": 11}), style=set_style(cw_11, textAlign="center")),
+                                html.Td(create_impact_dropdown(gid("well_integrity", "impact", 11)), style=set_style(cw_10, textAlign="center")),
+                                html.Td(create_color_square(gid("well_integrity", "impact-color", 11)), style=set_style(cw_11, textAlign="center")),
                             ]),
 
                             ################# Element 12 #################
@@ -480,28 +500,28 @@ tab_well_integrity = dcc.Tab(
                             html.Tr([
                                 html.Td("12)", style=set_style(cw_1, textAlign="left")),
                                 html.Td("Other non-retrievable completion e.g. sand screens", style=set_style(cw_2, textAlign="left")),
-                                html.Td(create_barrier_dropdown(), style=set_style(cw_3, textAlign="center")),
-                                html.Td(create_retrievable_dropdown("retrievable-12"), style=set_style(cw_4)),
+                                html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-12")), style=set_style(cw_3, textAlign="center")),
+                                html.Td(create_retrievable_dropdown(rid("well_integrity", "retrievable-12")), style=set_style(cw_4)),
                                 html.Tr([
                                         html.Td("1. Are all components inspected and free of any defect (e.g. corrosion) as per applicable requirements?", style=set_style(cw_6)),
-                                        html.Td(create_answer_dropdown("q-12-1"), style=set_style(cw_8, textAlign="right"))
+                                        html.Td(create_answer_dropdown(qid("well_integrity", "q-12-1")), style=set_style(cw_8, textAlign="right"))
                                     ]
                                 ),
                                 html.Tr([
                                         html.Td("2. Have all components been verified through functional testing (e.g. pressure testing) as required by applicable standards, guidelines, or regulations?", style=set_style(cw_6)),
-                                        html.Td(create_answer_dropdown("q-12-2"), style=set_style(cw_8, textAlign="right"))
+                                        html.Td(create_answer_dropdown(qid("well_integrity", "q-12-2")), style=set_style(cw_8, textAlign="right"))
                                     ]
                                 ),
                                 html.Tr([
                                         html.Td("3. Are the materials compatible with expected operating conditions?", style=set_style(cw_6)),
-                                        html.Td(create_answer_dropdown("q-12-3"), style=set_style(cw_8, textAlign="right"))
+                                        html.Td(create_answer_dropdown(qid("well_integrity", "q-12-3")), style=set_style(cw_8, textAlign="right"))
                                     ]
                                 ),
                                 html.Td("", id="a-ffs-12", style=set_style(cw_7, textAlign="center")),
                                 html.Td("", id="a-compat-12", style=set_style(cw_8, textAlign="center")),
                                 html.Td("", id="mit-12", style=set_style(cw_9, textAlign="center")),
-                                html.Td(create_impact_dropdown({"type": "integrity-impact", "i": 12}), style=set_style(cw_10, textAlign="center")),
-                                html.Td(create_color_square({"type": "integrity-impact-color", "i": 12}), style=set_style(cw_11, textAlign="center")),
+                                html.Td(create_impact_dropdown(gid("well_integrity", "impact", 12)), style=set_style(cw_10, textAlign="center")),
+                                html.Td(create_color_square(gid("well_integrity", "impact-color", 12)), style=set_style(cw_11, textAlign="center")),
                             ]),
 
                             ################# Element 13 #################
@@ -511,28 +531,28 @@ tab_well_integrity = dcc.Tab(
                             html.Tr([
                                 html.Td("13)", style=set_style(cw_1, textAlign="left")),
                                 html.Td("Production packer", style=set_style(cw_2, textAlign="left")),
-                                html.Td(create_barrier_dropdown(), style=set_style(cw_3, textAlign="center")),
-                                html.Td(create_retrievable_dropdown("retrievable-13"), style=set_style(cw_4)),
+                                html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-13")), style=set_style(cw_3, textAlign="center")),
+                                html.Td(create_retrievable_dropdown(rid("well_integrity", "retrievable-13")), style=set_style(cw_4)),
                                 html.Tr([
                                         html.Td("1. Has packer functionality been verified through testing as per applicable guideliness, standards or regulations?", style=set_style(cw_6)),
-                                        html.Td(create_answer_dropdown("q-13-1"), style=set_style(cw_8, textAlign="right"))
+                                        html.Td(create_answer_dropdown(qid("well_integrity", "q-13-1")), style=set_style(cw_8, textAlign="right"))
                                     ]
                                 ),
                                 html.Tr([
                                         html.Td("2. Is the packer positioned across the caprock with a good quality cement behind cement string(s)?", style=set_style(cw_6)),
-                                        html.Td(create_answer_dropdown("q-13-2"), style=set_style(cw_8, textAlign="right"))
+                                        html.Td(create_answer_dropdown(qid("well_integrity", "q-13-2")), style=set_style(cw_8, textAlign="right"))
                                     ]
                                 ),
                                 html.Tr([
                                         html.Td("3. Are all packer materials (e.g. elastomer and steel) compatible with the expected operating conditions?", style=set_style(cw_6)),
-                                        html.Td(create_answer_dropdown("q-13-3"), style=set_style(cw_8, textAlign="right"))
+                                        html.Td(create_answer_dropdown(qid("well_integrity", "q-13-3")), style=set_style(cw_8, textAlign="right"))
                                     ]
                                 ),
                                 html.Td("", id="a-ffs-13", style=set_style(cw_7, textAlign="center")),
                                 html.Td("", id="a-compat-13", style=set_style(cw_8, textAlign="center")),
                                 html.Td("", id="mit-13", style=set_style(cw_9, textAlign="center")),
-                                html.Td(create_impact_dropdown({"type": "integrity-impact", "i": 13}), style=set_style(cw_10, textAlign="center")),
-                                html.Td(create_color_square({"type": "integrity-impact-color", "i": 13}), style=set_style(cw_11, textAlign="center")),
+                                html.Td(create_impact_dropdown(gid("well_integrity", "impact", 13)), style=set_style(cw_10, textAlign="center")),
+                                html.Td(create_color_square(gid("well_integrity", "impact-color", 13)), style=set_style(cw_11, textAlign="center")),
                             ]),
 
                             ################# Element 14 #################
@@ -542,33 +562,33 @@ tab_well_integrity = dcc.Tab(
                             html.Tr([
                                 html.Td("14)", style=set_style(cw_1, textAlign="left")),
                                 html.Td("SSSV", style=set_style(cw_2, textAlign="left")),
-                                html.Td(create_barrier_dropdown(), style=set_style(cw_3, textAlign="center")),
-                                html.Td(create_retrievable_dropdown("retrievable-14"), style=set_style(cw_4)),
+                                html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-14")), style=set_style(cw_3, textAlign="center")),
+                                html.Td(create_retrievable_dropdown(rid("well_integrity", "retrievable-14")), style=set_style(cw_4)),
                                 html.Tr([
                                         html.Td("1. Is the SSSV surface controlled? ", style=set_style(cw_6)),
-                                        html.Td(create_answer_dropdown("q-14-1"), style=set_style(cw_8, textAlign="right"))
+                                        html.Td(create_answer_dropdown(qid("well_integrity", "q-14-1")), style=set_style(cw_8, textAlign="right"))
                                     ]
                                 ),
                                 html.Tr([
                                         html.Td("2. Is the SSV inspected and free of any defect as per applicable requirements?", style=set_style(cw_6)),
-                                        html.Td(create_answer_dropdown("q-14-2"), style=set_style(cw_8, textAlign="right"))
+                                        html.Td(create_answer_dropdown(qid("well_integrity", "q-14-2")), style=set_style(cw_8, textAlign="right"))
                                     ]
                                 ),
                                 html.Tr([
                                         html.Td("3. Has the SSSV been verified through functional testing (e.g. pressure and leakage testing) as required by applicable standards, guidelines, or regulations?", style=set_style(cw_6)),
-                                        html.Td(create_answer_dropdown("q-14-3"), style=set_style(cw_8, textAlign="right"))
+                                        html.Td(create_answer_dropdown(qid("well_integrity", "q-14-3")), style=set_style(cw_8, textAlign="right"))
                                     ]
                                 ),
                                 html.Tr([
                                         html.Td("4. Are all SSSV component materials compatible with the expected operating conditions?", style=set_style(cw_6)),
-                                        html.Td(create_answer_dropdown("q-14-4"), style=set_style(cw_8, textAlign="right"))
+                                        html.Td(create_answer_dropdown(qid("well_integrity", "q-14-4")), style=set_style(cw_8, textAlign="right"))
                                     ]
                                 ),
                                 html.Td("", id="a-ffs-14", style=set_style(cw_7, textAlign="center")),
                                 html.Td("", id="a-compat-14", style=set_style(cw_8, textAlign="center")),
                                 html.Td("", id="mit-14", style=set_style(cw_9, textAlign="center")),
-                                html.Td(create_impact_dropdown({"type": "integrity-impact", "i": 14}), style=set_style(cw_10, textAlign="center")),
-                                html.Td(create_color_square({"type": "integrity-impact-color", "i": 14}), style=set_style(cw_11, textAlign="center")),
+                                html.Td(create_impact_dropdown(gid("well_integrity", "impact", 14)), style=set_style(cw_10, textAlign="center")),
+                                html.Td(create_color_square(gid("well_integrity", "impact-color", 14)), style=set_style(cw_11, textAlign="center")),
                             ]),
 
                             ################# Element 15 #################
@@ -578,33 +598,33 @@ tab_well_integrity = dcc.Tab(
                             html.Tr([
                                 html.Td("15)", style=set_style(cw_1, textAlign="left")),
                                 html.Td("Tubing", style=set_style(cw_2, textAlign="left")),
-                                html.Td(create_barrier_dropdown(), style=set_style(cw_3, textAlign="center")),
-                                html.Td(create_retrievable_dropdown("retrievable-15"), style=set_style(cw_4)),
+                                html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-15")), style=set_style(cw_3, textAlign="center")),
+                                html.Td(create_retrievable_dropdown(rid("well_integrity", "retrievable-15")), style=set_style(cw_4)),
                                 html.Tr([
                                         html.Td("1. Is the tubing string inspected and free of any defect (e.g. corrosion) as per applicable requirements?", style=set_style(cw_6)),
-                                        html.Td(create_answer_dropdown("q-15-1"), style=set_style(cw_8, textAlign="right"))
+                                        html.Td(create_answer_dropdown(qid("well_integrity", "q-15-1")), style=set_style(cw_8, textAlign="right"))
                                     ]
                                 ),
                                 html.Tr([
                                         html.Td("2. Has the tubing string been verified through functional testing (e.g. pressure testing) as required by applicable standards, guidelines, or regulations?", style=set_style(cw_6)),
-                                        html.Td(create_answer_dropdown("q-15-2"), style=set_style(cw_8, textAlign="right"))
+                                        html.Td(create_answer_dropdown(qid("well_integrity", "q-15-2")), style=set_style(cw_8, textAlign="right"))
                                     ]
                                 ),
                                 html.Tr([
                                         html.Td("3. Does the tubing string contain gas-tight (premium) connections?", style=set_style(cw_6)),
-                                        html.Td(create_answer_dropdown("q-15-3"), style=set_style(cw_8, textAlign="right"))
+                                        html.Td(create_answer_dropdown(qid("well_integrity", "q-15-3")), style=set_style(cw_8, textAlign="right"))
                                     ]
                                 ),
                                 html.Tr([
                                         html.Td("4. Is the tubing string material compatible with the expected operating conditions?", style=set_style(cw_6)),
-                                        html.Td(create_answer_dropdown("q-15-4"), style=set_style(cw_8, textAlign="right"))
+                                        html.Td(create_answer_dropdown(qid("well_integrity", "q-15-4")), style=set_style(cw_8, textAlign="right"))
                                     ]
                                 ),
                                 html.Td("", id="a-ffs-15", style=set_style(cw_7, textAlign="center")),
                                 html.Td("", id="a-compat-15", style=set_style(cw_8, textAlign="center")),
                                 html.Td("", id="mit-15", style=set_style(cw_9, textAlign="center")),
-                                html.Td(create_impact_dropdown({"type": "integrity-impact", "i": 15}), style=set_style(cw_10, textAlign="center")),
-                                html.Td(create_color_square({"type": "integrity-impact-color", "i": 15}), style=set_style(cw_11, textAlign="center")),
+                                html.Td(create_impact_dropdown(gid("well_integrity", "impact", 15)), style=set_style(cw_10, textAlign="center")),
+                                html.Td(create_color_square(gid("well_integrity", "impact-color", 15)), style=set_style(cw_11, textAlign="center")),
                             ]),
 
                             ################# Element 16 #################
@@ -614,28 +634,28 @@ tab_well_integrity = dcc.Tab(
                             html.Tr([
                                 html.Td("16)", style=set_style(cw_1, textAlign="left")),
                                 html.Td("X-mas tree and valves", style=set_style(cw_2, textAlign="left")),
-                                html.Td(create_barrier_dropdown(), style=set_style(cw_3, textAlign="center")),
-                                html.Td(create_retrievable_dropdown("retrievable-16"), style=set_style(cw_4)),
+                                html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-16")), style=set_style(cw_3, textAlign="center")),
+                                html.Td(create_retrievable_dropdown(rid("well_integrity", "retrievable-16")), style=set_style(cw_4)),
                                 html.Tr([
                                         html.Td("1. Are all x-mas tree components inspected and free of any defect (e.g. corrosion) as per applicable requirements?", style=set_style(cw_6)),
-                                        html.Td(create_answer_dropdown("q-16-1"), style=set_style(cw_8, textAlign="right"))
+                                        html.Td(create_answer_dropdown(qid("well_integrity", "q-16-1")), style=set_style(cw_8, textAlign="right"))
                                     ]
                                 ),
                                 html.Tr([
                                         html.Td("2. Have all x-mas tree components been verified through functional testing (e.g. pressure testing) as required by applicable standards, guidelines, or regulations?", style=set_style(cw_6)),
-                                        html.Td(create_answer_dropdown("q-16-2"), style=set_style(cw_8, textAlign="right"))
+                                        html.Td(create_answer_dropdown(qid("well_integrity", "q-16-2")), style=set_style(cw_8, textAlign="right"))
                                     ]
                                 ),
                                 html.Tr([
                                         html.Td("3. Are all x-mas tree materials compatible and designed for hydrogen environment? E.g. metal-to-metal seals, less connections", style=set_style(cw_6)),
-                                        html.Td(create_answer_dropdown("q-16-3"), style=set_style(cw_8, textAlign="right"))
+                                        html.Td(create_answer_dropdown(qid("well_integrity", "q-16-3")), style=set_style(cw_8, textAlign="right"))
                                     ]
                                 ),
                                 html.Td("", id="a-ffs-16", style=set_style(cw_7, textAlign="center")),
                                 html.Td("", id="a-compat-16", style=set_style(cw_8, textAlign="center")),
                                 html.Td("", id="mit-16", style=set_style(cw_9, textAlign="center")),
-                                html.Td(create_impact_dropdown({"type": "integrity-impact", "i": 16}), style=set_style(cw_10, textAlign="center")),
-                                html.Td(create_color_square({"type": "integrity-impact-color", "i": 16}), style=set_style(cw_11, textAlign="center")),
+                                html.Td(create_impact_dropdown(gid("well_integrity", "impact", 16)), style=set_style(cw_10, textAlign="center")),
+                                html.Td(create_color_square(gid("well_integrity", "impact-color", 16)), style=set_style(cw_11, textAlign="center")),
                             ]),
 
                             ################# Element 17 #################
@@ -645,28 +665,28 @@ tab_well_integrity = dcc.Tab(
                             html.Tr([
                                 html.Td("17)", style=set_style(cw_1, textAlign="left")),
                                 html.Td("Wellhead casing spools and hangers", style=set_style(cw_2, textAlign="left")),
-                                html.Td(create_barrier_dropdown(), style=set_style(cw_3, textAlign="center")),
-                                html.Td(create_retrievable_dropdown("retrievable-17"), style=set_style(cw_4)),
+                                html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-17")), style=set_style(cw_3, textAlign="center")),
+                                html.Td(create_retrievable_dropdown(rid("well_integrity", "retrievable-17")), style=set_style(cw_4)),
                                 html.Tr([
                                         html.Td("1. Are all wellhead components inspected and free of any defect (e.g. corrosion) as per applicable requirements?", style=set_style(cw_6)),
-                                        html.Td(create_answer_dropdown("q-17-1"), style=set_style(cw_8, textAlign="right"))
+                                        html.Td(create_answer_dropdown(qid("well_integrity", "q-17-1")), style=set_style(cw_8, textAlign="right"))
                                     ]
                                 ),
                                 html.Tr([
                                         html.Td("2. Have all wellhead components been verified through functional testing (e.g. pressure testing) as required by applicable standards, guidelines, or regulations?", style=set_style(cw_6)),
-                                        html.Td(create_answer_dropdown("q-17-2"), style=set_style(cw_8, textAlign="right"))
+                                        html.Td(create_answer_dropdown(qid("well_integrity", "q-17-2")), style=set_style(cw_8, textAlign="right"))
                                     ]
                                 ),
                                 html.Tr([
                                         html.Td("3. Are all wellhead materials compatible and designed for hydrogen environment? E.g. metal-to-metal seals, less connections", style=set_style(cw_6)),
-                                        html.Td(create_answer_dropdown("q-17-3"), style=set_style(cw_8, textAlign="right"))
+                                        html.Td(create_answer_dropdown(qid("well_integrity", "q-17-3")), style=set_style(cw_8, textAlign="right"))
                                     ]
                                 ),
                                 html.Td("", id="a-ffs-17", style=set_style(cw_7, textAlign="center")),
                                 html.Td("", id="a-compat-17", style=set_style(cw_8, textAlign="center")),
                                 html.Td("", id="mit-17", style=set_style(cw_9, textAlign="center")),
-                                html.Td(create_impact_dropdown({"type": "integrity-impact", "i": 17}), style=set_style(cw_10, textAlign="center")),
-                                html.Td(create_color_square({"type": "integrity-impact-color", "i": 17}), style=set_style(cw_11, textAlign="center")),
+                                html.Td(create_impact_dropdown(gid("well_integrity", "impact", 17)), style=set_style(cw_10, textAlign="center")),
+                                html.Td(create_color_square(gid("well_integrity", "impact-color", 17)), style=set_style(cw_11, textAlign="center")),
                             ]),
 
                             ################# Element 18 #################
@@ -676,28 +696,28 @@ tab_well_integrity = dcc.Tab(
                             html.Tr([
                                 html.Td("18)", style=set_style(cw_1, textAlign="left")),
                                 html.Td("Any other completion e.g.. Sliding side doors, side pocket mandrels, landing nipples etc", style=set_style(cw_2, textAlign="left")),
-                                html.Td(create_barrier_dropdown(), style=set_style(cw_3, textAlign="center")),
-                                html.Td(create_retrievable_dropdown("retrievable-18"), style=set_style(cw_4)),
+                                html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-18")), style=set_style(cw_3, textAlign="center")),
+                                html.Td(create_retrievable_dropdown(rid("well_integrity", "retrievable-18")), style=set_style(cw_4)),
                                 html.Tr([
                                         html.Td("1. Are all components inspected and free of any defect (e.g. corrosion) as per applicable requirements?", style=set_style(cw_6)),
-                                        html.Td(create_answer_dropdown("q-18-1"), style=set_style(cw_8, textAlign="right"))
+                                        html.Td(create_answer_dropdown(qid("well_integrity", "q-18-1")), style=set_style(cw_8, textAlign="right"))
                                     ]
                                 ),
                                 html.Tr([
                                         html.Td("2. Have all components been verified through functional testing (e.g. pressure testing) as required by applicable standards, guidelines, or regulations?", style=set_style(cw_6)),
-                                        html.Td(create_answer_dropdown("q-18-2"), style=set_style(cw_8, textAlign="right"))
+                                        html.Td(create_answer_dropdown(qid("well_integrity", "q-18-2")), style=set_style(cw_8, textAlign="right"))
                                     ]
                                 ),
                                 html.Tr([
                                         html.Td("3. Are the materials compatible with expected operating conditions?", style=set_style(cw_6)),
-                                        html.Td(create_answer_dropdown("q-18-3"), style=set_style(cw_8, textAlign="right"))
+                                        html.Td(create_answer_dropdown(qid("well_integrity", "q-18-3")), style=set_style(cw_8, textAlign="right"))
                                     ]
                                 ),
                                 html.Td("", id="a-ffs-18", style=set_style(cw_7, textAlign="center")),
                                 html.Td("", id="a-compat-18", style=set_style(cw_8, textAlign="center")),
                                 html.Td("", id="mit-18", style=set_style(cw_9, textAlign="center")),
-                                html.Td(create_impact_dropdown({"type": "integrity-impact", "i": 18}), style=set_style(cw_10, textAlign="center")),
-                                html.Td(create_color_square({"type": "integrity-impact-color", "i": 18}), style=set_style(cw_11, textAlign="center")),
+                                html.Td(create_impact_dropdown(gid("well_integrity", "impact", 18)), style=set_style(cw_10, textAlign="center")),
+                                html.Td(create_color_square(gid("well_integrity", "impact-color", 18)), style=set_style(cw_11, textAlign="center")),
                             ]),
                         ])
                     ],
@@ -712,8 +732,8 @@ tab_well_integrity = dcc.Tab(
 
 
 @callback(
-    Output(component_id={"type": "integrity-impact-color", "i": MATCH}, component_property="style"),
-    Input(component_id={"type": "integrity-impact", "i": MATCH}, component_property="value"),
+    Output(component_id=gid("well_integrity", "impact-color", MATCH), component_property="style"),
+    Input(component_id=gid("well_integrity", "impact", MATCH), component_property="value"),
 )
 def change_impact_color(value):
     mapping = {
@@ -737,7 +757,7 @@ def change_impact_color(value):
 @callback(
     Output(component_id="a-ffs-1", component_property="children"),
     Output(component_id="a-ffs-1", component_property="style"),
-    Input(component_id="q-1-2", component_property="value")
+    Input(component_id=qid("well_integrity", "q-1-2"), component_property="value")
 )
 def qualified_FFS_1(input):
     mapping = {
@@ -764,7 +784,7 @@ def qualified_FFS_1(input):
 @callback(
     Output(component_id="a-compat-1", component_property="children"),
     Output(component_id="a-compat-1", component_property="style"),
-    Input(component_id="q-1-1", component_property="value")
+    Input(component_id=qid("well_integrity", "q-1-1"), component_property="value")
 )
 def material_compatibility_1(input):
     mapping = {
@@ -793,7 +813,7 @@ def material_compatibility_1(input):
     Output(component_id="mit-1", component_property="style"),
     Input(component_id="a-ffs-1", component_property="children"),
     Input(component_id="a-compat-1", component_property="children"),
-    Input(component_id="retrievable-1", component_property="value")
+    Input(component_id=rid("well_integrity", "retrievable-1"), component_property="value")
 )
 def mitigation_1(H, I, is_retrievable):
     if H == "Unknown" or I == "Unknown":
@@ -825,8 +845,8 @@ def mitigation_1(H, I, is_retrievable):
 @callback(
     Output(component_id="a-ffs-2", component_property="children"),
     Output(component_id="a-ffs-2", component_property="style"),
-    Input(component_id="q-2-1", component_property="value"),
-    Input(component_id="q-2-2", component_property="value"),
+    Input(component_id=qid("well_integrity", "q-2-1"), component_property="value"),
+    Input(component_id=qid("well_integrity", "q-2-2"), component_property="value")
 )
 def qualified_FFS_2(q1, q2):
     if q1 == "Unknown" or q2 == "Unknown":
@@ -852,7 +872,7 @@ def qualified_FFS_2(q1, q2):
 @callback(
     Output(component_id="a-compat-2", component_property="children"),
     Output(component_id="a-compat-2", component_property="style"),
-    Input(component_id="q-2-3", component_property="value")
+    Input(component_id=qid("well_integrity", "q-2-3"), component_property="value"),
 )
 def material_compatibility_2(q3):
     if q3 == "Yes":
@@ -880,7 +900,7 @@ def material_compatibility_2(q3):
     Output(component_id="mit-2", component_property="style"),
     Input(component_id="a-ffs-2", component_property="children"),
     Input(component_id="a-compat-2", component_property="children"),
-    Input(component_id="retrievable-2", component_property="value")
+    Input(component_id=rid("well_integrity", "retrievable-2"), component_property="value")
 )
 def mitigation_2(q_ffs, q_mit, is_retrievable):
     if q_ffs == "Unknown" or q_mit == "Unknown":
@@ -912,8 +932,8 @@ def mitigation_2(q_ffs, q_mit, is_retrievable):
 @callback(
     Output(component_id="a-ffs-3", component_property="children"),
     Output(component_id="a-ffs-3", component_property="style"),
-    Input(component_id="q-3-1", component_property="value"),
-    Input(component_id="q-3-2", component_property="value"),
+    Input(component_id=qid("well_integrity", "q-3-1"), component_property="value"),
+    Input(component_id=qid("well_integrity", "q-3-2"), component_property="value")
 )
 def qualified_FFS_3(q31, q32):
     if q31 == "Unknown" or q32 == "Unknown":
@@ -938,7 +958,7 @@ def qualified_FFS_3(q31, q32):
 @callback(
     Output(component_id="a-compat-3", component_property="children"),
     Output(component_id="a-compat-3", component_property="style"),
-    Input(component_id="q-3-3", component_property="value")
+    Input(component_id=qid("well_integrity", "q-3-3"), component_property="value"),
 )
 def material_compatibility_3(q33):
     if q33 == "Yes":
@@ -965,10 +985,9 @@ def material_compatibility_3(q33):
     Output(component_id="mit-3", component_property="style"),
     Input(component_id="a-ffs-3", component_property="children"),
     Input(component_id="a-compat-3", component_property="children"),
-    Input(component_id="retrievable-3", component_property="value")
+    Input(component_id=rid("well_integrity", "retrievable-3"), component_property="value")
 )
 def mitigation_3(q_ffs, q_mit, is_retrievable):
-    print(q_ffs, q_mit, is_retrievable)
     if q_ffs == "Unknown" or q_mit == "Unknown":
         text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
     elif q_ffs == "Yes" and q_mit == "Yes":
@@ -998,8 +1017,8 @@ def mitigation_3(q_ffs, q_mit, is_retrievable):
 @callback(
     Output(component_id="a-ffs-4", component_property="children"),
     Output(component_id="a-ffs-4", component_property="style"),
-    Input(component_id="q-4-1", component_property="value"),
-    Input(component_id="q-4-2", component_property="value"),
+    Input(component_id=qid("well_integrity", "q-4-1"), component_property="value"),
+    Input(component_id=qid("well_integrity", "q-4-2"), component_property="value")
 )
 def qualified_FFS_4(q41, q42):
     if q41 == "Unknown" or q42 == "Unknown":
@@ -1024,7 +1043,7 @@ def qualified_FFS_4(q41, q42):
 @callback(
     Output(component_id="a-compat-4", component_property="children"),
     Output(component_id="a-compat-4", component_property="style"),
-    Input(component_id="q-4-3", component_property="value")
+    Input(component_id=qid("well_integrity", "q-4-3"), component_property="value")
 )
 def material_compatibility_4(q43):
     if q43 == "Yes":
@@ -1051,7 +1070,7 @@ def material_compatibility_4(q43):
     Output(component_id="mit-4", component_property="style"),
     Input(component_id="a-ffs-4", component_property="children"),
     Input(component_id="a-compat-4", component_property="children"),
-    Input(component_id="retrievable-4", component_property="value")
+    Input(component_id=rid("well_integrity", "retrievable-4"), component_property="value")
 )
 def mitigation_4(q_ffs, q_mit, is_retrievable):
     if q_ffs == "Unknown" or q_mit == "Unknown":
@@ -1083,8 +1102,8 @@ def mitigation_4(q_ffs, q_mit, is_retrievable):
 @callback(
     Output(component_id="a-ffs-5", component_property="children"),
     Output(component_id="a-ffs-5", component_property="style"),
-    Input(component_id="q-5-1", component_property="value"),
-    Input(component_id="q-5-2", component_property="value")
+    Input(component_id=qid("well_integrity", "q-5-1"), component_property="value"),
+    Input(component_id=qid("well_integrity", "q-5-2"), component_property="value")
 )
 def qualified_FFS_5(q51, q52):
     if q51 == "Unknown" or q52 == "Unknown":
@@ -1109,7 +1128,7 @@ def qualified_FFS_5(q51, q52):
 @callback(
     Output(component_id="a-compat-5", component_property="children"),
     Output(component_id="a-compat-5", component_property="style"),
-    Input(component_id="q-5-3", component_property="value")
+    Input(component_id=qid("well_integrity", "q-5-3"), component_property="value")
 )
 def material_compatibility_5(q53):
     if q53 == "Yes":
@@ -1136,7 +1155,7 @@ def material_compatibility_5(q53):
     Output(component_id="mit-5", component_property="style"),
     Input(component_id="a-ffs-5", component_property="children"),
     Input(component_id="a-compat-5", component_property="children"),
-    Input(component_id="retrievable-5", component_property="value")
+    Input(component_id=rid("well_integrity", "retrievable-5"), component_property="value")
 )
 def mitigation_5(q_ffs, q_mit, is_retrievable):
     if q_ffs == "Unknown" or q_mit == "Unknown":
@@ -1168,7 +1187,7 @@ def mitigation_5(q_ffs, q_mit, is_retrievable):
 @callback(
     Output(component_id="a-ffs-6", component_property="children"),
     Output(component_id="a-ffs-6", component_property="style"),
-    Input(component_id="q-6-1", component_property="value")
+    Input(component_id=qid("well_integrity", "q-6-1"), component_property="value")
 )
 def qualified_FFS_6(q61):
     if q61 == "Yes":
@@ -1193,14 +1212,14 @@ def qualified_FFS_6(q61):
 @callback(
     Output(component_id="a-compat-6", component_property="children"),
     Output(component_id="a-compat-6", component_property="style"),
-    Input(component_id="q-6-2", component_property="value")
+    Input(component_id=qid("well_integrity", "q-6-2"), component_property="value")
 )
 def material_compatibility_6(q62):
-    if q62 == "yes":
+    if q62 == "Yes":
         text, bg_color, txt_color = "Yes", "#43c54381", "#000000"
-    elif q62 == "no":
+    elif q62 == "No":
         text, bg_color, txt_color = "No", "#c0272783", "#FFFFFF"
-    elif q62 == "unknown":
+    elif q62 == "Unknown":
         text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
     else:
         text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
@@ -1220,7 +1239,7 @@ def material_compatibility_6(q62):
     Output(component_id="mit-6", component_property="style"),
     Input(component_id="a-ffs-6", component_property="children"),
     Input(component_id="a-compat-6", component_property="children"),
-    Input(component_id="retrievable-6", component_property="value")
+    Input(component_id=rid("well_integrity", "retrievable-6"), component_property="value")
 )
 def mitigation_6(q_ffs, q_mit, is_retrievable):
     if q_ffs == "Unknown" or q_mit == "Unknown":
@@ -1252,8 +1271,8 @@ def mitigation_6(q_ffs, q_mit, is_retrievable):
 @callback(
     Output(component_id="a-ffs-7", component_property="children"),
     Output(component_id="a-ffs-7", component_property="style"),
-    Input(component_id="q-7-1", component_property="value"),
-    Input(component_id="q-7-2", component_property="value")
+    Input(component_id=qid("well_integrity", "q-7-1"), component_property="value"),
+    Input(component_id=qid("well_integrity", "q-7-2"), component_property="value")
 )
 def qualified_FFS_7(q71, q72):
     if q71 == "Unknown" or q72 == "Unknown":
@@ -1278,7 +1297,7 @@ def qualified_FFS_7(q71, q72):
 @callback(
     Output(component_id="a-compat-7", component_property="children"),
     Output(component_id="a-compat-7", component_property="style"),
-    Input(component_id="q-7-3", component_property="value")
+    Input(component_id=qid("well_integrity", "q-7-3"), component_property="value"),
 )
 def material_compatibility_7(q73):
     if q73 == "Yes":
@@ -1305,7 +1324,7 @@ def material_compatibility_7(q73):
     Output(component_id="mit-7", component_property="style"),
     Input(component_id="a-ffs-7", component_property="children"),
     Input(component_id="a-compat-7", component_property="children"),
-    Input(component_id="retrievable-7", component_property="value")
+    Input(component_id=rid("well_integrity", "retrievable-7"), component_property="value")
 )
 def mitigation_7(q_ffs, q_mit, is_retrievable):
     if q_ffs == "Unknown" or q_mit == "Unknown":
@@ -1337,8 +1356,8 @@ def mitigation_7(q_ffs, q_mit, is_retrievable):
 @callback(
     Output(component_id="a-ffs-8", component_property="children"),
     Output(component_id="a-ffs-8", component_property="style"),
-    Input(component_id="q-8-1", component_property="value"),
-    Input(component_id="q-8-2", component_property="value"),
+    Input(component_id=qid("well_integrity", "q-8-1"), component_property="value"),
+    Input(component_id=qid("well_integrity", "q-8-2"), component_property="value")
 )
 def qualified_FFS_8(q81, q82):
     if q81 == "Unknown" or q82 == "Unknown":
@@ -1363,7 +1382,7 @@ def qualified_FFS_8(q81, q82):
 @callback(
     Output(component_id="a-compat-8", component_property="children"),
     Output(component_id="a-compat-8", component_property="style"),
-    Input(component_id="q-8-3", component_property="value")
+    Input(component_id=qid("well_integrity", "q-8-3"), component_property="value"),
 )
 def material_compatibility_8(q83):
     if q83 == "Yes":
@@ -1390,7 +1409,7 @@ def material_compatibility_8(q83):
     Output(component_id="mit-8", component_property="style"),
     Input(component_id="a-ffs-8", component_property="children"),
     Input(component_id="a-compat-8", component_property="children"),
-    Input(component_id="retrievable-8", component_property="value")
+    Input(component_id=rid("well_integrity", "retrievable-8"), component_property="value")
 )
 def mitigation_8(q_ffs, q_mit, is_retrievable):
     if q_ffs == "Unknown" or q_mit == "Unknown":
@@ -1422,8 +1441,8 @@ def mitigation_8(q_ffs, q_mit, is_retrievable):
 @callback(
     Output(component_id="a-ffs-9", component_property="children"),
     Output(component_id="a-ffs-9", component_property="style"),
-    Input(component_id="q-9-1", component_property="value"),
-    Input(component_id="q-9-2", component_property="value")
+    Input(component_id=qid("well_integrity", "q-9-1"), component_property="value"),
+    Input(component_id=qid("well_integrity", "q-9-2"), component_property="value")
 )
 def qualified_FFS_9(q91, q92):
     if q91 == "Unknown" or q92 == "Unknown":
@@ -1448,7 +1467,7 @@ def qualified_FFS_9(q91, q92):
 @callback(
     Output(component_id="a-compat-9", component_property="children"),
     Output(component_id="a-compat-9", component_property="style"),
-    Input(component_id="q-9-3", component_property="value")
+    Input(component_id=qid("well_integrity", "q-9-3"), component_property="value")
 )
 def material_compatibility_9(q93):
     if q93 == "Yes":
@@ -1475,7 +1494,7 @@ def material_compatibility_9(q93):
     Output(component_id="mit-9", component_property="style"),
     Input(component_id="a-ffs-9", component_property="children"),
     Input(component_id="a-compat-9", component_property="children"),
-    Input(component_id="retrievable-9", component_property="value")
+    Input(component_id=rid("well_integrity", "retrievable-9"), component_property="value")
 )
 def mitigation_9(q_ffs, q_mit, is_retrievable):
     if q_ffs == "Unknown" or q_mit == "Unknown":
@@ -1507,8 +1526,8 @@ def mitigation_9(q_ffs, q_mit, is_retrievable):
 @callback(
     Output(component_id="a-ffs-10", component_property="children"),
     Output(component_id="a-ffs-10", component_property="style"),
-    Input(component_id="q-10-1", component_property="value"),
-    Input(component_id="q-10-2", component_property="value")
+    Input(component_id=qid("well_integrity", "q-10-1"), component_property="value"),
+    Input(component_id=qid("well_integrity", "q-10-2"), component_property="value")
 )
 def qualified_FFS_10(q101, q102):
     if q101 == "Unknown" or q102 == "Unknown":
@@ -1533,7 +1552,7 @@ def qualified_FFS_10(q101, q102):
 @callback(
     Output(component_id="a-compat-10", component_property="children"),
     Output(component_id="a-compat-10", component_property="style"),
-    Input(component_id="q-10-3", component_property="value")
+    Input(component_id=qid("well_integrity", "q-10-3"), component_property="value"),
 )
 def material_compatibility_10(q103):
     if q103 == "Yes":
@@ -1560,7 +1579,7 @@ def material_compatibility_10(q103):
     Output(component_id="mit-10", component_property="style"),
     Input(component_id="a-ffs-10", component_property="children"),
     Input(component_id="a-compat-10", component_property="children"),
-    Input(component_id="retrievable-10", component_property="value")
+    Input(component_id=rid("well_integrity", "retrievable-10"), component_property="value")
 )
 def mitigation_10(q_ffs, q_mit, is_retrievable):
     if q_ffs == "Unknown" or q_mit == "Unknown":
@@ -1592,8 +1611,8 @@ def mitigation_10(q_ffs, q_mit, is_retrievable):
 @callback(
     Output(component_id="a-ffs-11", component_property="children"),
     Output(component_id="a-ffs-11", component_property="style"),
-    Input(component_id="q-11-1", component_property="value"),
-    Input(component_id="q-11-2", component_property="value")
+    Input(component_id=qid("well_integrity", "q-11-1"), component_property="value"),
+    Input(component_id=qid("well_integrity", "q-11-2"), component_property="value"),
 )
 def qualified_FFS_11(q111, q112):
     if q111 == "Unknown" or q112 == "Unknown":
@@ -1618,7 +1637,7 @@ def qualified_FFS_11(q111, q112):
 @callback(
     Output(component_id="a-compat-11", component_property="children"),
     Output(component_id="a-compat-11", component_property="style"),
-    Input(component_id="q-11-3", component_property="value")
+    Input(component_id=qid("well_integrity", "q-11-3"), component_property="value"),
 )
 def material_compatibility_11(q113):
     if q113 == "Yes":
@@ -1645,7 +1664,7 @@ def material_compatibility_11(q113):
     Output(component_id="mit-11", component_property="style"),
     Input(component_id="a-ffs-11", component_property="children"),
     Input(component_id="a-compat-11", component_property="children"),
-    Input(component_id="retrievable-11", component_property="value")
+    Input(component_id=rid("well_integrity", "retrievable-11"), component_property="value")
 )
 def mitigation_11(q_ffs, q_mit, is_retrievable):
     if q_ffs == "Unknown" or q_mit == "Unknown":
@@ -1677,8 +1696,8 @@ def mitigation_11(q_ffs, q_mit, is_retrievable):
 @callback(
     Output(component_id="a-ffs-12", component_property="children"),
     Output(component_id="a-ffs-12", component_property="style"),
-    Input(component_id="q-12-1", component_property="value"),
-    Input(component_id="q-12-2", component_property="value")
+    Input(component_id=qid("well_integrity", "q-12-1"), component_property="value"),
+    Input(component_id=qid("well_integrity", "q-12-2"), component_property="value"),
 )
 def qualified_FFS_12(q121, q122):
     if q121 == "Unknown" or q122 == "Unknown":
@@ -1703,7 +1722,7 @@ def qualified_FFS_12(q121, q122):
 @callback(
     Output(component_id="a-compat-12", component_property="children"),
     Output(component_id="a-compat-12", component_property="style"),
-    Input(component_id="q-12-3", component_property="value")
+    Input(component_id=qid("well_integrity", "q-12-3"), component_property="value"),
 )
 def material_compatibility_12(q123):
     if q123 == "Yes":
@@ -1730,7 +1749,7 @@ def material_compatibility_12(q123):
     Output(component_id="mit-12", component_property="style"),
     Input(component_id="a-ffs-12", component_property="children"),
     Input(component_id="a-compat-12", component_property="children"),
-    Input(component_id="retrievable-12", component_property="value")
+    Input(component_id=rid("well_integrity", "retrievable-13"), component_property="value")
 )
 def mitigation_12(q_ffs, q_mit, is_retrievable):
     if q_ffs == "Unknown" or q_mit == "Unknown":
@@ -1762,8 +1781,8 @@ def mitigation_12(q_ffs, q_mit, is_retrievable):
 @callback(
     Output(component_id="a-ffs-13", component_property="children"),
     Output(component_id="a-ffs-13", component_property="style"),
-    Input(component_id="q-13-1", component_property="value"),
-    Input(component_id="q-13-2", component_property="value")
+    Input(component_id=qid("well_integrity", "q-13-1"), component_property="value"),
+    Input(component_id=qid("well_integrity", "q-13-2"), component_property="value"),
 )
 def qualified_FFS_13(q131, q132):
     if q131 == "Unknown" or q132 == "Unknown":
@@ -1788,7 +1807,7 @@ def qualified_FFS_13(q131, q132):
 @callback(
     Output(component_id="a-compat-13", component_property="children"),
     Output(component_id="a-compat-13", component_property="style"),
-    Input(component_id="q-13-3", component_property="value")
+    Input(component_id=qid("well_integrity", "q-13-3"), component_property="value"),
 )
 def material_compatibility_13(q133):
     if q133 == "Yes":
@@ -1815,7 +1834,7 @@ def material_compatibility_13(q133):
     Output(component_id="mit-13", component_property="style"),
     Input(component_id="a-ffs-13", component_property="children"),
     Input(component_id="a-compat-13", component_property="children"),
-    Input(component_id="retrievable-13", component_property="value")
+    Input(component_id=rid("well_integrity", "retrievable-13"), component_property="value")
 )
 def mitigation_13(q_ffs, q_mit, is_retrievable):
     if q_ffs == "Unknown" or q_mit == "Unknown":
@@ -1847,9 +1866,9 @@ def mitigation_13(q_ffs, q_mit, is_retrievable):
 @callback(
     Output(component_id="a-ffs-14", component_property="children"),
     Output(component_id="a-ffs-14", component_property="style"),
-    Input(component_id="q-14-1", component_property="value"),
-    Input(component_id="q-14-2", component_property="value"),
-    Input(component_id="q-14-3", component_property="value"),
+    Input(component_id=qid("well_integrity", "q-14-1"), component_property="value"),
+    Input(component_id=qid("well_integrity", "q-14-2"), component_property="value"),
+    Input(component_id=qid("well_integrity", "q-14-3"), component_property="value"),
 )
 def qualified_FFS_14(q141, q142, q143):
     if q141 == "Unknown" or q142 == "Unknown" or q143 == "Unknown":
@@ -1874,7 +1893,7 @@ def qualified_FFS_14(q141, q142, q143):
 @callback(
     Output(component_id="a-compat-14", component_property="children"),
     Output(component_id="a-compat-14", component_property="style"),
-    Input(component_id="q-14-4", component_property="value")
+    Input(component_id=qid("well_integrity", "q-14-4"), component_property="value"),
 )
 def material_compatibility_14(q144):
     if q144 == "Yes":
@@ -1901,7 +1920,7 @@ def material_compatibility_14(q144):
     Output(component_id="mit-14", component_property="style"),
     Input(component_id="a-ffs-14", component_property="children"),
     Input(component_id="a-compat-14", component_property="children"),
-    Input(component_id="retrievable-14", component_property="value")
+    Input(component_id=rid("well_integrity", "retrievable-14"), component_property="value")
 )
 def mitigation_14(q_ffs, q_mit, is_retrievable):
     if q_ffs == "Unknown" or q_mit == "Unknown":
@@ -1933,9 +1952,9 @@ def mitigation_14(q_ffs, q_mit, is_retrievable):
 @callback(
     Output(component_id="a-ffs-15", component_property="children"),
     Output(component_id="a-ffs-15", component_property="style"),
-    Input(component_id="q-15-1", component_property="value"),
-    Input(component_id="q-15-2", component_property="value"),
-    Input(component_id="q-15-3", component_property="value")
+    Input(component_id=qid("well_integrity", "q-15-1"), component_property="value"),
+    Input(component_id=qid("well_integrity", "q-15-2"), component_property="value"),
+    Input(component_id=qid("well_integrity", "q-15-3"), component_property="value"),
 )
 def qualified_FFS_15(q151, q152, q153):
     if q151 == "Unknown" or q152 == "Unknown" or q153 == "Unknown":
@@ -1960,7 +1979,7 @@ def qualified_FFS_15(q151, q152, q153):
 @callback(
     Output(component_id="a-compat-15", component_property="children"),
     Output(component_id="a-compat-15", component_property="style"),
-    Input(component_id="q-15-4", component_property="value")
+    Input(component_id=qid("well_integrity", "q-15-4"), component_property="value"),
 )
 def material_compatibility_15(q154):
     if q154 == "Yes":
@@ -1987,7 +2006,7 @@ def material_compatibility_15(q154):
     Output(component_id="mit-15", component_property="style"),
     Input(component_id="a-ffs-15", component_property="children"),
     Input(component_id="a-compat-15", component_property="children"),
-    Input(component_id="retrievable-15", component_property="value")
+    Input(component_id=rid("well_integrity", "retrievable-15"), component_property="value")
 )
 def mitigation_15(q_ffs, q_mit, is_retrievable):
     if q_ffs == "Unknown" or q_mit == "Unknown":
@@ -2019,8 +2038,8 @@ def mitigation_15(q_ffs, q_mit, is_retrievable):
 @callback(
     Output(component_id="a-ffs-16", component_property="children"),
     Output(component_id="a-ffs-16", component_property="style"),
-    Input(component_id="q-16-1", component_property="value"),
-    Input(component_id="q-16-2", component_property="value"),
+    Input(component_id=qid("well_integrity", "q-16-1"), component_property="value"),
+    Input(component_id=qid("well_integrity", "q-16-2"), component_property="value"),
 )
 def qualified_FFS_16(q161, q162):
     if q161 == "Unknown" or q162 == "Unknown":
@@ -2045,7 +2064,7 @@ def qualified_FFS_16(q161, q162):
 @callback(
     Output(component_id="a-compat-16", component_property="children"),
     Output(component_id="a-compat-16", component_property="style"),
-    Input(component_id="q-16-3", component_property="value")
+    Input(component_id=qid("well_integrity", "q-16-3"), component_property="value"),
 )
 def material_compatibility_16(q163):
     if q163 == "Yes":
@@ -2072,7 +2091,7 @@ def material_compatibility_16(q163):
     Output(component_id="mit-16", component_property="style"),
     Input(component_id="a-ffs-16", component_property="children"),
     Input(component_id="a-compat-16", component_property="children"),
-    Input(component_id="retrievable-16", component_property="value")
+    Input(component_id=rid("well_integrity", "retrievable-16"), component_property="value")
 )
 def mitigation_16(q_ffs, q_mit, is_retrievable):
     if q_ffs == "Unknown" or q_mit == "Unknown":
@@ -2104,8 +2123,8 @@ def mitigation_16(q_ffs, q_mit, is_retrievable):
 @callback(
     Output(component_id="a-ffs-17", component_property="children"),
     Output(component_id="a-ffs-17", component_property="style"),
-    Input(component_id="q-17-1", component_property="value"),
-    Input(component_id="q-17-2", component_property="value")
+    Input(component_id=qid("well_integrity", "q-17-1"), component_property="value"),
+    Input(component_id=qid("well_integrity", "q-17-2"), component_property="value"),
 )
 def qualified_FFS_17(q171, q172):
     if q171 == "Unknown" or q172 == "Unknown":
@@ -2130,7 +2149,7 @@ def qualified_FFS_17(q171, q172):
 @callback(
     Output(component_id="a-compat-17", component_property="children"),
     Output(component_id="a-compat-17", component_property="style"),
-    Input(component_id="q-17-3", component_property="value")
+    Input(component_id=qid("well_integrity", "q-17-3"), component_property="value"),
 )
 def material_compatibility_17(q173):
     if q173 == "Yes":
@@ -2157,7 +2176,7 @@ def material_compatibility_17(q173):
     Output(component_id="mit-17", component_property="style"),
     Input(component_id="a-ffs-17", component_property="children"),
     Input(component_id="a-compat-17", component_property="children"),
-    Input(component_id="retrievable-17", component_property="value")
+    Input(component_id=rid("well_integrity", "retrievable-17"), component_property="value")
 )
 def mitigation_17(q_ffs, q_mit, is_retrievable):
     if q_ffs == "Unknown" or q_mit == "Unknown":
@@ -2189,8 +2208,8 @@ def mitigation_17(q_ffs, q_mit, is_retrievable):
 @callback(
     Output(component_id="a-ffs-18", component_property="children"),
     Output(component_id="a-ffs-18", component_property="style"),
-    Input(component_id="q-18-1", component_property="value"),
-    Input(component_id="q-18-2", component_property="value")
+    Input(component_id=qid("well_integrity", "q-18-1"), component_property="value"),
+    Input(component_id=qid("well_integrity", "q-18-2"), component_property="value"),
 )
 def qualified_FFS_18(q181, q182):
     if q181 == "Unknown" or q182 == "Unknown":
@@ -2215,7 +2234,7 @@ def qualified_FFS_18(q181, q182):
 @callback(
     Output(component_id="a-compat-18", component_property="children"),
     Output(component_id="a-compat-18", component_property="style"),
-    Input(component_id="q-18-3", component_property="value")
+    Input(component_id=qid("well_integrity", "q-18-3"), component_property="value"),
 )
 def material_compatibility_18(q183):
     if q183 == "Yes":
@@ -2242,7 +2261,7 @@ def material_compatibility_18(q183):
     Output(component_id="mit-18", component_property="style"),
     Input(component_id="a-ffs-18", component_property="children"),
     Input(component_id="a-compat-18", component_property="children"),
-    Input(component_id="retrievable-18", component_property="value")
+    Input(component_id=rid("well_integrity", "retrievable-18"), component_property="value")
 )
 def mitigation_18(q_ffs, q_mit, is_retrievable):
     if q_ffs == "Unknown" or q_mit == "Unknown":
