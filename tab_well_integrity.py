@@ -737,7 +737,7 @@ def change_impact_color(value):
 ################# Element 1 #################
 @callback(
     Output(component_id="a-ffs-1", component_property="children"),
-    Output(component_id="a-ffs-1", component_property="style"),
+    # Output(component_id="a-ffs-1", component_property="style"),
     Input(component_id=qid("well_integrity", "q-1-2"), component_property="value")
 )
 def qualified_FFS_1(input):
@@ -759,12 +759,12 @@ def qualified_FFS_1(input):
     style["color"] = selected["tx_color"]
     style["fontWeight"] = "bold"
     style["transition"] = "background-color 200ms ease"
-    return selected["text"], style
+    return selected["text"]#, style
 
 
 @callback(
     Output(component_id="a-compat-1", component_property="children"),
-    Output(component_id="a-compat-1", component_property="style"),
+    # Output(component_id="a-compat-1", component_property="style"),
     Input(component_id=qid("well_integrity", "q-1-1"), component_property="value")
 )
 def material_compatibility_1(input):
@@ -786,7 +786,7 @@ def material_compatibility_1(input):
     style["color"] = selected["tx_color"]
     style["fontWeight"] = "bold"
     style["transition"] = "background-color 200ms ease"
-    return selected["text"], style
+    return selected["text"]#, style
 
 
 @callback(
@@ -796,12 +796,12 @@ def material_compatibility_1(input):
     Input(component_id="a-compat-1", component_property="children"),
     Input(component_id=rid("well_integrity", "retrievable-1"), component_property="value")
 )
-def mitigation_1(H, I, is_retrievable):
-    if H == "Unknown" or I == "Unknown":
+def mitigation_1(q_ffs, q_mit, is_retrievable):
+    if q_ffs == "Unknown" or q_mit == "Unknown":
         text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
-    elif H == "Yes" and I == "Yes":
+    elif q_ffs == "Yes" and q_mit == "Yes":
         text, bg_color, txt_color = "No or minor", "#43c543", "#000000"
-    elif H == "No" or I == "No":
+    elif q_ffs == "No" or q_mit == "No":
         if is_retrievable == "No":
             text, bg_color, txt_color = "Severe", "#c02727", "#FFFFFF"
         elif is_retrievable == "Yes":
@@ -825,7 +825,7 @@ def mitigation_1(H, I, is_retrievable):
 ################# Element 2 #################
 @callback(
     Output(component_id="a-ffs-2", component_property="children"),
-    Output(component_id="a-ffs-2", component_property="style"),
+    # Output(component_id="a-ffs-2", component_property="style"),
     Input(component_id=qid("well_integrity", "q-2-1"), component_property="value"),
     Input(component_id=qid("well_integrity", "q-2-2"), component_property="value")
 )
@@ -847,12 +847,12 @@ def qualified_FFS_2(q1, q2):
         "backgroundColor": bg_color,
         "color": txt_color
     }
-    return text, style
+    return text#, style
 
 
 @callback(
     Output(component_id="a-compat-2", component_property="children"),
-    Output(component_id="a-compat-2", component_property="style"),
+    # Output(component_id="a-compat-2", component_property="style"),
     Input(component_id=qid("well_integrity", "q-2-3"), component_property="value"),
 )
 def material_compatibility_2(q3):
@@ -873,7 +873,7 @@ def material_compatibility_2(q3):
         "backgroundColor": bg_color,
         "color": txt_color
     }
-    return text, style
+    return text#, style
 
 
 @callback(
@@ -912,7 +912,7 @@ def mitigation_2(q_ffs, q_mit, is_retrievable):
 ################# Element 3 #################
 @callback(
     Output(component_id="a-ffs-3", component_property="children"),
-    Output(component_id="a-ffs-3", component_property="style"),
+    # Output(component_id="a-ffs-3", component_property="style"),
     Input(component_id=qid("well_integrity", "q-3-1"), component_property="value"),
     Input(component_id=qid("well_integrity", "q-3-2"), component_property="value")
 )
@@ -933,12 +933,12 @@ def qualified_FFS_3(q31, q32):
         "color": txt_color,
         "backgroundColor": bg_color
     }
-    return text, style
+    return text#, style
 
 
 @callback(
     Output(component_id="a-compat-3", component_property="children"),
-    Output(component_id="a-compat-3", component_property="style"),
+    # Output(component_id="a-compat-3", component_property="style"),
     Input(component_id=qid("well_integrity", "q-3-3"), component_property="value"),
 )
 def material_compatibility_3(q33):
@@ -958,7 +958,7 @@ def material_compatibility_3(q33):
         "color": txt_color,
         "backgroundColor": bg_color
     }
-    return text, style
+    return text#, style
 
 
 @callback(
@@ -997,7 +997,7 @@ def mitigation_3(q_ffs, q_mit, is_retrievable):
 ################# Element 4 #################
 @callback(
     Output(component_id="a-ffs-4", component_property="children"),
-    Output(component_id="a-ffs-4", component_property="style"),
+    # Output(component_id="a-ffs-4", component_property="style"),
     Input(component_id=qid("well_integrity", "q-4-1"), component_property="value"),
     Input(component_id=qid("well_integrity", "q-4-2"), component_property="value")
 )
@@ -1018,12 +1018,12 @@ def qualified_FFS_4(q41, q42):
         "color": txt_color,
         "backgroundColor": bg_color
     }
-    return text, style
+    return text#, style
 
 
 @callback(
     Output(component_id="a-compat-4", component_property="children"),
-    Output(component_id="a-compat-4", component_property="style"),
+    # Output(component_id="a-compat-4", component_property="style"),
     Input(component_id=qid("well_integrity", "q-4-3"), component_property="value")
 )
 def material_compatibility_4(q43):
@@ -1043,7 +1043,7 @@ def material_compatibility_4(q43):
         "color": txt_color,
         "backgroundColor": bg_color
     }
-    return text, style
+    return text#, style
 
 
 @callback(
@@ -1082,7 +1082,7 @@ def mitigation_4(q_ffs, q_mit, is_retrievable):
 ################# Element 5 #################
 @callback(
     Output(component_id="a-ffs-5", component_property="children"),
-    Output(component_id="a-ffs-5", component_property="style"),
+    # Output(component_id="a-ffs-5", component_property="style"),
     Input(component_id=qid("well_integrity", "q-5-1"), component_property="value"),
     Input(component_id=qid("well_integrity", "q-5-2"), component_property="value")
 )
@@ -1103,12 +1103,12 @@ def qualified_FFS_5(q51, q52):
         "color": txt_color,
         "backgroundColor": bg_color
     }
-    return text, style
+    return text#, style
 
 
 @callback(
     Output(component_id="a-compat-5", component_property="children"),
-    Output(component_id="a-compat-5", component_property="style"),
+    # Output(component_id="a-compat-5", component_property="style"),
     Input(component_id=qid("well_integrity", "q-5-3"), component_property="value")
 )
 def material_compatibility_5(q53):
@@ -1128,7 +1128,7 @@ def material_compatibility_5(q53):
         "color": txt_color,
         "backgroundColor": bg_color
     }
-    return text, style
+    return text#, style
 
 
 @callback(
@@ -1167,7 +1167,7 @@ def mitigation_5(q_ffs, q_mit, is_retrievable):
 ################# Element 6 #################
 @callback(
     Output(component_id="a-ffs-6", component_property="children"),
-    Output(component_id="a-ffs-6", component_property="style"),
+    # Output(component_id="a-ffs-6", component_property="style"),
     Input(component_id=qid("well_integrity", "q-6-1"), component_property="value")
 )
 def qualified_FFS_6(q61):
@@ -1187,12 +1187,12 @@ def qualified_FFS_6(q61):
         "color": txt_color,
         "backgroundColor": bg_color
     }
-    return text, style
+    return text#, style
 
 
 @callback(
     Output(component_id="a-compat-6", component_property="children"),
-    Output(component_id="a-compat-6", component_property="style"),
+    # Output(component_id="a-compat-6", component_property="style"),
     Input(component_id=qid("well_integrity", "q-6-2"), component_property="value")
 )
 def material_compatibility_6(q62):
@@ -1212,7 +1212,7 @@ def material_compatibility_6(q62):
         "color": txt_color,
         "backgroundColor": bg_color
     }
-    return text, style
+    return text#, style
 
 
 @callback(
@@ -1251,7 +1251,7 @@ def mitigation_6(q_ffs, q_mit, is_retrievable):
 ################# Element 7 #################
 @callback(
     Output(component_id="a-ffs-7", component_property="children"),
-    Output(component_id="a-ffs-7", component_property="style"),
+    # Output(component_id="a-ffs-7", component_property="style"),
     Input(component_id=qid("well_integrity", "q-7-1"), component_property="value"),
     Input(component_id=qid("well_integrity", "q-7-2"), component_property="value")
 )
@@ -1272,12 +1272,12 @@ def qualified_FFS_7(q71, q72):
         "color": txt_color,
         "backgroundColor": bg_color
     }
-    return text, style
+    return text#, style
 
 
 @callback(
     Output(component_id="a-compat-7", component_property="children"),
-    Output(component_id="a-compat-7", component_property="style"),
+    # Output(component_id="a-compat-7", component_property="style"),
     Input(component_id=qid("well_integrity", "q-7-3"), component_property="value"),
 )
 def material_compatibility_7(q73):
@@ -1297,7 +1297,7 @@ def material_compatibility_7(q73):
         "color": txt_color,
         "backgroundColor": bg_color
     }
-    return text, style
+    return text#, style
 
 
 @callback(
@@ -1336,7 +1336,7 @@ def mitigation_7(q_ffs, q_mit, is_retrievable):
 ################# Element 8 #################
 @callback(
     Output(component_id="a-ffs-8", component_property="children"),
-    Output(component_id="a-ffs-8", component_property="style"),
+    # Output(component_id="a-ffs-8", component_property="style"),
     Input(component_id=qid("well_integrity", "q-8-1"), component_property="value"),
     Input(component_id=qid("well_integrity", "q-8-2"), component_property="value")
 )
@@ -1357,12 +1357,12 @@ def qualified_FFS_8(q81, q82):
         "color": txt_color,
         "backgroundColor": bg_color
     }
-    return text, style
+    return text#, style
 
 
 @callback(
     Output(component_id="a-compat-8", component_property="children"),
-    Output(component_id="a-compat-8", component_property="style"),
+    # Output(component_id="a-compat-8", component_property="style"),
     Input(component_id=qid("well_integrity", "q-8-3"), component_property="value"),
 )
 def material_compatibility_8(q83):
@@ -1382,7 +1382,7 @@ def material_compatibility_8(q83):
         "color": txt_color,
         "backgroundColor": bg_color
     }
-    return text, style
+    return text#, style
 
 
 @callback(
@@ -1421,7 +1421,7 @@ def mitigation_8(q_ffs, q_mit, is_retrievable):
 ################# Element 9 #################
 @callback(
     Output(component_id="a-ffs-9", component_property="children"),
-    Output(component_id="a-ffs-9", component_property="style"),
+    # Output(component_id="a-ffs-9", component_property="style"),
     Input(component_id=qid("well_integrity", "q-9-1"), component_property="value"),
     Input(component_id=qid("well_integrity", "q-9-2"), component_property="value")
 )
@@ -1442,12 +1442,12 @@ def qualified_FFS_9(q91, q92):
         "color": txt_color,
         "backgroundColor": bg_color
     }
-    return text, style
+    return text#, style
 
 
 @callback(
     Output(component_id="a-compat-9", component_property="children"),
-    Output(component_id="a-compat-9", component_property="style"),
+    # Output(component_id="a-compat-9", component_property="style"),
     Input(component_id=qid("well_integrity", "q-9-3"), component_property="value")
 )
 def material_compatibility_9(q93):
@@ -1467,7 +1467,7 @@ def material_compatibility_9(q93):
         "color": txt_color,
         "backgroundColor": bg_color
     }
-    return text, style
+    return text#, style
 
 
 @callback(
@@ -1506,7 +1506,7 @@ def mitigation_9(q_ffs, q_mit, is_retrievable):
 ################# Element 10 #################
 @callback(
     Output(component_id="a-ffs-10", component_property="children"),
-    Output(component_id="a-ffs-10", component_property="style"),
+    # Output(component_id="a-ffs-10", component_property="style"),
     Input(component_id=qid("well_integrity", "q-10-1"), component_property="value"),
     Input(component_id=qid("well_integrity", "q-10-2"), component_property="value")
 )
@@ -1527,12 +1527,12 @@ def qualified_FFS_10(q101, q102):
         "color": txt_color,
         "backgroundColor": bg_color
     }
-    return text, style
+    return text#, style
 
 
 @callback(
     Output(component_id="a-compat-10", component_property="children"),
-    Output(component_id="a-compat-10", component_property="style"),
+    # Output(component_id="a-compat-10", component_property="style"),
     Input(component_id=qid("well_integrity", "q-10-3"), component_property="value"),
 )
 def material_compatibility_10(q103):
@@ -1552,7 +1552,7 @@ def material_compatibility_10(q103):
         "color": txt_color,
         "backgroundColor": bg_color
     }
-    return text, style
+    return text#, style
 
 
 @callback(
@@ -1591,7 +1591,7 @@ def mitigation_10(q_ffs, q_mit, is_retrievable):
 ################# Element 11 #################
 @callback(
     Output(component_id="a-ffs-11", component_property="children"),
-    Output(component_id="a-ffs-11", component_property="style"),
+    # Output(component_id="a-ffs-11", component_property="style"),
     Input(component_id=qid("well_integrity", "q-11-1"), component_property="value"),
     Input(component_id=qid("well_integrity", "q-11-2"), component_property="value"),
 )
@@ -1612,12 +1612,12 @@ def qualified_FFS_11(q111, q112):
         "color": txt_color,
         "backgroundColor": bg_color
     }
-    return text, style
+    return text#, style
 
 
 @callback(
     Output(component_id="a-compat-11", component_property="children"),
-    Output(component_id="a-compat-11", component_property="style"),
+    # Output(component_id="a-compat-11", component_property="style"),
     Input(component_id=qid("well_integrity", "q-11-3"), component_property="value"),
 )
 def material_compatibility_11(q113):
@@ -1637,7 +1637,7 @@ def material_compatibility_11(q113):
         "color": txt_color,
         "backgroundColor": bg_color
     }
-    return text, style
+    return text#, style
 
 
 @callback(
@@ -1676,7 +1676,7 @@ def mitigation_11(q_ffs, q_mit, is_retrievable):
 ################# Element 12 #################
 @callback(
     Output(component_id="a-ffs-12", component_property="children"),
-    Output(component_id="a-ffs-12", component_property="style"),
+    # Output(component_id="a-ffs-12", component_property="style"),
     Input(component_id=qid("well_integrity", "q-12-1"), component_property="value"),
     Input(component_id=qid("well_integrity", "q-12-2"), component_property="value"),
 )
@@ -1697,12 +1697,12 @@ def qualified_FFS_12(q121, q122):
         "color": txt_color,
         "backgroundColor": bg_color
     }
-    return text, style
+    return text#, style
 
 
 @callback(
     Output(component_id="a-compat-12", component_property="children"),
-    Output(component_id="a-compat-12", component_property="style"),
+    # Output(component_id="a-compat-12", component_property="style"),
     Input(component_id=qid("well_integrity", "q-12-3"), component_property="value"),
 )
 def material_compatibility_12(q123):
@@ -1722,7 +1722,7 @@ def material_compatibility_12(q123):
         "color": txt_color,
         "backgroundColor": bg_color
     }
-    return text, style
+    return text#, style
 
 
 @callback(
@@ -1730,9 +1730,11 @@ def material_compatibility_12(q123):
     Output(component_id=gid("well_integrity", "mitigation", 12), component_property="style"),
     Input(component_id="a-ffs-12", component_property="children"),
     Input(component_id="a-compat-12", component_property="children"),
-    Input(component_id=rid("well_integrity", "retrievable-13"), component_property="value")
+    Input(component_id=rid("well_integrity", "retrievable-12"), component_property="value")
 )
 def mitigation_12(q_ffs, q_mit, is_retrievable):
+    print("---------------------------")
+    print(q_ffs, q_mit, is_retrievable)
     if q_ffs == "Unknown" or q_mit == "Unknown":
         text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
     elif q_ffs == "Yes" and q_mit == "Yes":
@@ -1761,7 +1763,7 @@ def mitigation_12(q_ffs, q_mit, is_retrievable):
 ################# Element 13 #################
 @callback(
     Output(component_id="a-ffs-13", component_property="children"),
-    Output(component_id="a-ffs-13", component_property="style"),
+    # Output(component_id="a-ffs-13", component_property="style"),
     Input(component_id=qid("well_integrity", "q-13-1"), component_property="value"),
     Input(component_id=qid("well_integrity", "q-13-2"), component_property="value"),
 )
@@ -1782,12 +1784,12 @@ def qualified_FFS_13(q131, q132):
         "color": txt_color,
         "backgroundColor": bg_color
     }
-    return text, style
+    return text#, style
 
 
 @callback(
     Output(component_id="a-compat-13", component_property="children"),
-    Output(component_id="a-compat-13", component_property="style"),
+    # Output(component_id="a-compat-13", component_property="style"),
     Input(component_id=qid("well_integrity", "q-13-3"), component_property="value"),
 )
 def material_compatibility_13(q133):
@@ -1807,7 +1809,7 @@ def material_compatibility_13(q133):
         "color": txt_color,
         "backgroundColor": bg_color
     }
-    return text, style
+    return text#, style
 
 
 @callback(
@@ -1846,7 +1848,7 @@ def mitigation_13(q_ffs, q_mit, is_retrievable):
 ################# Element 14 #################
 @callback(
     Output(component_id="a-ffs-14", component_property="children"),
-    Output(component_id="a-ffs-14", component_property="style"),
+    # Output(component_id="a-ffs-14", component_property="style"),
     Input(component_id=qid("well_integrity", "q-14-1"), component_property="value"),
     Input(component_id=qid("well_integrity", "q-14-2"), component_property="value"),
     Input(component_id=qid("well_integrity", "q-14-3"), component_property="value"),
@@ -1868,12 +1870,12 @@ def qualified_FFS_14(q141, q142, q143):
         "color": txt_color,
         "backgroundColor": bg_color
     }
-    return text, style
+    return text#, style
 
 
 @callback(
     Output(component_id="a-compat-14", component_property="children"),
-    Output(component_id="a-compat-14", component_property="style"),
+    # Output(component_id="a-compat-14", component_property="style"),
     Input(component_id=qid("well_integrity", "q-14-4"), component_property="value"),
 )
 def material_compatibility_14(q144):
@@ -1893,7 +1895,7 @@ def material_compatibility_14(q144):
         "color": txt_color,
         "backgroundColor": bg_color
     }
-    return text, style
+    return text#, style
 
 
 @callback(
@@ -1932,7 +1934,7 @@ def mitigation_14(q_ffs, q_mit, is_retrievable):
 ################# Element 15 #################
 @callback(
     Output(component_id="a-ffs-15", component_property="children"),
-    Output(component_id="a-ffs-15", component_property="style"),
+    # Output(component_id="a-ffs-15", component_property="style"),
     Input(component_id=qid("well_integrity", "q-15-1"), component_property="value"),
     Input(component_id=qid("well_integrity", "q-15-2"), component_property="value"),
     Input(component_id=qid("well_integrity", "q-15-3"), component_property="value"),
@@ -1954,12 +1956,12 @@ def qualified_FFS_15(q151, q152, q153):
         "color": txt_color,
         "backgroundColor": bg_color
     }
-    return text, style
+    return text#, style
 
 
 @callback(
     Output(component_id="a-compat-15", component_property="children"),
-    Output(component_id="a-compat-15", component_property="style"),
+    # Output(component_id="a-compat-15", component_property="style"),
     Input(component_id=qid("well_integrity", "q-15-4"), component_property="value"),
 )
 def material_compatibility_15(q154):
@@ -1979,7 +1981,7 @@ def material_compatibility_15(q154):
         "color": txt_color,
         "backgroundColor": bg_color
     }
-    return text, style
+    return text#, style
 
 
 @callback(
@@ -2018,7 +2020,7 @@ def mitigation_15(q_ffs, q_mit, is_retrievable):
 ################# Element 16 #################
 @callback(
     Output(component_id="a-ffs-16", component_property="children"),
-    Output(component_id="a-ffs-16", component_property="style"),
+    # Output(component_id="a-ffs-16", component_property="style"),
     Input(component_id=qid("well_integrity", "q-16-1"), component_property="value"),
     Input(component_id=qid("well_integrity", "q-16-2"), component_property="value"),
 )
@@ -2039,12 +2041,12 @@ def qualified_FFS_16(q161, q162):
         "color": txt_color,
         "backgroundColor": bg_color
     }
-    return text, style
+    return text#, style
 
 
 @callback(
     Output(component_id="a-compat-16", component_property="children"),
-    Output(component_id="a-compat-16", component_property="style"),
+    # Output(component_id="a-compat-16", component_property="style"),
     Input(component_id=qid("well_integrity", "q-16-3"), component_property="value"),
 )
 def material_compatibility_16(q163):
@@ -2064,7 +2066,7 @@ def material_compatibility_16(q163):
         "color": txt_color,
         "backgroundColor": bg_color
     }
-    return text, style
+    return text#, style
 
 
 @callback(
@@ -2103,7 +2105,7 @@ def mitigation_16(q_ffs, q_mit, is_retrievable):
 ################# Element 17 #################
 @callback(
     Output(component_id="a-ffs-17", component_property="children"),
-    Output(component_id="a-ffs-17", component_property="style"),
+    # Output(component_id="a-ffs-17", component_property="style"),
     Input(component_id=qid("well_integrity", "q-17-1"), component_property="value"),
     Input(component_id=qid("well_integrity", "q-17-2"), component_property="value"),
 )
@@ -2124,12 +2126,12 @@ def qualified_FFS_17(q171, q172):
         "color": txt_color,
         "backgroundColor": bg_color
     }
-    return text, style
+    return text#, style
 
 
 @callback(
     Output(component_id="a-compat-17", component_property="children"),
-    Output(component_id="a-compat-17", component_property="style"),
+    # Output(component_id="a-compat-17", component_property="style"),
     Input(component_id=qid("well_integrity", "q-17-3"), component_property="value"),
 )
 def material_compatibility_17(q173):
@@ -2149,7 +2151,7 @@ def material_compatibility_17(q173):
         "color": txt_color,
         "backgroundColor": bg_color
     }
-    return text, style
+    return text#, style
 
 
 @callback(
@@ -2188,7 +2190,7 @@ def mitigation_17(q_ffs, q_mit, is_retrievable):
 ################# Element 18 #################
 @callback(
     Output(component_id="a-ffs-18", component_property="children"),
-    Output(component_id="a-ffs-18", component_property="style"),
+    # Output(component_id="a-ffs-18", component_property="style"),
     Input(component_id=qid("well_integrity", "q-18-1"), component_property="value"),
     Input(component_id=qid("well_integrity", "q-18-2"), component_property="value"),
 )
@@ -2209,12 +2211,12 @@ def qualified_FFS_18(q181, q182):
         "color": txt_color,
         "backgroundColor": bg_color
     }
-    return text, style
+    return text#, style
 
 
 @callback(
     Output(component_id="a-compat-18", component_property="children"),
-    Output(component_id="a-compat-18", component_property="style"),
+    # Output(component_id="a-compat-18", component_property="style"),
     Input(component_id=qid("well_integrity", "q-18-3"), component_property="value"),
 )
 def material_compatibility_18(q183):
@@ -2234,7 +2236,7 @@ def material_compatibility_18(q183):
         "color": txt_color,
         "backgroundColor": bg_color
     }
-    return text, style
+    return text#, style
 
 
 @callback(

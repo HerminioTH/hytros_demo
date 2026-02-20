@@ -12,9 +12,9 @@ import base64
 FONT_AWESOME = (
     "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
 )
-external_stylesheets = [dbc.themes.BOOTSTRAP, FONT_AWESOME]
+# external_stylesheets = [dbc.themes.BOOTSTRAP, FONT_AWESOME]
 # external_stylesheets = [dbc.themes.SKETCHY, FONT_AWESOME]
-# external_stylesheets = [dbc.themes.SLATE, FONT_AWESOME]
+external_stylesheets = [dbc.themes.FLATLY, FONT_AWESOME]
 
 app = Dash(__name__, external_stylesheets=external_stylesheets)
 
@@ -68,7 +68,7 @@ app.layout = html.Div(
 
         dcc.Tabs(
             id="tabs",
-            value="mat-compat",
+            value="tab-how",
             children=[
                 tab_instructions,
                 tab_well_design,

@@ -1,9 +1,11 @@
-from dash import dcc
+from dash import dcc, html
 
 tab_instructions = dcc.Tab(
         label="Instructions",
         value="tab-how",
         children=[
+            html.Br(),
+
             dcc.Markdown("""
                 The screening is conducted through two screening categories:
 
