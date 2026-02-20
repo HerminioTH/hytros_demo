@@ -5,14 +5,15 @@ from tab_well_design import tab_well_design
 from tab_instructions import tab_instructions
 from tab_well_integrity import tab_well_integrity
 from tab_risk_matrix import tab_risk_matrix
+from tab_materials import tab_materials
 import json
 import base64
 
 FONT_AWESOME = (
     "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
 )
-# external_stylesheets = [dbc.themes.BOOTSTRAP, FONT_AWESOME]
-external_stylesheets = [dbc.themes.SKETCHY, FONT_AWESOME]
+external_stylesheets = [dbc.themes.BOOTSTRAP, FONT_AWESOME]
+# external_stylesheets = [dbc.themes.SKETCHY, FONT_AWESOME]
 # external_stylesheets = [dbc.themes.SLATE, FONT_AWESOME]
 
 app = Dash(__name__, external_stylesheets=external_stylesheets)
@@ -67,12 +68,13 @@ app.layout = html.Div(
 
         dcc.Tabs(
             id="tabs",
-            value="tab-risk-matrix",
+            value="mat-compat",
             children=[
                 tab_instructions,
                 tab_well_design,
                 tab_well_integrity,
-                tab_risk_matrix
+                tab_risk_matrix,
+                tab_materials
             ],
             style={
                 "display": "flex",

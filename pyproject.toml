@@ -7,5 +7,6 @@ requires-python = ">=3.10"
 dependencies = [
     "dash",
     "dash-bootstrap-components>=2.0.4",
+    "numpy>=2.2.6",
     "pandas",
 ]

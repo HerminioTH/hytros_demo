@@ -1,12 +1,5 @@
 from dash import dcc, html, callback, Output, Input, MATCH
-
-def fid(type, name):
-    id = {"tab": type, "name": name}
-    return id
-
-def gid(type, name, i):
-    id = {"tab": type, "name": name, "i": i}
-    return id
+from utils import fid, gid
 
 def set_style(width, padding="15px", textAlign="left", border=False):
     if border:
@@ -101,7 +94,7 @@ tab_well_design = dcc.Tab(
                                 html.Td("Acessibility", style=set_style(cw_2)),
                                 html.Td("Is the well accessible?", style=set_style(cw_3)),
                                 html.Td(create_answer_dropdown(fid("well_design", "question-1")), style=set_style(cw_4)),
-                                html.Td("Unknown", style=set_style(cw_5), id="1-mitigation"),
+                                html.Td("Unknown", style=set_style(cw_5), id=gid("well_design", "mitigation", 1)),
                                 html.Td(create_impact_dropdown(gid("well_design", "impact", 1)), style=set_style(cw_6)),
                                 html.Td(create_color_square(gid("well_design", "impact-color", 1), size=24)),
                             ],
@@ -113,7 +106,7 @@ tab_well_design = dcc.Tab(
                                 html.Td("Age", style=set_style(cw_2)),
                                 html.Td("Is the well constructed before 1996?", style=set_style(cw_3)),
                                 html.Td(create_answer_dropdown(fid("well_design", "question-2")), style=set_style(cw_4)),
-                                html.Td("Unknown", style=set_style(cw_5), id="2-mitigation"),
+                                html.Td("Unknown", style=set_style(cw_5), id=gid("well_design", "mitigation", 2)),
                                 html.Td(create_impact_dropdown(gid("well_design", "impact", 2)), style=set_style(cw_6)),
                                 html.Td(create_color_square(gid("well_design", "impact-color", 2), size=24)),
                             ]),
@@ -122,7 +115,7 @@ tab_well_design = dcc.Tab(
                                 html.Td("Type/function", style=set_style(cw_2)),
                                 html.Td("Was the well used as injector e.g. brine for pressure maintenance? ", style=set_style(cw_3)),
                                 html.Td(create_answer_dropdown(fid("well_design", "question-3")), style=set_style(cw_4)),
-                                html.Td("Unknown", style=set_style(cw_5), id="3-mitigation"),
+                                html.Td("Unknown", style=set_style(cw_5), id=gid("well_design", "mitigation", 3)),
                                 html.Td(create_impact_dropdown(gid("well_design", "impact", 3)), style=set_style(cw_6)),
                                 html.Td(create_color_square(gid("well_design", "impact-color", 3), size=24)),
                             ]),
@@ -131,7 +124,7 @@ tab_well_design = dcc.Tab(
                                 html.Td("Depth", style=set_style(cw_2)),
                                 html.Td("Is chage in target depth required? For example, drilling or sidetracking to reach deeper zones, or perforating, milling shallower intervals. ", style=set_style(cw_3)),
                                 html.Td(create_answer_dropdown(fid("well_design", "question-4")), style=set_style(cw_4)),
-                                html.Td("Unknown", style=set_style(cw_5), id="4-mitigation"),
+                                html.Td("Unknown", style=set_style(cw_5), id=gid("well_design", "mitigation", 4)),
                                 html.Td(create_impact_dropdown(gid("well_design", "impact", 4)), style=set_style(cw_6)),
                                 html.Td(create_color_square(gid("well_design", "impact-color", 4), size=24)),
                             ]),
@@ -140,7 +133,7 @@ tab_well_design = dcc.Tab(
                                 html.Td("Diameter", style=set_style(cw_2)),
                                 html.Td("Is the well diameter sufficient for the expected operational conditions and performance?", style=set_style(cw_3)),
                                 html.Td(create_answer_dropdown(fid("well_design", "question-5")), style=set_style(cw_4)),
-                                html.Td("Unknown", style=set_style(cw_5), id="5-mitigation"),
+                                html.Td("Unknown", style=set_style(cw_5), id=gid("well_design", "mitigation", 5)),
                                 html.Td(create_impact_dropdown(gid("well_design", "impact", 5)), style=set_style(cw_6)),
                                 html.Td(create_color_square(gid("well_design", "impact-color", 5), size=24)),
                             ]),
@@ -149,7 +142,7 @@ tab_well_design = dcc.Tab(
                                 html.Td("Deviation", style=set_style(cw_2)),
                                 html.Td("Is the inclination of the well across the caprock(s) higher than 30 degrees?", style=set_style(cw_3)),
                                 html.Td(create_answer_dropdown(fid("well_design", "question-6")), style=set_style(cw_4)),
-                                html.Td("Unknown", style=set_style(cw_5), id="6-mitigation"),
+                                html.Td("Unknown", style=set_style(cw_5), id=gid("well_design", "mitigation", 6)),
                                 html.Td(create_impact_dropdown(gid("well_design", "impact", 6)), style=set_style(cw_6)),
                                 html.Td(create_color_square(gid("well_design", "impact-color", 6), size=24)),
                             ]),
@@ -158,7 +151,7 @@ tab_well_design = dcc.Tab(
                                 html.Td("Geological and geomechanical occurances", style=set_style(cw_2)),
                                 html.Td("Are there indication of geological or geomehcanical mechanisms (e.g. tectonic forces, presence of fractures and faults etc) that could have an affect on the components of the well that provide structural integrity i.e. wellhead, conductor casing?", style=set_style(cw_3)),
                                 html.Td(create_answer_dropdown(fid("well_design", "question-7")), style=set_style(cw_4)),
-                                html.Td("Unknown", style=set_style(cw_5), id="7-mitigation"),
+                                html.Td("Unknown", style=set_style(cw_5), id=gid("well_design", "mitigation", 7)),
                                 html.Td(create_impact_dropdown(gid("well_design", "impact", 7)), style=set_style(cw_6)),
                                 html.Td(create_color_square(gid("well_design", "impact-color", 7), size=24)),
                             ]),
@@ -167,7 +160,7 @@ tab_well_design = dcc.Tab(
                                 html.Td("Operational issues", style=set_style(cw_2)),
                                 html.Td("Has the well experienced any integrity issues, such as sustained casing pressure (SCP) or leakage in any relevant annulus?", style=set_style(cw_3)),
                                 html.Td(create_answer_dropdown(fid("well_design", "question-8")), style=set_style(cw_4)),
-                                html.Td("Unknown", style=set_style(cw_5), id="8-mitigation"),
+                                html.Td("Unknown", style=set_style(cw_5), id=gid("well_design", "mitigation", 8)),
                                 html.Td(create_impact_dropdown(gid("well_design", "impact", 8)), style=set_style(cw_6)),
                                 html.Td(create_color_square(gid("well_design", "impact-color", 8), size=24)),
                             ]),
@@ -183,8 +176,8 @@ tab_well_design = dcc.Tab(
 )
 
 @callback(
-    Output(component_id="1-mitigation", component_property="style"),
-    Output(component_id="1-mitigation",  component_property="children"),
+    Output(component_id=gid("well_design", "mitigation", 1), component_property="style"),
+    Output(component_id=gid("well_design", "mitigation", 1),  component_property="children"),
     Input(component_id=fid("well_design", "question-1"),  component_property="value"),
 )
 def mitigation_1(status):
@@ -203,8 +196,8 @@ def mitigation_1(status):
     return style, selected["text"]
 
 @callback(
-    Output(component_id="2-mitigation", component_property="style"),
-    Output(component_id="2-mitigation",  component_property="children"),
+    Output(component_id=gid("well_design", "mitigation", 2), component_property="style"),
+    Output(component_id=gid("well_design", "mitigation", 2),  component_property="children"),
     Input(component_id=fid("well_design", "question-2"),  component_property="value"),
 )
 def mitigation_2(status):
@@ -223,8 +216,8 @@ def mitigation_2(status):
     return style, selected["text"]
 
 @callback(
-    Output(component_id="3-mitigation", component_property="style"),
-    Output(component_id="3-mitigation",  component_property="children"),
+    Output(component_id=gid("well_design", "mitigation", 3), component_property="style"),
+    Output(component_id=gid("well_design", "mitigation", 3),  component_property="children"),
     Input(component_id=fid("well_design", "question-3"),  component_property="value"),
 )
 def mitigation_3(status):
@@ -243,8 +236,8 @@ def mitigation_3(status):
     return style, selected["text"]
 
 @callback(
-    Output(component_id="4-mitigation", component_property="style"),
-    Output(component_id="4-mitigation",  component_property="children"),
+    Output(component_id=gid("well_design", "mitigation", 4), component_property="style"),
+    Output(component_id=gid("well_design", "mitigation", 4),  component_property="children"),
     Input(component_id=fid("well_design", "question-4"),  component_property="value"),
 )
 def mitigation_4(status):
@@ -263,8 +256,8 @@ def mitigation_4(status):
     return style, selected["text"]
 
 @callback(
-    Output(component_id="5-mitigation", component_property="style"),
-    Output(component_id="5-mitigation",  component_property="children"),
+    Output(component_id=gid("well_design", "mitigation", 5), component_property="style"),
+    Output(component_id=gid("well_design", "mitigation", 5),  component_property="children"),
     Input(component_id=fid("well_design", "question-5"),  component_property="value"),
 )
 def mitigation_5(status):
@@ -283,8 +276,8 @@ def mitigation_5(status):
     return style, selected["text"]
 
 @callback(
-    Output(component_id="6-mitigation", component_property="style"),
-    Output(component_id="6-mitigation",  component_property="children"),
+    Output(component_id=gid("well_design", "mitigation", 6), component_property="style"),
+    Output(component_id=gid("well_design", "mitigation", 6),  component_property="children"),
     Input(component_id=fid("well_design", "question-6"),  component_property="value"),
 )
 def mitigation_6(status):
@@ -303,8 +296,8 @@ def mitigation_6(status):
     return style, selected["text"]
 
 @callback(
-    Output(component_id="7-mitigation", component_property="style"),
-    Output(component_id="7-mitigation",  component_property="children"),
+    Output(component_id=gid("well_design", "mitigation", 7), component_property="style"),
+    Output(component_id=gid("well_design", "mitigation", 7),  component_property="children"),
     Input(component_id=fid("well_design", "question-7"),  component_property="value"),
 )
 def mitigation_7(status):
@@ -323,8 +316,8 @@ def mitigation_7(status):
     return style, selected["text"]
 
 @callback(
-    Output(component_id="8-mitigation", component_property="style"),
-    Output(component_id="8-mitigation",  component_property="children"),
+    Output(component_id=gid("well_design", "mitigation", 8), component_property="style"),
+    Output(component_id=gid("well_design", "mitigation", 8),  component_property="children"),
     Input(component_id=fid("well_design", "question-8"),  component_property="value"),
 )
 def mitigation_8(status):
