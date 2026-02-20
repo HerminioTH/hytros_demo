@@ -1,24 +1,5 @@
 from dash import dcc, html, callback, Output, Input, MATCH
-
-def bid(tab, barrier):
-    id = {"tab": tab, "barrier": barrier}
-    return id
-
-def rid(tab, retrievable):
-    id = {"tab": tab, "retrievable": retrievable}
-    return id
-
-def qid(tab, question):
-    id = {"tab": tab, "question": question}
-    return id
-
-def fid(type, name):
-    id = {"tab": type, "name": name}
-    return id
-
-def gid(type, name, i):
-    id = {"tab": type, "name": name, "i": i}
-    return id
+from utils import bid, rid, qid, gid
 
 cw_1 = 2
 cw_2 = 10
@@ -170,7 +151,7 @@ tab_well_integrity = dcc.Tab(
                                 ),
                                 html.Td("", id="a-ffs-1", style=set_style(cw_7, textAlign="center")),
                                 html.Td("", id="a-compat-1", style=set_style(cw_8, textAlign="center")),
-                                html.Td("", id="mit-1", style=set_style(cw_9, textAlign="center")),
+                                html.Td("", id=gid("well_integrity", "mitigation", 1), style=set_style(cw_9, textAlign="center")),
                                 html.Td(create_impact_dropdown(gid("well_integrity", "impact", 1)), style=set_style(cw_10, textAlign="center")),
                                 html.Td(create_color_square(gid("well_integrity", "impact-color", 1)), style=set_style(cw_11, textAlign="center")),
                             ]),
@@ -201,7 +182,7 @@ tab_well_integrity = dcc.Tab(
                                 ),
                                 html.Td("", id="a-ffs-2", style=set_style(cw_7, textAlign="center")),
                                 html.Td("", id="a-compat-2", style=set_style(cw_8, textAlign="center")),
-                                html.Td("", id="mit-2", style=set_style(cw_9, textAlign="center")),
+                                html.Td("", id=gid("well_integrity", "mitigation", 2), style=set_style(cw_9, textAlign="center")),
                                 html.Td(create_impact_dropdown(gid("well_integrity", "impact", 2)), style=set_style(cw_10, textAlign="center")),
                                 html.Td(create_color_square(gid("well_integrity", "impact-color", 2)), style=set_style(cw_11, textAlign="center")),
                             ]),
@@ -232,7 +213,7 @@ tab_well_integrity = dcc.Tab(
                                 ),
                                 html.Td("", id="a-ffs-3", style=set_style(cw_7, textAlign="center")),
                                 html.Td("", id="a-compat-3", style=set_style(cw_8, textAlign="center")),
-                                html.Td("", id="mit-3", style=set_style(cw_9, textAlign="center")),
+                                html.Td("", id=gid("well_integrity", "mitigation", 3), style=set_style(cw_9, textAlign="center")),
                                 html.Td(create_impact_dropdown(gid("well_integrity", "impact", 3)), style=set_style(cw_10, textAlign="center")),
                                 html.Td(create_color_square(gid("well_integrity", "impact-color", 3)), style=set_style(cw_11, textAlign="center")),
                             ]),
@@ -268,7 +249,7 @@ tab_well_integrity = dcc.Tab(
                                 ),
                                 html.Td("", id="a-ffs-4", style=set_style(cw_7, textAlign="center")),
                                 html.Td("", id="a-compat-4", style=set_style(cw_8, textAlign="center")),
-                                html.Td("", id="mit-4", style=set_style(cw_9, textAlign="center")),
+                                html.Td("", id=gid("well_integrity", "mitigation", 4), style=set_style(cw_9, textAlign="center")),
                                 html.Td(create_impact_dropdown(gid("well_integrity", "impact", 4)), style=set_style(cw_10, textAlign="center")),
                                 html.Td(create_color_square(gid("well_integrity", "impact-color", 4)), style=set_style(cw_11, textAlign="center")),
                             ]),
@@ -299,7 +280,7 @@ tab_well_integrity = dcc.Tab(
                                 ),
                                 html.Td("", id="a-ffs-5", style=set_style(cw_7, textAlign="center")),
                                 html.Td("", id="a-compat-5", style=set_style(cw_8, textAlign="center")),
-                                html.Td("", id="mit-5", style=set_style(cw_9, textAlign="center")),
+                                html.Td("", id=gid("well_integrity", "mitigation", 5), style=set_style(cw_9, textAlign="center")),
                                 html.Td(create_impact_dropdown(gid("well_integrity", "impact", 5)), style=set_style(cw_10, textAlign="center")),
                                 html.Td(create_color_square(gid("well_integrity", "impact-color", 5)), style=set_style(cw_11, textAlign="center")),
                             ]),
@@ -325,7 +306,7 @@ tab_well_integrity = dcc.Tab(
                                 ),
                                 html.Td("", id="a-ffs-6", style=set_style(cw_7, textAlign="center")),
                                 html.Td("", id="a-compat-6", style=set_style(cw_8, textAlign="center")),
-                                html.Td("", id="mit-6", style=set_style(cw_9, textAlign="center")),
+                                html.Td("", id=gid("well_integrity", "mitigation", 6), style=set_style(cw_9, textAlign="center")),
                                 html.Td(create_impact_dropdown(gid("well_integrity", "impact", 6)), style=set_style(cw_10, textAlign="center")),
                                 html.Td(create_color_square(gid("well_integrity", "impact-color", 6)), style=set_style(cw_11, textAlign="center")),
                             ]),
@@ -356,7 +337,7 @@ tab_well_integrity = dcc.Tab(
                                 ),
                                 html.Td("", id="a-ffs-7", style=set_style(cw_7, textAlign="center")),
                                 html.Td("", id="a-compat-7", style=set_style(cw_8, textAlign="center")),
-                                html.Td("", id="mit-7", style=set_style(cw_9, textAlign="center")),
+                                html.Td("", id=gid("well_integrity", "mitigation", 7), style=set_style(cw_9, textAlign="center")),
                                 html.Td(create_impact_dropdown(gid("well_integrity", "impact", 7)), style=set_style(cw_10, textAlign="center")),
                                 html.Td(create_color_square(gid("well_integrity", "impact-color", 7)), style=set_style(cw_11, textAlign="center")),
                             ]),
@@ -387,7 +368,7 @@ tab_well_integrity = dcc.Tab(
                                 ),
                                 html.Td("", id="a-ffs-8", style=set_style(cw_7, textAlign="center")),
                                 html.Td("", id="a-compat-8", style=set_style(cw_8, textAlign="center")),
-                                html.Td("", id="mit-8", style=set_style(cw_9, textAlign="center")),
+                                html.Td("", id=gid("well_integrity", "mitigation", 8), style=set_style(cw_9, textAlign="center")),
                                 html.Td(create_impact_dropdown(gid("well_integrity", "impact", 8)), style=set_style(cw_10, textAlign="center")),
                                 html.Td(create_color_square(gid("well_integrity", "impact-color", 8)), style=set_style(cw_11, textAlign="center")),
                             ]),
@@ -426,7 +407,7 @@ tab_well_integrity = dcc.Tab(
                                 ),
                                 html.Td("", id="a-ffs-9", style=set_style(cw_7, textAlign="center")),
                                 html.Td("", id="a-compat-9", style=set_style(cw_8, textAlign="center")),
-                                html.Td("", id="mit-9", style=set_style(cw_9, textAlign="center")),
+                                html.Td("", id=gid("well_integrity", "mitigation", 9), style=set_style(cw_9, textAlign="center")),
                                 html.Td(create_impact_dropdown(gid("well_integrity", "impact", 9)), style=set_style(cw_10, textAlign="center")),
                                 html.Td(create_color_square(gid("well_integrity", "impact-color", 9)), style=set_style(cw_11, textAlign="center")),
                             ]),
@@ -457,7 +438,7 @@ tab_well_integrity = dcc.Tab(
                                 ),
                                 html.Td("", id="a-ffs-10", style=set_style(cw_7, textAlign="center")),
                                 html.Td("", id="a-compat-10", style=set_style(cw_8, textAlign="center")),
-                                html.Td("", id="mit-10", style=set_style(cw_9, textAlign="center")),
+                                html.Td("", id=gid("well_integrity", "mitigation", 10), style=set_style(cw_9, textAlign="center")),
                                 html.Td(create_impact_dropdown(gid("well_integrity", "impact", 10)), style=set_style(cw_10, textAlign="center")),
                                 html.Td(create_color_square(gid("well_integrity", "impact-color", 10)), style=set_style(cw_11, textAlign="center")),
                             ]),
@@ -488,7 +469,7 @@ tab_well_integrity = dcc.Tab(
                                 ),
                                 html.Td("", id="a-ffs-11", style=set_style(cw_7, textAlign="center")),
                                 html.Td("", id="a-compat-11", style=set_style(cw_8, textAlign="center")),
-                                html.Td("", id="mit-11", style=set_style(cw_9, textAlign="center")),
+                                html.Td("", id=gid("well_integrity", "mitigation", 11), style=set_style(cw_9, textAlign="center")),
                                 html.Td(create_impact_dropdown(gid("well_integrity", "impact", 11)), style=set_style(cw_10, textAlign="center")),
                                 html.Td(create_color_square(gid("well_integrity", "impact-color", 11)), style=set_style(cw_11, textAlign="center")),
                             ]),
@@ -519,7 +500,7 @@ tab_well_integrity = dcc.Tab(
                                 ),
                                 html.Td("", id="a-ffs-12", style=set_style(cw_7, textAlign="center")),
                                 html.Td("", id="a-compat-12", style=set_style(cw_8, textAlign="center")),
-                                html.Td("", id="mit-12", style=set_style(cw_9, textAlign="center")),
+                                html.Td("", id=gid("well_integrity", "mitigation", 12), style=set_style(cw_9, textAlign="center")),
                                 html.Td(create_impact_dropdown(gid("well_integrity", "impact", 12)), style=set_style(cw_10, textAlign="center")),
                                 html.Td(create_color_square(gid("well_integrity", "impact-color", 12)), style=set_style(cw_11, textAlign="center")),
                             ]),
@@ -550,7 +531,7 @@ tab_well_integrity = dcc.Tab(
                                 ),
                                 html.Td("", id="a-ffs-13", style=set_style(cw_7, textAlign="center")),
                                 html.Td("", id="a-compat-13", style=set_style(cw_8, textAlign="center")),
-                                html.Td("", id="mit-13", style=set_style(cw_9, textAlign="center")),
+                                html.Td("", id=gid("well_integrity", "mitigation", 13), style=set_style(cw_9, textAlign="center")),
                                 html.Td(create_impact_dropdown(gid("well_integrity", "impact", 13)), style=set_style(cw_10, textAlign="center")),
                                 html.Td(create_color_square(gid("well_integrity", "impact-color", 13)), style=set_style(cw_11, textAlign="center")),
                             ]),
@@ -586,7 +567,7 @@ tab_well_integrity = dcc.Tab(
                                 ),
                                 html.Td("", id="a-ffs-14", style=set_style(cw_7, textAlign="center")),
                                 html.Td("", id="a-compat-14", style=set_style(cw_8, textAlign="center")),
-                                html.Td("", id="mit-14", style=set_style(cw_9, textAlign="center")),
+                                html.Td("", id=gid("well_integrity", "mitigation", 14), style=set_style(cw_9, textAlign="center")),
                                 html.Td(create_impact_dropdown(gid("well_integrity", "impact", 14)), style=set_style(cw_10, textAlign="center")),
                                 html.Td(create_color_square(gid("well_integrity", "impact-color", 14)), style=set_style(cw_11, textAlign="center")),
                             ]),
@@ -622,7 +603,7 @@ tab_well_integrity = dcc.Tab(
                                 ),
                                 html.Td("", id="a-ffs-15", style=set_style(cw_7, textAlign="center")),
                                 html.Td("", id="a-compat-15", style=set_style(cw_8, textAlign="center")),
-                                html.Td("", id="mit-15", style=set_style(cw_9, textAlign="center")),
+                                html.Td("", id=gid("well_integrity", "mitigation", 15), style=set_style(cw_9, textAlign="center")),
                                 html.Td(create_impact_dropdown(gid("well_integrity", "impact", 15)), style=set_style(cw_10, textAlign="center")),
                                 html.Td(create_color_square(gid("well_integrity", "impact-color", 15)), style=set_style(cw_11, textAlign="center")),
                             ]),
@@ -653,7 +634,7 @@ tab_well_integrity = dcc.Tab(
                                 ),
                                 html.Td("", id="a-ffs-16", style=set_style(cw_7, textAlign="center")),
                                 html.Td("", id="a-compat-16", style=set_style(cw_8, textAlign="center")),
-                                html.Td("", id="mit-16", style=set_style(cw_9, textAlign="center")),
+                                html.Td("", id=gid("well_integrity", "mitigation", 16), style=set_style(cw_9, textAlign="center")),
                                 html.Td(create_impact_dropdown(gid("well_integrity", "impact", 16)), style=set_style(cw_10, textAlign="center")),
                                 html.Td(create_color_square(gid("well_integrity", "impact-color", 16)), style=set_style(cw_11, textAlign="center")),
                             ]),
@@ -684,7 +665,7 @@ tab_well_integrity = dcc.Tab(
                                 ),
                                 html.Td("", id="a-ffs-17", style=set_style(cw_7, textAlign="center")),
                                 html.Td("", id="a-compat-17", style=set_style(cw_8, textAlign="center")),
-                                html.Td("", id="mit-17", style=set_style(cw_9, textAlign="center")),
+                                html.Td("", id=gid("well_integrity", "mitigation", 17), style=set_style(cw_9, textAlign="center")),
                                 html.Td(create_impact_dropdown(gid("well_integrity", "impact", 17)), style=set_style(cw_10, textAlign="center")),
                                 html.Td(create_color_square(gid("well_integrity", "impact-color", 17)), style=set_style(cw_11, textAlign="center")),
                             ]),
@@ -715,7 +696,7 @@ tab_well_integrity = dcc.Tab(
                                 ),
                                 html.Td("", id="a-ffs-18", style=set_style(cw_7, textAlign="center")),
                                 html.Td("", id="a-compat-18", style=set_style(cw_8, textAlign="center")),
-                                html.Td("", id="mit-18", style=set_style(cw_9, textAlign="center")),
+                                html.Td("", id=gid("well_integrity", "mitigation", 18), style=set_style(cw_9, textAlign="center")),
                                 html.Td(create_impact_dropdown(gid("well_integrity", "impact", 18)), style=set_style(cw_10, textAlign="center")),
                                 html.Td(create_color_square(gid("well_integrity", "impact-color", 18)), style=set_style(cw_11, textAlign="center")),
                             ]),
@@ -809,8 +790,8 @@ def material_compatibility_1(input):
 
 
 @callback(
-    Output(component_id="mit-1", component_property="children"),
-    Output(component_id="mit-1", component_property="style"),
+    Output(component_id=gid("well_integrity", "mitigation", 1), component_property="children"),
+    Output(component_id=gid("well_integrity", "mitigation", 1), component_property="style"),
     Input(component_id="a-ffs-1", component_property="children"),
     Input(component_id="a-compat-1", component_property="children"),
     Input(component_id=rid("well_integrity", "retrievable-1"), component_property="value")
@@ -896,8 +877,8 @@ def material_compatibility_2(q3):
 
 
 @callback(
-    Output(component_id="mit-2", component_property="children"),
-    Output(component_id="mit-2", component_property="style"),
+    Output(component_id=gid("well_integrity", "mitigation", 2), component_property="children"),
+    Output(component_id=gid("well_integrity", "mitigation", 2), component_property="style"),
     Input(component_id="a-ffs-2", component_property="children"),
     Input(component_id="a-compat-2", component_property="children"),
     Input(component_id=rid("well_integrity", "retrievable-2"), component_property="value")
@@ -981,8 +962,8 @@ def material_compatibility_3(q33):
 
 
 @callback(
-    Output(component_id="mit-3", component_property="children"),
-    Output(component_id="mit-3", component_property="style"),
+    Output(component_id=gid("well_integrity", "mitigation", 3), component_property="children"),
+    Output(component_id=gid("well_integrity", "mitigation", 3), component_property="style"),
     Input(component_id="a-ffs-3", component_property="children"),
     Input(component_id="a-compat-3", component_property="children"),
     Input(component_id=rid("well_integrity", "retrievable-3"), component_property="value")
@@ -1066,8 +1047,8 @@ def material_compatibility_4(q43):
 
 
 @callback(
-    Output(component_id="mit-4", component_property="children"),
-    Output(component_id="mit-4", component_property="style"),
+    Output(component_id=gid("well_integrity", "mitigation", 4), component_property="children"),
+    Output(component_id=gid("well_integrity", "mitigation", 4), component_property="style"),
     Input(component_id="a-ffs-4", component_property="children"),
     Input(component_id="a-compat-4", component_property="children"),
     Input(component_id=rid("well_integrity", "retrievable-4"), component_property="value")
@@ -1151,8 +1132,8 @@ def material_compatibility_5(q53):
 
 
 @callback(
-    Output(component_id="mit-5", component_property="children"),
-    Output(component_id="mit-5", component_property="style"),
+    Output(component_id=gid("well_integrity", "mitigation", 5), component_property="children"),
+    Output(component_id=gid("well_integrity", "mitigation", 5), component_property="style"),
     Input(component_id="a-ffs-5", component_property="children"),
     Input(component_id="a-compat-5", component_property="children"),
     Input(component_id=rid("well_integrity", "retrievable-5"), component_property="value")
@@ -1235,8 +1216,8 @@ def material_compatibility_6(q62):
 
 
 @callback(
-    Output(component_id="mit-6", component_property="children"),
-    Output(component_id="mit-6", component_property="style"),
+    Output(component_id=gid("well_integrity", "mitigation", 6), component_property="children"),
+    Output(component_id=gid("well_integrity", "mitigation", 6), component_property="style"),
     Input(component_id="a-ffs-6", component_property="children"),
     Input(component_id="a-compat-6", component_property="children"),
     Input(component_id=rid("well_integrity", "retrievable-6"), component_property="value")
@@ -1320,8 +1301,8 @@ def material_compatibility_7(q73):
 
 
 @callback(
-    Output(component_id="mit-7", component_property="children"),
-    Output(component_id="mit-7", component_property="style"),
+    Output(component_id=gid("well_integrity", "mitigation", 7), component_property="children"),
+    Output(component_id=gid("well_integrity", "mitigation", 7), component_property="style"),
     Input(component_id="a-ffs-7", component_property="children"),
     Input(component_id="a-compat-7", component_property="children"),
     Input(component_id=rid("well_integrity", "retrievable-7"), component_property="value")
@@ -1405,8 +1386,8 @@ def material_compatibility_8(q83):
 
 
 @callback(
-    Output(component_id="mit-8", component_property="children"),
-    Output(component_id="mit-8", component_property="style"),
+    Output(component_id=gid("well_integrity", "mitigation", 8), component_property="children"),
+    Output(component_id=gid("well_integrity", "mitigation", 8), component_property="style"),
     Input(component_id="a-ffs-8", component_property="children"),
     Input(component_id="a-compat-8", component_property="children"),
     Input(component_id=rid("well_integrity", "retrievable-8"), component_property="value")
@@ -1490,8 +1471,8 @@ def material_compatibility_9(q93):
 
 
 @callback(
-    Output(component_id="mit-9", component_property="children"),
-    Output(component_id="mit-9", component_property="style"),
+    Output(component_id=gid("well_integrity", "mitigation", 9), component_property="children"),
+    Output(component_id=gid("well_integrity", "mitigation", 9), component_property="style"),
     Input(component_id="a-ffs-9", component_property="children"),
     Input(component_id="a-compat-9", component_property="children"),
     Input(component_id=rid("well_integrity", "retrievable-9"), component_property="value")
@@ -1575,8 +1556,8 @@ def material_compatibility_10(q103):
 
 
 @callback(
-    Output(component_id="mit-10", component_property="children"),
-    Output(component_id="mit-10", component_property="style"),
+    Output(component_id=gid("well_integrity", "mitigation", 10), component_property="children"),
+    Output(component_id=gid("well_integrity", "mitigation", 10), component_property="style"),
     Input(component_id="a-ffs-10", component_property="children"),
     Input(component_id="a-compat-10", component_property="children"),
     Input(component_id=rid("well_integrity", "retrievable-10"), component_property="value")
@@ -1660,8 +1641,8 @@ def material_compatibility_11(q113):
 
 
 @callback(
-    Output(component_id="mit-11", component_property="children"),
-    Output(component_id="mit-11", component_property="style"),
+    Output(component_id=gid("well_integrity", "mitigation", 11), component_property="children"),
+    Output(component_id=gid("well_integrity", "mitigation", 11), component_property="style"),
     Input(component_id="a-ffs-11", component_property="children"),
     Input(component_id="a-compat-11", component_property="children"),
     Input(component_id=rid("well_integrity", "retrievable-11"), component_property="value")
@@ -1745,8 +1726,8 @@ def material_compatibility_12(q123):
 
 
 @callback(
-    Output(component_id="mit-12", component_property="children"),
-    Output(component_id="mit-12", component_property="style"),
+    Output(component_id=gid("well_integrity", "mitigation", 12), component_property="children"),
+    Output(component_id=gid("well_integrity", "mitigation", 12), component_property="style"),
     Input(component_id="a-ffs-12", component_property="children"),
     Input(component_id="a-compat-12", component_property="children"),
     Input(component_id=rid("well_integrity", "retrievable-13"), component_property="value")
@@ -1830,8 +1811,8 @@ def material_compatibility_13(q133):
 
 
 @callback(
-    Output(component_id="mit-13", component_property="children"),
-    Output(component_id="mit-13", component_property="style"),
+    Output(component_id=gid("well_integrity", "mitigation", 13), component_property="children"),
+    Output(component_id=gid("well_integrity", "mitigation", 13), component_property="style"),
     Input(component_id="a-ffs-13", component_property="children"),
     Input(component_id="a-compat-13", component_property="children"),
     Input(component_id=rid("well_integrity", "retrievable-13"), component_property="value")
@@ -1916,8 +1897,8 @@ def material_compatibility_14(q144):
 
 
 @callback(
-    Output(component_id="mit-14", component_property="children"),
-    Output(component_id="mit-14", component_property="style"),
+    Output(component_id=gid("well_integrity", "mitigation", 14), component_property="children"),
+    Output(component_id=gid("well_integrity", "mitigation", 14), component_property="style"),
     Input(component_id="a-ffs-14", component_property="children"),
     Input(component_id="a-compat-14", component_property="children"),
     Input(component_id=rid("well_integrity", "retrievable-14"), component_property="value")
@@ -2002,8 +1983,8 @@ def material_compatibility_15(q154):
 
 
 @callback(
-    Output(component_id="mit-15", component_property="children"),
-    Output(component_id="mit-15", component_property="style"),
+    Output(component_id=gid("well_integrity", "mitigation", 15), component_property="children"),
+    Output(component_id=gid("well_integrity", "mitigation", 15), component_property="style"),
     Input(component_id="a-ffs-15", component_property="children"),
     Input(component_id="a-compat-15", component_property="children"),
     Input(component_id=rid("well_integrity", "retrievable-15"), component_property="value")
@@ -2087,8 +2068,8 @@ def material_compatibility_16(q163):
 
 
 @callback(
-    Output(component_id="mit-16", component_property="children"),
-    Output(component_id="mit-16", component_property="style"),
+    Output(component_id=gid("well_integrity", "mitigation", 16), component_property="children"),
+    Output(component_id=gid("well_integrity", "mitigation", 16), component_property="style"),
     Input(component_id="a-ffs-16", component_property="children"),
     Input(component_id="a-compat-16", component_property="children"),
     Input(component_id=rid("well_integrity", "retrievable-16"), component_property="value")
@@ -2172,8 +2153,8 @@ def material_compatibility_17(q173):
 
 
 @callback(
-    Output(component_id="mit-17", component_property="children"),
-    Output(component_id="mit-17", component_property="style"),
+    Output(component_id=gid("well_integrity", "mitigation", 17), component_property="children"),
+    Output(component_id=gid("well_integrity", "mitigation", 17), component_property="style"),
     Input(component_id="a-ffs-17", component_property="children"),
     Input(component_id="a-compat-17", component_property="children"),
     Input(component_id=rid("well_integrity", "retrievable-17"), component_property="value")
@@ -2257,8 +2238,8 @@ def material_compatibility_18(q183):
 
 
 @callback(
-    Output(component_id="mit-18", component_property="children"),
-    Output(component_id="mit-18", component_property="style"),
+    Output(component_id=gid("well_integrity", "mitigation", 18), component_property="children"),
+    Output(component_id=gid("well_integrity", "mitigation", 18), component_property="style"),
     Input(component_id="a-ffs-18", component_property="children"),
     Input(component_id="a-compat-18", component_property="children"),
     Input(component_id=rid("well_integrity", "retrievable-18"), component_property="value")
