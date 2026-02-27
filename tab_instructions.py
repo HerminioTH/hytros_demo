@@ -6,7 +6,8 @@ tab_instructions = dcc.Tab(
         children=[
             html.Br(),
 
-            dcc.Markdown("""
+            dcc.Markdown(
+                """
                 The screening is conducted through two screening categories:
 
                 1) Well design  - pre screening, focusing on the design and operational aspects.
@@ -26,6 +27,8 @@ tab_instructions = dcc.Tab(
                 Screening results are represented through:
                 Mitigation requirements – hard-coded based on criteria questions
                 Impact – user selected
-            """)
+                """,
+                style={"textAlign": "left"}
+            )
         ]
     )

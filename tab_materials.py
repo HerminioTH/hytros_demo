@@ -62,6 +62,67 @@ def create_dropdown():
                         )
     return drop
 
+def create_details():
+    details = dbc.Accordion(
+        [
+            dbc.AccordionItem(
+                [
+                    html.Table(
+                        [
+                            html.Tbody([
+                                html.Tr([
+                                    html.Td("Final state:", style=style_1),
+                                    html.Td("", id=fid("tab_material", "cell-3"), style=style_2),
+                                ]),
+                                html.Tr([
+                                    html.Td("Failure mode / observation:", style=style_1),
+                                    html.Td("", id=fid("tab_material", "cell-4"), style=style_2),
+                                ]),
+                                html.Tr([
+                                    html.Td("Test conditions:", style=style_1),
+                                    html.Td("", id=fid("tab_material", "cell-5"), style=style_2),
+                                ]),
+                                html.Tr([
+                                    html.Td("Time:", style=style_1),
+                                    html.Td("", id=fid("tab_material", "cell-6"), style=style_2),
+                                ]),
+                                html.Tr([
+                                    html.Td("% H₂:", style=style_1),
+                                    html.Td("", id=fid("tab_material", "cell-7"), style=style_2),
+                                ]),
+                                html.Tr([
+                                    html.Td("Pressure (bar):", style=style_1),
+                                    html.Td("", id=fid("tab_material", "cell-8"), style=style_2),
+                                ]),
+                                html.Tr([
+                                    html.Td("Temperature (°C):", style=style_1),
+                                    html.Td("", id=fid("tab_material", "cell-9"), style=style_2),
+                                ]),
+                                html.Tr([
+                                    html.Td("Test type:", style=style_1),
+                                    html.Td("", id=fid("tab_material", "cell-10"), style=style_2),
+                                ]),
+                                html.Tr([
+                                    html.Td("Yield strenght (MPa):", style=style_1),
+                                    html.Td("", id=fid("tab_material", "cell-11"), style=style_2),
+                                ]),
+                                html.Tr([
+                                    html.Td("Study / Source:", style=style_1),
+                                    html.Td("", id=fid("tab_material", "cell-12"), style=style_2),
+                                ]),
+                            ])
+                        ],
+                        style={"width": "80%"}
+                    )
+                ],
+                title="Further details",
+            )
+        ],
+        start_collapsed=True,
+    )
+    return details
+
+
 def create_steel_table():
     table = html.Table(
         [
@@ -74,46 +135,28 @@ def create_steel_table():
                     html.Td("Result:", style=style_1),
                     html.Td("", id=fid("tab_material", "cell-2"), style=style_2),
                 ]),
-                html.Tr([
-                    html.Td("Final state:", style=style_1),
-                    html.Td("", id=fid("tab_material", "cell-3"), style=style_2),
-                ]),
-                html.Tr([
-                    html.Td("Failure mode / observation:", style=style_1),
-                    html.Td("", id=fid("tab_material", "cell-4"), style=style_2),
-                ]),
-                html.Tr([
-                    html.Td("Test conditions:", style=style_1),
-                    html.Td("", id=fid("tab_material", "cell-5"), style=style_2),
-                ]),
-                html.Tr([
-                    html.Td("Time:", style=style_1),
-                    html.Td("", id=fid("tab_material", "cell-6"), style=style_2),
-                ]),
-                html.Tr([
-                    html.Td("% H₂:", style=style_1),
-                    html.Td("", id=fid("tab_material", "cell-7"), style=style_2),
-                ]),
-                html.Tr([
-                    html.Td("Pressure (bar):", style=style_1),
-                    html.Td("", id=fid("tab_material", "cell-8"), style=style_2),
-                ]),
-                html.Tr([
-                    html.Td("Temperature (°C):", style=style_1),
-                    html.Td("", id=fid("tab_material", "cell-9"), style=style_2),
-                ]),
-                html.Tr([
-                    html.Td("Test type:", style=style_1),
-                    html.Td("", id=fid("tab_material", "cell-10"), style=style_2),
-                ]),
-                html.Tr([
-                    html.Td("Yield strenght (MPa):", style=style_1),
-                    html.Td("", id=fid("tab_material", "cell-11"), style=style_2),
-                ]),
-                html.Tr([
-                    html.Td("Study / Source:", style=style_1),
-                    html.Td("", id=fid("tab_material", "cell-12"), style=style_2),
-                ]),
+                # html.Tr(
+                #     [
+                #         html.Div(
+                #             create_details(),
+                #             style={"textAlign": "left"},
+                #         )
+                #     ],
+                # ),
+                # html.Tr(
+                #     html.Td(
+                #         [
+                #             html.Div(
+                #                 create_details(),
+                #                 style={"textAlign": "left"},
+                #             )
+                #         ],
+                #         style=style_1,
+                #         colSpan=2
+                #     ),
+                    
+                # ),
+                
             ]),
         ],
         id=fid("tab_material", "mat-details"),
@@ -171,7 +214,13 @@ tab_materials = dcc.Tab(
                             ),
                             html.Tbody([
                                 html.Tr([
-                                    html.Td(create_steel_table(), style={"verticalAlign": "top"}),
+                                    html.Td(
+                                        [
+                                            create_steel_table(),
+                                            create_details()
+                                        ],
+                                        style={"verticalAlign": "top"}
+                                    ),
                                     html.Td(create_elastometer_table(), style={"verticalAlign": "top"}),
                                 ])
                             ]),
@@ -180,7 +229,6 @@ tab_materials = dcc.Tab(
                             "width": "100%",
                         }
                     )
-                    # create_steel_table()
                 ]
             )
 
