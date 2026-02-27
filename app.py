@@ -6,6 +6,7 @@ from tab_instructions import tab_instructions
 from tab_well_integrity import tab_well_integrity
 from tab_risk_matrix import tab_risk_matrix
 from tab_materials import tab_materials
+from tab_intro import tab_intro
 import json
 import base64
 
@@ -25,13 +26,15 @@ server = app.server
 app.layout = html.Div(
     style={"maxWidth": "1500px", "margin": "24px auto", "fontFamily": "system-ui"},
     children=[
-        html.H2("HyTROS Screening Framework"),
+        html.H2("HyTROS Screening Framework", style={"textAlign": "left"}),
 
         # Shared state between tabs
         dcc.Store(id="app-state", storage_type="memory", data={}),
 
         dbc.Stack(
             direction="horizontal",
+            className="justify-content-end",
+            style={"width": "100%"},
             gap=4,
             children=[
                 dbc.Button(id="btn-download-json",
@@ -52,25 +55,22 @@ app.layout = html.Div(
                     ]
                 ),
 
-                # dbc.Button(id="btn-apply",
-                #     children=[html.I(className="fa fa-play me-2"), "Apply"],
-                #     color="success",
-                #     className="mt-0"
-                # ),
-
                 html.Div(id="upload-status"),
-            ]
+            ],
         ),
 
         dcc.Download(id="download-json"),
 
         html.H2(" "),
 
+        html.Br(),
+
         dcc.Tabs(
             id="tabs",
-            value="tab-how",
+            value="tab-intro",
             # value="mat-compat",
             children=[
+                tab_intro,
                 tab_instructions,
                 tab_well_design,
                 tab_well_integrity,
