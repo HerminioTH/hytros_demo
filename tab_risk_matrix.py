@@ -55,13 +55,14 @@ def build_dataframe(wd_mit, wd_impact, wi_mit, wi_impact):
     data_dict = {
         "Mitigation Label": mitigation,
         "Impact Label": impact,
-        "Category": ["Well design" for i in range(len(wd_mit))] + ["Well element" for i in range(len(wi_mit))],
+        "Category": ["Well Design" for i in range(len(wd_mit))] + ["Well Integrity" for i in range(len(wi_mit))],
         "Category Number": [i+1 for i in range(len(wd_mit))] + [i+1 for i in range(len(wi_mit))],
         "Mitigation": [mitigation_dict[x] for x in mitigation],
         "Impact": [impact_dict[x] for x in impact],
     }
 
     df = pd.DataFrame(data_dict)
+    print(df)
 
     df_count = df.groupby(["Mitigation", "Impact"]).size().reset_index(name="count")
 
@@ -142,7 +143,20 @@ def build_dataframe(wd_mit, wd_impact, wi_mit, wi_impact):
     )
 
     fig.update_layout(
-        plot_bgcolor="lightgray"   # inside the axes
+        plot_bgcolor="lightgray",   # inside the axes
+        # title="Risk Matrix",
+        xaxis=dict(
+            title=dict(
+                text="Impact",
+                font=dict(size=16)
+            )
+        ),
+        yaxis=dict(
+            title=dict(
+                text="Mitigation",
+                font=dict(size=16)
+            )
+        )
     )
 
     return fig
