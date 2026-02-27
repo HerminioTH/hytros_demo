@@ -16,6 +16,19 @@ style_2 = {
     "fontWeight": "normal"
 }
 
+def set_style(width, textAlign="left", bold=None, fontsize=24):
+    style = {
+        "textAlign": textAlign,
+        "verticalAlign": "middle",
+        "padding": "10px 10px",        # ← controls space inside cells
+        "fontWeight": bold,
+        "fontSize": fontsize,
+        "width": str(width)+"%",
+        "borderRadius": "5px",
+        "backgroundColor": "white"
+    }
+    return style
+
 def create_dropdown():
     drop = dcc.Dropdown(
                             options=[
@@ -49,6 +62,96 @@ def create_dropdown():
                         )
     return drop
 
+def create_steel_table():
+    table = html.Table(
+        [
+            html.Tbody([
+                html.Tr([
+                    html.Td("Select steel type/grade:", style=style_1),
+                    html.Td(create_dropdown(), id=fid("tab_material", "cell-1"), style=style_2),
+                ]),
+                html.Tr([
+                    html.Td("Result:", style=style_1),
+                    html.Td("", id=fid("tab_material", "cell-2"), style=style_2),
+                ]),
+                html.Tr([
+                    html.Td("Final state:", style=style_1),
+                    html.Td("", id=fid("tab_material", "cell-3"), style=style_2),
+                ]),
+                html.Tr([
+                    html.Td("Failure mode / observation:", style=style_1),
+                    html.Td("", id=fid("tab_material", "cell-4"), style=style_2),
+                ]),
+                html.Tr([
+                    html.Td("Test conditions:", style=style_1),
+                    html.Td("", id=fid("tab_material", "cell-5"), style=style_2),
+                ]),
+                html.Tr([
+                    html.Td("Time:", style=style_1),
+                    html.Td("", id=fid("tab_material", "cell-6"), style=style_2),
+                ]),
+                html.Tr([
+                    html.Td("% H₂:", style=style_1),
+                    html.Td("", id=fid("tab_material", "cell-7"), style=style_2),
+                ]),
+                html.Tr([
+                    html.Td("Pressure (bar):", style=style_1),
+                    html.Td("", id=fid("tab_material", "cell-8"), style=style_2),
+                ]),
+                html.Tr([
+                    html.Td("Temperature (°C):", style=style_1),
+                    html.Td("", id=fid("tab_material", "cell-9"), style=style_2),
+                ]),
+                html.Tr([
+                    html.Td("Test type:", style=style_1),
+                    html.Td("", id=fid("tab_material", "cell-10"), style=style_2),
+                ]),
+                html.Tr([
+                    html.Td("Yield strenght (MPa):", style=style_1),
+                    html.Td("", id=fid("tab_material", "cell-11"), style=style_2),
+                ]),
+                html.Tr([
+                    html.Td("Study / Source:", style=style_1),
+                    html.Td("", id=fid("tab_material", "cell-12"), style=style_2),
+                ]),
+            ]),
+        ],
+        id=fid("tab_material", "mat-details"),
+        style={"width": "100%"}
+    )
+    return table
+
+def create_elastometer_table():
+    table = html.Table(
+        [
+            html.Thead(
+                html.Tr([
+                    html.Th("Type", style=set_style(cw_1, textAlign="right", bold="bold", fontsize=20)),
+                    html.Th("Performance", style=set_style(cw_2, textAlign="left", bold="bold", fontsize=20)),
+                ])
+            ),
+            html.Tbody([
+                html.Tr([
+                    html.Td("Perflueoroelastomers (FFKM) ", style=style_1),
+                    html.Td("High", style=style_2),
+                ]),
+                html.Tr([
+                    html.Td("Ethylene propylene diene monomer (EPDM)", style=style_1),
+                    html.Td("Medium", style=style_2),
+                ]),
+                html.Tr([
+                    html.Td("Nitrile butadiene rubber (NBR)", style=style_1),
+                    html.Td("Low", style=style_2),
+                ]),
+            ]),
+        ],
+        style={"width": "100%"}
+    )
+    return table
+
+cw_1 = 50
+cw_2 = 50
+
 tab_materials = dcc.Tab(
         label="Material compatibility",
         value="mat-compat",
@@ -59,61 +162,25 @@ tab_materials = dcc.Tab(
                 style={"width": "100%", "margin": "16px auto", "fontFamily": "system-ui"},
                 children=[
                     html.Table(
-                        [
+                        children=[
+                            html.Thead(
+                                html.Tr([
+                                    html.Th("Steel-H2 compatibility", style=set_style(cw_1, textAlign="center")),
+                                    html.Th("Elastometer-H2 compatibility", style=set_style(cw_2, textAlign="center")),
+                                ])
+                            ),
                             html.Tbody([
                                 html.Tr([
-                                    html.Td("Steel Type / Grade:", style=style_1),
-                                    html.Td(create_dropdown(), id=fid("tab_material", "cell-1"), style=style_2),
-                                ]),
-                                html.Tr([
-                                    html.Td("Result:", style=style_1),
-                                    html.Td("", id=fid("tab_material", "cell-2"), style=style_2),
-                                ]),
-                                html.Tr([
-                                    html.Td("Final state:", style=style_1),
-                                    html.Td("", id=fid("tab_material", "cell-3"), style=style_2),
-                                ]),
-                                html.Tr([
-                                    html.Td("Failure mode / observation:", style=style_1),
-                                    html.Td("", id=fid("tab_material", "cell-4"), style=style_2),
-                                ]),
-                                html.Tr([
-                                    html.Td("Test conditions:", style=style_1),
-                                    html.Td("", id=fid("tab_material", "cell-5"), style=style_2),
-                                ]),
-                                html.Tr([
-                                    html.Td("Time:", style=style_1),
-                                    html.Td("", id=fid("tab_material", "cell-6"), style=style_2),
-                                ]),
-                                html.Tr([
-                                    html.Td("% H₂:", style=style_1),
-                                    html.Td("", id=fid("tab_material", "cell-7"), style=style_2),
-                                ]),
-                                html.Tr([
-                                    html.Td("Pressure (bar):", style=style_1),
-                                    html.Td("", id=fid("tab_material", "cell-8"), style=style_2),
-                                ]),
-                                html.Tr([
-                                    html.Td("Temperature (°C):", style=style_1),
-                                    html.Td("", id=fid("tab_material", "cell-9"), style=style_2),
-                                ]),
-                                html.Tr([
-                                    html.Td("Test type:", style=style_1),
-                                    html.Td("", id=fid("tab_material", "cell-10"), style=style_2),
-                                ]),
-                                html.Tr([
-                                    html.Td("Yield strenght (MPa):", style=style_1),
-                                    html.Td("", id=fid("tab_material", "cell-11"), style=style_2),
-                                ]),
-                                html.Tr([
-                                    html.Td("Study / Source:", style=style_1),
-                                    html.Td("", id=fid("tab_material", "cell-12"), style=style_2),
-                                ]),
+                                    html.Td(create_steel_table(), style={"verticalAlign": "top"}),
+                                    html.Td(create_elastometer_table(), style={"verticalAlign": "top"}),
+                                ])
                             ]),
                         ],
-                        id=fid("tab_material", "mat-details"),
-                        style={"width": "100%"}
+                        style={
+                            "width": "100%",
+                        }
                     )
+                    # create_steel_table()
                 ]
             )
 
@@ -321,7 +388,7 @@ def show_details(material):
             "source": "HyStock (Roordink et al., 2025)"
         },
         "34CrMo4": {
-            "result": "Validated, higher than required to comply to standards",
+            "result": "Validated (Note: higher than required to comply to standards)",
             "condition": "Laboratory,vallourec steel, 100% H2, 1000h",
             "final_state": "KIH ~115 MPa√m (meets ASME B31.12)",
             "failure_mode": "KIH higher han required to comply to standards",
@@ -336,7 +403,7 @@ def show_details(material):
             "source": "Vallourec (2023)"
         },
         "HAZ X65": {
-            "result": "Validated, higher than required to comply to standards",
+            "result": "Validated (Note: higher than required to comply to standards)",
             "condition": "Laboratory,vallourec steel, 100% H2, 1000h",
             "final_state": "KIH ~90 MPa√m",
             "failure_mode": "KIH higher han required to comply to standards",
@@ -351,7 +418,7 @@ def show_details(material):
             "source": "Vallourec (2023)"
         },
         "BM X65": {
-            "result": "Validated, higher than required to comply to standards",
+            "result": "Validated (Note: higher than required to comply to standards)",
             "condition": "Laboratory,vallourec steel, 100% H2, 1000h",
             "final_state": "KIH ~100 MPa√m",
             "failure_mode": "KIH higher han required to comply to standards",
@@ -366,7 +433,7 @@ def show_details(material):
             "source": "Vallourec (2023)"
         },
         "WM X65": {
-            "result": "Validated, higher than required to comply to standards",
+            "result": "Validated (Note: higher than required to comply to standards)",
             "condition": "Laboratory,vallourec steel, 100% H2, 1000h",
             "final_state": "KIH ~95 MPa√m",
             "failure_mode": "KIH higher han required to comply to standards",
@@ -381,7 +448,7 @@ def show_details(material):
             "source": "Vallourec (2023)"
         },
         "BM X80": {
-            "result": "Validated, higher than required to comply to standards",
+            "result": "Validated (Note: higher than required to comply to standards)",
             "condition": "Laboratory,vallourec steel, 100% H2, 1000h",
             "final_state": "KIH ~85 MPa√m",
             "failure_mode": "KIH higher han required to comply to standards",
@@ -396,7 +463,7 @@ def show_details(material):
             "source": "Vallourec (2023)"
         },
         "VM55W": {
-            "result": "Validated, higher than required to comply to standards",
+            "result": "Validated (Note: higher than required to comply to standards)",
             "condition": "Laboratory,vallourec steel, 100% H2, 1000h",
             "final_state": "KIH ~75 MPa√m",
             "failure_mode": "KIH higher han required to comply to standards",
@@ -411,7 +478,7 @@ def show_details(material):
             "source": "Vallourec (2023)"
         },
         "VM80W": {
-            "result": "Validated, higher than required to comply to standards",
+            "result": "Validated (Note: higher than required to comply to standards)",
             "condition": "Laboratory,vallourec steel, 100% H2, 1000h",
             "final_state": "KIH ~90 MPa√m",
             "failure_mode": "KIH higher han required to comply to standards",
@@ -426,7 +493,7 @@ def show_details(material):
             "source": "Vallourec (2023)"
         },
         "VM80S": {
-            "result": "Validated, higher than required to comply to standards",
+            "result": "Validated (Note: higher than required to comply to standards)",
             "condition": "Laboratory,vallourec steel, 100% H2, 1000h",
             "final_state": "KIH ~95 MPa√m",
             "failure_mode": "KIH higher han required to comply to standards",
@@ -441,7 +508,7 @@ def show_details(material):
             "source": "Vallourec (2023)"
         },
         "VM95SS": {
-            "result": "Validated, higher than required to comply to standards",
+            "result": "Validated (Note: higher than required to comply to standards)",
             "condition": "Laboratory,vallourec steel, 100% H2, 1000h",
             "final_state": "KIH ~100 MPa√m",
             "failure_mode": "KIH higher han required to comply to standards",
@@ -456,7 +523,7 @@ def show_details(material):
             "source": "Vallourec (2023)"
         },
         "VM110SS": {
-            "result": "Validated, higher than required to comply to standards",
+            "result": "Validated (Note: higher than required to comply to standards)",
             "condition": "Laboratory,vallourec steel, 100% H2, 1000h",
             "final_state": "KIH ~105 MPa√m",
             "failure_mode": "KIH higher han required to comply to standards",
