@@ -797,19 +797,23 @@ def material_compatibility_1(input):
     Input(component_id=rid("well_integrity", "retrievable-1"), component_property="value")
 )
 def mitigation_1(q_ffs, q_mit, is_retrievable):
-    if q_ffs == "Unknown" or q_mit == "Unknown":
-        text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
-    elif q_ffs == "Yes" and q_mit == "Yes":
+    if q_ffs == "Yes" and q_mit == "Yes":
         text, bg_color, txt_color = "No or minor", "#43c543", "#000000"
-    elif q_ffs == "No" or q_mit == "No":
-        if is_retrievable == "No":
-            text, bg_color, txt_color = "Severe", "#c02727", "#FFFFFF"
-        elif is_retrievable == "Yes":
-            text, bg_color, txt_color = "Minor", "#a2c543", "#000000"
-        else:
-            text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
-    else:
+    elif q_ffs == "" or q_mit == "":
         text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
+    else:
+        if is_retrievable == "Yes":
+            if q_ffs == "No" or q_mit == "No":
+                text, bg_color, txt_color = "Moderate", "#fff130", "#000000"
+            elif q_mit == "Yes":
+                text, bg_color, txt_color = "Moderate", "#fff130", "#000000"
+            else:
+                text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
+        else: # if is_retrievable == "No":
+            if q_ffs == "No" or q_mit == "No":
+                text, bg_color, txt_color = "Severe", "#c02727", "#FFFFFF"
+            else:
+                text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
     style = {
         "textAlign": "center",
         "verticalAlign": "middle",
@@ -827,27 +831,18 @@ def mitigation_1(q_ffs, q_mit, is_retrievable):
     Output(component_id="a-ffs-2", component_property="children"),
     # Output(component_id="a-ffs-2", component_property="style"),
     Input(component_id=qid("well_integrity", "q-2-1"), component_property="value"),
-    Input(component_id=qid("well_integrity", "q-2-2"), component_property="value")
+    Input(component_id=qid("well_integrity", "q-2-2"), component_property="value"),
 )
 def qualified_FFS_2(q1, q2):
     if q1 == "Unknown" or q2 == "Unknown":
-        text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
+        text = "Unknown"
     elif q1 == "Yes" and q2 == "Yes":
-        text, bg_color, txt_color = "Yes", "#43c54381", "#000000"
+        text = "Yes"
     elif q1 == "No" or q2 == "No":
-        text, bg_color, txt_color = "No", "#c0272783", "#FFFFFF"
+        text = "No"
     else:
-        text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
-    style = {
-        "textAlign": "center",
-        "verticalAlign": "middle",
-        "borderRadius": "5px",
-        "fontWeight": "bold",
-        "transition": "background-color 200ms ease",
-        "backgroundColor": bg_color,
-        "color": txt_color
-    }
-    return text#, style
+        text = ""
+    return text
 
 
 @callback(
@@ -857,46 +852,55 @@ def qualified_FFS_2(q1, q2):
 )
 def material_compatibility_2(q3):
     if q3 == "Yes":
-        text, bg_color, txt_color = "Yes", "#43c54381", "#000000"
+        text = "Yes"
     elif q3 == "No":
-        text, bg_color, txt_color = "No", "#c0272783", "#FFFFFF"
+        text = "No"
     elif q3 == "Unknown":
-        text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
+        text = "Unknown"
     else:
-        text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
-    style = {
-        "textAlign": "center",
-        "verticalAlign": "middle",
-        "borderRadius": "5px",
-        "fontWeight": "bold",
-        "transition": "background-color 200ms ease",
-        "backgroundColor": bg_color,
-        "color": txt_color
-    }
-    return text#, style
+        text = ""
+    return text
 
 
 @callback(
     Output(component_id=gid("well_integrity", "mitigation", 2), component_property="children"),
     Output(component_id=gid("well_integrity", "mitigation", 2), component_property="style"),
+    Input(component_id=qid("well_integrity", "q-2-1"), component_property="value"),
+    Input(component_id=qid("well_integrity", "q-2-2"), component_property="value"),
+    Input(component_id=qid("well_integrity", "q-2-3"), component_property="value"),
     Input(component_id="a-ffs-2", component_property="children"),
     Input(component_id="a-compat-2", component_property="children"),
     Input(component_id=rid("well_integrity", "retrievable-2"), component_property="value")
 )
-def mitigation_2(q_ffs, q_mit, is_retrievable):
-    if q_ffs == "Unknown" or q_mit == "Unknown":
-        text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
-    elif q_ffs == "Yes" and q_mit == "Yes":
+def mitigation_2(q1, q2, q3, q_ffs, q_mit, is_retrievable):
+    if q1 == "Yes" and q2 == "Yes" and q3 == "Yes":
         text, bg_color, txt_color = "No or minor", "#43c543", "#000000"
-    elif q_ffs == "No" or q_mit == "No":
-        if is_retrievable == "No":
-            text, bg_color, txt_color = "Severe", "#c02727", "#FFFFFF"
-        elif is_retrievable == "Yes":
-            text, bg_color, txt_color = "Minor", "#a2c543", "#000000"
-        else:
-            text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
-    else:
+    elif q_ffs == "" or q_mit == "":
         text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
+    else:
+        if is_retrievable == "Yes":
+            if q3 == "Yes":
+                if q1 == "Yes" or q2 == "Yes":
+                    if q1 == "Unknown" or q2 == "Unknown":
+                        text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
+                    else:
+                        text, bg_color, txt_color = "Moderate", "#fff130", "#000000"
+                elif q1 == "No" or q2 == "No":
+                    text, bg_color, txt_color = "Moderate", "#fff130", "#000000"
+                elif q1 == "Unknown" or q2 == "Unknown":
+                    text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
+                else:
+                    text, bg_color, txt_color = "Moderate", "#fff130", "#000000"
+            else:
+                text, bg_color, txt_color = "Moderate", "#fff130", "#000000"
+        else:
+            if q_mit == "No":
+                text, bg_color, txt_color = "Severe", "#c02727", "#FFFFFF"
+            else:
+                if q1 == "No" or q2 == "No":
+                    text, bg_color, txt_color = "Severe", "#c02727", "#FFFFFF"
+                else:
+                    text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
     style = {
         "textAlign": "center",
         "verticalAlign": "middle",
@@ -969,19 +973,37 @@ def material_compatibility_3(q33):
     Input(component_id=rid("well_integrity", "retrievable-3"), component_property="value")
 )
 def mitigation_3(q_ffs, q_mit, is_retrievable):
-    if q_ffs == "Unknown" or q_mit == "Unknown":
-        text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
-    elif q_ffs == "Yes" and q_mit == "Yes":
+    if q_ffs == "Yes" and q_mit == "Yes":
         text, bg_color, txt_color = "No or minor", "#43c543", "#000000"
-    elif q_ffs == "No" or q_mit == "No":
-        if is_retrievable == "No":
-            text, bg_color, txt_color = "Severe", "#c02727", "#FFFFFF"
-        elif is_retrievable == "Yes":
-            text, bg_color, txt_color = "Minor", "#a2c543", "#000000"
-        else:
-            text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
-    else:
+    elif q_ffs == "" or q_mit == "":
         text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
+    else:
+        if is_retrievable == "Yes":
+            if q_ffs == "No" or q_mit == "No":
+                text, bg_color, txt_color = "Moderate", "#fff130", "#000000"
+            elif q_mit == "Yes":
+                text, bg_color, txt_color = "Moderate", "#fff130", "#000000"
+            else:
+                text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
+        else: # if is_retrievable == "No":
+            if q_ffs == "No" or q_mit == "No":
+                text, bg_color, txt_color = "Severe", "#c02727", "#FFFFFF"
+            else:
+                text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
+
+    # if q_ffs == "Unknown" or q_mit == "Unknown":
+    #     text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
+    # elif q_ffs == "Yes" and q_mit == "Yes":
+    #     text, bg_color, txt_color = "No or minor", "#43c543", "#000000"
+    # elif q_ffs == "No" or q_mit == "No":
+    #     if is_retrievable == "No":
+    #         text, bg_color, txt_color = "Severe", "#c02727", "#FFFFFF"
+    #     elif is_retrievable == "Yes":
+    #         text, bg_color, txt_color = "Moderate", "#fff130", "#000000"
+    #     else:
+    #         text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
+    # else:
+    #     text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
     style = {
         "textAlign": "center",
         "verticalAlign": "middle",
