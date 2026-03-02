@@ -10,7 +10,7 @@ import numpy as np
 
 
 tab_risk_matrix = dcc.Tab(
-        label="Risk matrix",
+        label="Results",
         value="tab-risk-matrix",
         children=[
             # html.Div(id="upload-status"),
@@ -62,7 +62,6 @@ def build_dataframe(wd_mit, wd_impact, wi_mit, wi_impact):
     }
 
     df = pd.DataFrame(data_dict)
-    print(df)
 
     df_count = df.groupby(["Mitigation", "Impact"]).size().reset_index(name="count")
 
