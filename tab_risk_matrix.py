@@ -5,9 +5,6 @@ from utils import gid
 import pandas as pd
 import numpy as np
 
-# df = px.data.iris()
-# fig = px.scatter(df, x="sepal_width", y="sepal_length", color="species", hover_data=['petal_width', 'species_id'])
-
 
 tab_risk_matrix = dcc.Tab(
         label="Results",
@@ -27,19 +24,16 @@ tab_risk_matrix = dcc.Tab(
 
 @callback(
     Output(component_id="risk-matrix", component_property="figure"),
-    Input(component_id=gid("well_design", "mitigation", ALL),  component_property="children"),
-    Input(component_id={"tab": "well_design", "name": "impact", "i": ALL},  component_property="value"),
     Input(component_id=gid("well_integrity", "mitigation", ALL),  component_property="children"),
     Input(component_id={"tab": "well_integrity", "name": "impact", "i": ALL},  component_property="value"),
 )
-def build_dataframe(wd_mit, wd_impact, wi_mit, wi_impact):
-    mitigation = wd_mit + wi_mit
-    impact = wd_impact + wi_impact
+def build_dataframe(wi_mit, wi_impact):
+    mitigation = wi_mit
+    impact = wi_impact
 
     mitigation_dict = {
-        "Severe": 4,
-        "Moderate": 3,
-        "Minor": 2,
+        "Severe": 3,
+        "Moderate": 2,
         "No or minor": 1,
         "Unknown": 0,
         "": 0
@@ -55,13 +49,35 @@ def build_dataframe(wd_mit, wd_impact, wi_mit, wi_impact):
     data_dict = {
         "Mitigation Label": mitigation,
         "Impact Label": impact,
-        "Category": ["Well Design" for i in range(len(wd_mit))] + ["Well Integrity" for i in range(len(wi_mit))],
-        "Category Number": [i+1 for i in range(len(wd_mit))] + [i+1 for i in range(len(wi_mit))],
+        "Category": ["Well Integrity" for i in range(len(wi_mit))],
+        "Category Number": [i+1 for i in range(len(wi_mit))],
         "Mitigation": [mitigation_dict[x] for x in mitigation],
         "Impact": [impact_dict[x] for x in impact],
+        "Questions": [
+            "1. Primary caprock",
+            "2. Production casing/liner",
+            "3. Cement behind the production casing/liner",
+            "4. Overlapping casing behing the production casing/liner",
+            "5. Cement behind the overlapping casing",
+            "6. Secondary caprock",
+            "7. Casing string across the secondary caprock",
+            "8. Cement behind the casing string...",
+            "9. Overlapping casing behind the production casing/liner",
+            "10. Cement behind the overlapping casing",
+            "11. Wellhead",
+            "12. Other non-retrievable completion e.g. sand screens",
+            "13. Production packer",
+            "14. SSSV",
+            "15. Tubing",
+            "16. X-mas tree and valves",
+            "17. Wellhead casing spools and hangers",
+            "18. Any other completion..."
+
+        ]
     }
 
     df = pd.DataFrame(data_dict)
+    print(df)
 
     df_count = df.groupby(["Mitigation", "Impact"]).size().reset_index(name="count")
 
@@ -81,7 +97,7 @@ def build_dataframe(wd_mit, wd_impact, wi_mit, wi_impact):
 
 
     green_yellow_red = [
-        [0.0, "#43c543"],
+        [0.0, "#35b335"],
         [0.5, "#fff130"],
         [1.0, "#c02727"],
     ]
@@ -89,12 +105,11 @@ def build_dataframe(wd_mit, wd_impact, wi_mit, wi_impact):
     fig = go.Figure(
         data=go.Heatmap(
             x=[1, 2, 3],
-            y=[1, 2, 3, 4],
+            y=[1, 2, 3],
             z=[
-                [0.0, 0.5, 0.7],
-                [0.2, 0.6, 0.8],
-                [0.4, 0.7, 0.9],
-                [0.8, 0.9, 1.0],
+                [0.0, 0.0, 0.0],
+                [0.0, 0.5, 0.5],
+                [0.0, 0.5, 1.0],
             ],
             colorscale=green_yellow_red,
             showscale=False,
@@ -105,7 +120,7 @@ def build_dataframe(wd_mit, wd_impact, wi_mit, wi_impact):
                     x="Impact",
                     y="Mitigation",
                     color="Category",
-                    hover_data=['Mitigation Label', 'Impact Label', 'Category Number']
+                    hover_data=['Questions']
     )
     fig.add_traces(
         scatter_fig.data
@@ -124,26 +139,27 @@ def build_dataframe(wd_mit, wd_impact, wi_mit, wi_impact):
     )
 
     fig.update_xaxes(
-        range=[0.5, 3.5],
+        range=[-0.5, 3.5],
         tickmode="array",
-        tickvals=[1, 2, 3],
-        ticktext=["Low", "Medium", "High"],
+        tickvals=[0, 1, 2, 3],
+        ticktext=["Unknown", "Low", "Medium", "High"],
         showgrid=False,
         zeroline=False
     )
 
     fig.update_yaxes(
-        range=[0.5, 4.5],
+        range=[-0.5, 3.5],
         tickmode="array",
-        tickvals=[1, 2, 3, 4],
-        ticktext=["No", "No or minor", "Moderate", "Severe"],
+        tickvals=[0, 1, 2, 3],
+        ticktext=["Unknown", "No or minor", "Moderate", "Severe"],
         showgrid=False,
         zeroline=False
     )
 
     fig.update_layout(
         plot_bgcolor="lightgray",   # inside the axes
-        # title="Risk Matrix",
+        title="Risk Matrix",
+        title_x=0.5,
         xaxis=dict(
             title=dict(
                 text="Impact",
@@ -155,7 +171,8 @@ def build_dataframe(wd_mit, wd_impact, wi_mit, wi_impact):
                 text="Mitigation",
                 font=dict(size=16)
             )
-        )
+        ),
+        # showlegend=False
     )
 
     return fig
