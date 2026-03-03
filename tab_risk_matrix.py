@@ -6,21 +6,148 @@ import pandas as pd
 import numpy as np
 
 
-tab_risk_matrix = dcc.Tab(
-        label="Results",
-        value="tab-risk-matrix",
-        children=[
-            # html.Div(id="upload-status"),
+# tab_risk_matrix = dcc.Tab(
+#     label="Results",
+#     value="tab-risk-matrix",
+#     children=[
+#         html.Br(),
+#         dcc.Graph(
+#             id="risk-matrix",
+#             # figure=fig,
+#             style={"height": "500px", "width": "700px"}
+#         ),
+#     ]
+# )
 
-            html.Br(),
+cw_1 = 20
+cw_2 = 80
 
-            dcc.Graph(
-                id="risk-matrix",
-                # figure=fig,
-                style={"height": "500px", "width": "700px"}
-            ),
-        ]
+def set_style(width, textAlign="left", bold=None, fontsize=24):
+    style = {
+        "textAlign": textAlign,
+        "verticalAlign": "middle",
+        "padding": "10px 10px",        # ← controls space inside cells
+        "fontWeight": bold,
+        "fontSize": fontsize,
+        "width": str(width)+"%",
+        "borderRadius": "5px",
+        "backgroundColor": "white"
+    }
+    return style
+
+def create_criteria_table():
+    style_0 = {
+        "width": "1px"
+    }
+    def get_style(bg_color="#FFFFFF", txt_color="#000000"):
+        style_1 = {
+            "textAlign": "right",
+            "padding": "10px 5px",
+            "width": "1px",
+            "fontWeight": "bold",
+            "backgroundColor": bg_color,
+            "color": txt_color,
+        }
+        return style_1
+    style_2 = {
+        "padding": "10px 20px",
+        "width": "20px",
+        "fontWeight": "normal"
+    }
+    table = html.Table(
+        [
+            html.Tbody([
+                # html.Tr([
+                #     html.Td("", style=style_0),
+                #     html.Td("Mitigation", style=get_style()),
+                #     html.Td("Defines the level of additional work that is required to remediate the assessed element. ", style=style_2),
+                # ]),
+                html.Tr([
+                    html.Td("", style=style_0),
+                    # html.Td("No or minor", style={"width": "5px", "backgroundColor": "#c02727", "fontWeight": "bold", "textAlign": "right"}),
+                    html.Td("No or minor", style=get_style("#43c543", "#000000")),
+                    html.Td("No remediations and well operations are required; only some additional engineering " \
+                    "review work could be expected for the well in its current state e.g. processing and analysis on data. ", style=style_2),
+                ]),
+                html.Tr([
+                    html.Td("", style=style_0),
+                    html.Td("Moderate", style=get_style("#fff130", "#000000")),
+                    html.Td("Remediation, additional assessment and verification or risk management strategy could " \
+                    "be expected. This could include detailed engineering assessment, techno-economical analysis and/or interventions that " \
+                    "are typically done on retrievable components. ", style=style_2),
+                ]),
+                html.Tr([
+                    html.Td("", style=style_0),
+                    html.Td("Severe", style=get_style("#c02727", "#FFFFFF")),
+                    html.Td("Remediation and a comprehensive risk management strategy could be expected. This typically " \
+                    "involves technically challenging operations on non-retrievable components. ", style=style_2),
+                ]),
+                html.Tr([
+                    html.Td("", style=style_0),
+                    html.Td("Unknown", style=get_style("#4E4E4E", "#FFFFFF")),
+                    html.Td("Critical information is missing for assessment with the screening tool. It is advised to look for additional data, " \
+                    "acquire additional data (e.g. by running logs) or look for offset data, and then reassess the well with the " \
+                    "screening tool.", style=style_2),
+                ]),
+            ])
+        ],
+        style={"width": "100%", "border": "1px solid #999"}
+        # style={"width": "700px", "border": "1px solid #999"}
     )
+    return table
+
+tab_risk_matrix = dcc.Tab(
+    label="Results",
+    value="tab-risk-matrix",
+    children=[
+        html.Br(),
+        
+        html.Div(
+            style={"width": "100%", "margin": "16px auto", "fontFamily": "system-ui"},
+            children=[
+                html.Table(
+                    children=[
+                        html.Thead(
+                            html.Tr([
+                                html.Th("Risk matrix", style=set_style(cw_1, textAlign="center")),
+                                html.Th("Criteria", style=set_style(cw_2, textAlign="center")),
+                            ])
+                        ),
+                        html.Tbody([
+                            html.Tr([
+                                html.Td(
+                                    [
+                                        dcc.Graph(
+                                            id="risk-matrix",
+                                            style={"height": "500px", "width": "700px", "verticalAlign": "top"}
+                                        ),
+                                    ],
+                                    style={"verticalAlign": "top"}
+                                ),
+                                html.Td(
+                                    [
+                                        html.Br(),
+                                        # html.Div("Mitigation: Defines the level of additional work that is required to remediate the assessed element."),
+                                        dcc.Markdown(
+                                            """
+                                            ###### Mitigation: Defines the level of additional work that is required to remediate the assessed element.
+                                            """,
+                                            style={"textAlign": "left"}
+                                        ),
+                                        create_criteria_table()
+                                    ],
+                                    style={"verticalAlign": "top"}),
+                            ])
+                        ]),
+                    ],
+                    style={
+                        "width": "100%",
+                    }
+                )
+            ]
+        )
+    ]
+)
 
 @callback(
     Output(component_id="risk-matrix", component_property="figure"),
@@ -158,8 +285,8 @@ def build_dataframe(wi_mit, wi_impact):
 
     fig.update_layout(
         plot_bgcolor="lightgray",   # inside the axes
-        title="Risk Matrix",
-        title_x=0.5,
+        # title="Risk Matrix",
+        # title_x=0.5,
         xaxis=dict(
             title=dict(
                 text="Impact",
