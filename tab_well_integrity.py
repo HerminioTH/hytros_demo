@@ -389,7 +389,7 @@ tab_well_integrity = dcc.Tab(
                             
                             html.Tr([
                                 html.Td("5)", style=set_style(cw_1, textAlign="left")),
-                                html.Td("Overlapping casing behing the production casing / liner", style=set_style(cw_2, textAlign="left")),
+                                html.Td("Cement behind the overlapping casing", style=set_style(cw_2, textAlign="left")),
                                 html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-5")), style=set_style(cw_3, textAlign="center")),
                                 html.Td(create_retrievable_dropdown(rid("well_integrity", "retrievable-5")), style=set_style(cw_4)),
                                 html.Tr([
@@ -516,7 +516,7 @@ tab_well_integrity = dcc.Tab(
                             
                             html.Tr([
                                 html.Td("9)", style=set_style(cw_1, textAlign="left")),
-                                html.Td("Overlapping casing behing the production casing / liner", style=set_style(cw_2, textAlign="left")),
+                                html.Td("Overlapping casing behind the production casing / liner", style=set_style(cw_2, textAlign="left")),
                                 html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-9")), style=set_style(cw_3, textAlign="center")),
                                 html.Td(create_retrievable_dropdown(rid("well_integrity", "retrievable-9")), style=set_style(cw_4)),
                                 html.Tr([
