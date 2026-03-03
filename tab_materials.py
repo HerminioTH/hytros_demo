@@ -62,101 +62,59 @@ def create_dropdown():
                         )
     return drop
 
-def create_details():
-    details = dbc.Accordion(
-        [
-            dbc.AccordionItem(
-                [
-                    html.Table(
-                        [
-                            html.Tbody([
-                                html.Tr([
-                                    html.Td("Final state:", style=style_1),
-                                    html.Td("", id=fid("tab_material", "cell-3"), style=style_2),
-                                ]),
-                                html.Tr([
-                                    html.Td("Failure mode / observation:", style=style_1),
-                                    html.Td("", id=fid("tab_material", "cell-4"), style=style_2),
-                                ]),
-                                html.Tr([
-                                    html.Td("Test conditions:", style=style_1),
-                                    html.Td("", id=fid("tab_material", "cell-5"), style=style_2),
-                                ]),
-                                html.Tr([
-                                    html.Td("Time:", style=style_1),
-                                    html.Td("", id=fid("tab_material", "cell-6"), style=style_2),
-                                ]),
-                                html.Tr([
-                                    html.Td("% H₂:", style=style_1),
-                                    html.Td("", id=fid("tab_material", "cell-7"), style=style_2),
-                                ]),
-                                html.Tr([
-                                    html.Td("Pressure (bar):", style=style_1),
-                                    html.Td("", id=fid("tab_material", "cell-8"), style=style_2),
-                                ]),
-                                html.Tr([
-                                    html.Td("Temperature (°C):", style=style_1),
-                                    html.Td("", id=fid("tab_material", "cell-9"), style=style_2),
-                                ]),
-                                html.Tr([
-                                    html.Td("Test type:", style=style_1),
-                                    html.Td("", id=fid("tab_material", "cell-10"), style=style_2),
-                                ]),
-                                html.Tr([
-                                    html.Td("Yield strenght (MPa):", style=style_1),
-                                    html.Td("", id=fid("tab_material", "cell-11"), style=style_2),
-                                ]),
-                                html.Tr([
-                                    html.Td("Study / Source:", style=style_1),
-                                    html.Td("", id=fid("tab_material", "cell-12"), style=style_2),
-                                ]),
-                            ])
-                        ],
-                        style={"width": "80%"}
-                    )
-                ],
-                title="Further details",
-            )
-        ],
-        start_collapsed=True,
-    )
-    return details
-
 
 def create_steel_table():
     table = html.Table(
         [
             html.Tbody([
                 html.Tr([
-                    html.Td("Select steel type/grade:", style=style_1),
+                    html.Td("Steel Type / Grade:", style=style_1),
                     html.Td(create_dropdown(), id=fid("tab_material", "cell-1"), style=style_2),
                 ]),
                 html.Tr([
                     html.Td("Result:", style=style_1),
                     html.Td("", id=fid("tab_material", "cell-2"), style=style_2),
                 ]),
-                # html.Tr(
-                #     [
-                #         html.Div(
-                #             create_details(),
-                #             style={"textAlign": "left"},
-                #         )
-                #     ],
-                # ),
-                # html.Tr(
-                #     html.Td(
-                #         [
-                #             html.Div(
-                #                 create_details(),
-                #                 style={"textAlign": "left"},
-                #             )
-                #         ],
-                #         style=style_1,
-                #         colSpan=2
-                #     ),
-                    
-                # ),
-                
+                html.Tr([
+                    html.Td("Final state:", style=style_1),
+                    html.Td("", id=fid("tab_material", "cell-3"), style=style_2),
+                ]),
+                html.Tr([
+                    html.Td("Failure mode / observation:", style=style_1),
+                    html.Td("", id=fid("tab_material", "cell-4"), style=style_2),
+                ]),
+                html.Tr([
+                    html.Td("Test conditions:", style=style_1),
+                    html.Td("", id=fid("tab_material", "cell-5"), style=style_2),
+                ]),
+                html.Tr([
+                    html.Td("Time:", style=style_1),
+                    html.Td("", id=fid("tab_material", "cell-6"), style=style_2),
+                ]),
+                html.Tr([
+                    html.Td("% H₂:", style=style_1),
+                    html.Td("", id=fid("tab_material", "cell-7"), style=style_2),
+                ]),
+                html.Tr([
+                    html.Td("Pressure (bar):", style=style_1),
+                    html.Td("", id=fid("tab_material", "cell-8"), style=style_2),
+                ]),
+                html.Tr([
+                    html.Td("Temperature (°C):", style=style_1),
+                    html.Td("", id=fid("tab_material", "cell-9"), style=style_2),
+                ]),
+                html.Tr([
+                    html.Td("Test type:", style=style_1),
+                    html.Td("", id=fid("tab_material", "cell-10"), style=style_2),
+                ]),
+                html.Tr([
+                    html.Td("Yield strenght (MPa):", style=style_1),
+                    html.Td("", id=fid("tab_material", "cell-11"), style=style_2),
+                ]),
+                html.Tr([
+                    html.Td("Study / Source:", style=style_1),
+                    html.Td("", id=fid("tab_material", "cell-12"), style=style_2),
+                ]),
             ]),
         ],
         id=fid("tab_material", "mat-details"),
@@ -174,17 +132,27 @@ def create_elastometer_table():
                 ])
             ),
             html.Tbody([
+                # Row 1
                 html.Tr([
-                    html.Td("Perflueoroelastomers (FFKM) ", style=style_1),
-                    html.Td("High", style=style_2),
+                    html.Td("Perfluoroelastomers (FFKM) --", style=style_1),
+                    html.Td(
+                        html.Img(
+                            src="/assets/colorbar.png",  # put image inside assets folder
+                            style={"width": "30%", "height": "auto"}
+                        ),
+                        rowSpan=3,   # 🔥 merge B2 and B3 (since you have 3 body rows total)
+                        style={"textAlign": "left", "verticalAlign": "middle"}
+                    ),
                 ]),
+
+                # Row 2 (start merged cell here)
                 html.Tr([
-                    html.Td("Ethylene propylene diene monomer (EPDM)", style=style_1),
-                    html.Td("Medium", style=style_2),
+                    html.Td("Ethylene propylene diene monomer (EPDM) --", style=style_1),
                 ]),
+
+                # Row 3 (NO second column here!)
                 html.Tr([
-                    html.Td("Nitrile butadiene rubber (NBR)", style=style_1),
-                    html.Td("Low", style=style_2),
+                    html.Td("Nitrile butadiene rubber (NBR) --", style=style_1),
                 ]),
             ]),
         ],
@@ -216,12 +184,17 @@ tab_materials = dcc.Tab(
                                 html.Tr([
                                     html.Td(
                                         [
-                                            create_steel_table(),
-                                            create_details()
+                                            create_steel_table()
                                         ],
                                         style={"verticalAlign": "top"}
                                     ),
-                                    html.Td(create_elastometer_table(), style={"verticalAlign": "top"}),
+                                    html.Td(
+                                        [
+                                            create_elastometer_table(),
+                                            html.Br(),
+                                            html.Div("Note: The elastometers listed above are all appropriate for H2 operations."),
+                                        ],
+                                        style={"verticalAlign": "top"}),
                                 ])
                             ]),
                         ],
