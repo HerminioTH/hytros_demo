@@ -152,7 +152,8 @@ def calculate_mitigation_3q(q1, q2, q3, q_ffs, q_mat, is_retrievable):
         "borderRadius": "5px",
         "fontWeight": "bold",
         "color": txt_color,
-        "backgroundColor": bg_color
+        "backgroundColor": bg_color,
+        "transition": "background-color 0.2s ease",
     }
     return text, style
 
@@ -201,7 +202,8 @@ def calculate_mitigation_4q(q1, q2, q3, q4, q_ffs, q_mat, is_retrievable):
         "borderRadius": "5px",
         "fontWeight": "bold",
         "color": txt_color,
-        "backgroundColor": bg_color
+        "backgroundColor": bg_color,
+        "transition": "background-color 0.2s ease",
     }
     return text, style
 
@@ -947,7 +949,8 @@ def mitigation_1(q_ffs, q_mat, is_retrievable):
         "borderRadius": "5px",
         "fontWeight": "bold",
         "color": txt_color,
-        "backgroundColor": bg_color
+        "backgroundColor": bg_color,
+        "transition": "background-color 0.2s ease",
     }
     return text, style
 
