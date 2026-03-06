@@ -203,7 +203,6 @@ def build_dataframe(wi_mit, wi_impact):
     }
 
     df = pd.DataFrame(data_dict)
-    print(df)
 
     df_count = df.groupby(["Mitigation", "Impact"]).size().reset_index(name="count")
 
