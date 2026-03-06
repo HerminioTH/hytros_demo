@@ -140,7 +140,7 @@ def create_elastometer_table():
                             src="/assets/colorbar.png",  # put image inside assets folder
                             style={"width": "30%", "height": "auto"}
                         ),
-                        rowSpan=3,   # 🔥 merge B2 and B3 (since you have 3 body rows total)
+                        rowSpan=3,   # merge B2 and B3 (since you have 3 body rows total)
                         style={"textAlign": "left", "verticalAlign": "middle"}
                     ),
                 ]),
@@ -167,6 +167,17 @@ tab_materials = dcc.Tab(
         label="Material compatibility",
         value="mat-compat",
         children=[
+            html.Br(),
+            html.Br(),
+
+            dcc.Markdown(
+                """
+                Material compatibility based on the state-of-the art laboratory and field studies until 2025. 
+                For details, please refer to the deliverable report D5.3.1 State-of-the-art technical requirements and risks 
+                associated with well reuse for UHS.
+                """
+            ),
+            
             html.Br(),
 
             html.Div(

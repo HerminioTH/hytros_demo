@@ -80,8 +80,8 @@ tab_well_design = dcc.Tab(
                         html.Thead(
                             html.Tr([
                                 html.Th("#", style=set_style(cw_1)),
-                                html.Th("Criteria category", style=set_style(cw_2)),
-                                html.Th("Criteria sub-category", style=set_style(cw_3)),
+                                html.Th("Category", style=set_style(cw_2)),
+                                html.Th("Criteria", style=set_style(cw_3)),
                                 html.Th("Answer", style=set_style(cw_4)),
                                 html.Th("Mitigation", style=set_style(cw_5)),
                                 html.Th("Impact", style=set_style(cw_6)),

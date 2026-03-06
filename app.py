@@ -67,8 +67,8 @@ app.layout = html.Div(
 
         dcc.Tabs(
             id="tabs",
-            # value="tab-intro",
-            value="tab-risk-matrix",
+            value="tab-intro",
+            # value="tab-risk-matrix",
             # value="mat-compat",
             children=[
                 tab_intro,

@@ -103,7 +103,7 @@ tab_risk_matrix = dcc.Tab(
         html.Br(),
         
         html.Div(
-            style={"width": "100%", "margin": "16px auto", "fontFamily": "system-ui"},
+            style={"width": "100%", "margin": "16px auto", "fontFamily": "system-ui", "textAlign": "center"},
             children=[
                 html.Table(
                     children=[
@@ -127,14 +127,13 @@ tab_risk_matrix = dcc.Tab(
                                 html.Td(
                                     [
                                         html.Br(),
-                                        # html.Div("Mitigation: Defines the level of additional work that is required to remediate the assessed element."),
-                                        dcc.Markdown(
-                                            """
-                                            ###### Mitigation: Defines the level of additional work that is required to remediate the assessed element.
-                                            """,
-                                            style={"textAlign": "left"}
+                                        html.Br(),
+                                        html.Br(),
+                                        html.Br(),
+                                        html.Img(
+                                            src="/assets/mitigation_impact.png",  # put image inside assets folder
+                                            style={"width": "70%", "height": "auto", "textAlign": "right"}
                                         ),
-                                        create_criteria_table()
                                     ],
                                     style={"verticalAlign": "top"}),
                             ])
