@@ -69,7 +69,7 @@ def create_color_square(id_name="sq", color="#4E4E4E", size=24):
     return square
 
 tab_well_design = dcc.Tab(
-    label = "Well Design",
+    label = "Pre-screening",
     value = "well-design",
     children = [
         html.Div(

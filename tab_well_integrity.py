@@ -238,7 +238,7 @@ def calculate_FFS_3q(q1, q2, q3):
 
 
 tab_well_integrity = dcc.Tab(
-    label = "Well Integrity",
+    label = "Screening",
     value = "well-integrity",
     children = [
         html.Div(
