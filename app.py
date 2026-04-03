@@ -26,10 +26,28 @@ server = app.server
 app.layout = html.Div(
     style={"maxWidth": "1500px", "margin": "24px auto", "fontFamily": "system-ui"},
     children=[
-        html.H2("HyTROS Screening Framework", style={"textAlign": "left"}),
-
         # Shared state between tabs
         dcc.Store(id="app-state", storage_type="memory", data={}),
+
+        html.Div(
+            style={
+                "display": "flex",
+                "justifyContent": "space-between",
+                "alignItems": "center",
+            },
+            children=[
+                html.H2(
+                    "HyTROS Screening Framework",
+                    style={"margin": "0"}
+                ),
+                html.Img(
+                    src="/assets/groen_vermogen.png",
+                    style={"height": "50px"}
+                ),
+            ],
+        ),
+
+        html.Br(),
 
         dbc.Stack(
             direction="horizontal",
