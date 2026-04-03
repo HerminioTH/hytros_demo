@@ -269,7 +269,7 @@ tab_well_integrity = dcc.Tab(
                                 html.Td("1)", style=set_style(cw_1, textAlign="left")),
                                 html.Td("Primary caprock", style=set_style(cw_2, textAlign="left")),
                                 html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-1")), style=set_style(cw_3, textAlign="center")),
-                                html.Td(create_retrievable_dropdown(rid("well_integrity", "retrievable-1")), style=set_style(cw_4)),
+                                html.Td("N/A", style=set_style(cw_3, textAlign="left")),
                                 html.Tr([
                                         html.Td("1. Are there impermeable formations that can constitute a (primary) caprock?", style=set_style(cw_6)),
                                         html.Td(create_answer_dropdown(qid("well_integrity", "q-1-1")), style=set_style(cw_8, textAlign="right"))
@@ -281,7 +281,7 @@ tab_well_integrity = dcc.Tab(
                                     ]
                                 ),
                                 html.Td("", id="a-ffs-1", style=set_style(cw_7, textAlign="center")),
-                                html.Td("", id="a-compat-1", style=set_style(cw_8, textAlign="center")),
+                                html.Td("N/A", id="a-compat-1", style=set_style(cw_8, textAlign="center")),
                                 html.Td("", id=gid("well_integrity", "mitigation", 1), style=set_style(cw_9, textAlign="center")),
                                 html.Td(create_impact_dropdown(gid("well_integrity", "impact", 1)), style=set_style(cw_10, textAlign="center")),
                                 html.Td(create_color_square(gid("well_integrity", "impact-color", 1)), style=set_style(cw_11, textAlign="center")),
@@ -424,7 +424,7 @@ tab_well_integrity = dcc.Tab(
                                 html.Td("6)", style=set_style(cw_1, textAlign="left")),
                                 html.Td("Secondary caprock", style=set_style(cw_2, textAlign="left")),
                                 html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-6")), style=set_style(cw_3, textAlign="center")),
-                                html.Td(create_retrievable_dropdown(rid("well_integrity", "retrievable-6")), style=set_style(cw_4)),
+                                html.Td("N/A", style=set_style(cw_3, textAlign="left")),
                                 html.Tr([
                                         html.Td("1. Are there impermeable formations that can constitute an additional (secondary) caprock?", style=set_style(cw_6)),
                                         html.Td(create_answer_dropdown(qid("well_integrity", "q-6-1")), style=set_style(cw_8, textAlign="right"))
@@ -436,7 +436,7 @@ tab_well_integrity = dcc.Tab(
                                     ]
                                 ),
                                 html.Td("", id="a-ffs-6", style=set_style(cw_7, textAlign="center")),
-                                html.Td("", id="a-compat-6", style=set_style(cw_8, textAlign="center")),
+                                html.Td("N/A", id="a-compat-6", style=set_style(cw_8, textAlign="center")),
                                 html.Td("", id=gid("well_integrity", "mitigation", 6), style=set_style(cw_9, textAlign="center")),
                                 html.Td(create_impact_dropdown(gid("well_integrity", "impact", 6)), style=set_style(cw_10, textAlign="center")),
                                 html.Td(create_color_square(gid("well_integrity", "impact-color", 6)), style=set_style(cw_11, textAlign="center")),
@@ -868,81 +868,37 @@ def change_impact_color(value):
 ################# Element 1 #################
 @callback(
     Output(component_id="a-ffs-1", component_property="children"),
-    # Output(component_id="a-ffs-1", component_property="style"),
-    Input(component_id=qid("well_integrity", "q-1-2"), component_property="value")
+    Input(component_id=qid("well_integrity", "q-1-1"), component_property="value"),
+    Input(component_id=qid("well_integrity", "q-1-2"), component_property="value"),
 )
-def qualified_FFS_1(input):
-    mapping = {
-        "Yes": {"bg_color": "#43c54381", "tx_color": "#000000", "text": "Yes"},
-        "No": {"bg_color": "#c0272783", "tx_color": "#FFFFFF", "text": "No"},
-        "Unknown": {"bg_color": "#4E4E4E", "tx_color": "#FFFFFF", "text": "Unknown"},
-        "": {"bg_color": "#f5f5f5", "tx_color": "#FFFFFF", "text": ""},
-    }
-    style = {
-        "textAlign": "center",
-        "verticalAlign": "middle",
-        "borderRadius": "5px",
-        "fontWeight": "bold",
-        "backgroundColor": "#4E4E4E"
-    }
-    selected = mapping.get(input, mapping["Unknown"])
-    style["backgroundColor"] = selected["bg_color"]
-    style["color"] = selected["tx_color"]
-    style["fontWeight"] = "bold"
-    style["transition"] = "background-color 200ms ease"
-    return selected["text"]#, style
-
-
-@callback(
-    Output(component_id="a-compat-1", component_property="children"),
-    # Output(component_id="a-compat-1", component_property="style"),
-    Input(component_id=qid("well_integrity", "q-1-1"), component_property="value")
-)
-def material_compatibility_1(input):
-    mapping = {
-        "Yes": {"bg_color": "#43c54381", "tx_color": "#000000", "text": "Yes"},
-        "No": {"bg_color": "#c0272783", "tx_color": "#FFFFFF", "text": "No"},
-        "Unknown": {"bg_color": "#4E4E4E", "tx_color": "#FFFFFF", "text": "Unknown"},
-        "": {"bg_color": "#f5f5f5", "tx_color": "#FFFFFF", "text": ""},
-    }
-    style = {
-        "textAlign": "center",
-        "verticalAlign": "middle",
-        "borderRadius": "5px",
-        "fontWeight": "bold",
-        "backgroundColor": "#4E4E4E"
-    }
-    selected = mapping.get(input, mapping["Unknown"])
-    style["backgroundColor"] = selected["bg_color"]
-    style["color"] = selected["tx_color"]
-    style["fontWeight"] = "bold"
-    style["transition"] = "background-color 200ms ease"
-    return selected["text"]#, style
+def qualified_FFS_1(q11, q12):
+    if q11 == "Yes" and q12 == "Yes":
+        text = "Yes"
+    elif q11 == "" or q12 == "":
+        text = ""
+    elif q11 == "Yes" and q12 == "Unknown":
+        text = "Unknown"
+    elif q11 == "Unknown" and q12 == "Yes":
+        text = "Unknown"
+    else: # q11 == "No" or q12 == "No":
+        text = "No"
+    return text
 
 
 @callback(
     Output(component_id=gid("well_integrity", "mitigation", 1), component_property="children"),
     Output(component_id=gid("well_integrity", "mitigation", 1), component_property="style"),
     Input(component_id="a-ffs-1", component_property="children"),
-    Input(component_id="a-compat-1", component_property="children"),
-    Input(component_id=rid("well_integrity", "retrievable-1"), component_property="value")
 )
-def mitigation_1(q_ffs, q_mat, is_retrievable):
-    if q_ffs == "Yes" and q_mat == "Yes":
+def mitigation_1(q_ffs):
+    if q_ffs == "Yes":
         text, bg_color, txt_color = "No or minor", "#43c543", "#000000"
-    elif q_ffs == "" or q_mat == "":
+    elif q_ffs == "":
         text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
+    elif q_ffs == "Unknown":
+        text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
     else:
-        if is_retrievable == "Yes":
-            if q_ffs == "No" or q_mat == "No":
-                text, bg_color, txt_color = "Moderate", "#fff130", "#000000"
-            else:
-                text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
-        else: # if is_retrievable == "No":
-            if q_ffs == "No" or q_mat == "No":
-                text, bg_color, txt_color = "Severe", "#c02727", "#FFFFFF"
-            else:
-                text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
+        text, bg_color, txt_color = "Severe", "#c02727", "#FFFFFF"
     style = {
         "textAlign": "center",
         "verticalAlign": "middle",
@@ -1096,53 +1052,48 @@ def mitigation_5(q1, q2, q3, q_ffs, q_mat, is_retrievable):
 
 
 
+
 ################# Element 6 #################
 @callback(
     Output(component_id="a-ffs-6", component_property="children"),
-    Input(component_id=qid("well_integrity", "q-6-1"), component_property="value")
-)
-def qualified_FFS_6(q61):
-    return q61
-
-
-@callback(
-    Output(component_id="a-compat-6", component_property="children"),
+    Input(component_id=qid("well_integrity", "q-6-1"), component_property="value"),
     Input(component_id=qid("well_integrity", "q-6-2"), component_property="value")
 )
-def material_compatibility_6(q62):
-    return q62
+def qualified_FFS_6(q61, q62):
+    if q61 == "Yes" and q62 == "Yes":
+        return "Yes"
+    elif q61 == "" or q62 == "":
+        return ""
+    elif q61 == "Yes" and q62 == "Unknown":
+        return "Unknown"
+    elif q61 == "Unknown" and q62 == "Yes":
+        return "Unknown"
+    else: # q61 == "No" or q62 == "No":
+        return "No"
 
 
 @callback(
     Output(component_id=gid("well_integrity", "mitigation", 6), component_property="children"),
     Output(component_id=gid("well_integrity", "mitigation", 6), component_property="style"),
     Input(component_id="a-ffs-6", component_property="children"),
-    Input(component_id="a-compat-6", component_property="children"),
-    Input(component_id=rid("well_integrity", "retrievable-6"), component_property="value")
 )
-def mitigation_6(q_ffs, q_mat, is_retrievable):
-    if q_ffs == "Yes" and q_mat == "Yes":
+def mitigation_6(q_ffs):
+    if q_ffs == "Yes":
         text, bg_color, txt_color = "No or minor", "#43c543", "#000000"
-    elif q_ffs == "" or q_mat == "":
+    elif q_ffs == "":
         text, bg_color, txt_color = "", "#f5f5f5", "#FFFFFF"
+    elif q_ffs == "Unknown":
+        text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
     else:
-        if is_retrievable == "Yes":
-            if q_ffs == "No" or q_mat == "No":
-                text, bg_color, txt_color = "Moderate", "#fff130", "#000000"
-            else:
-                text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
-        else: # if is_retrievable == "No":
-            if q_ffs == "No" or q_mat == "No":
-                text, bg_color, txt_color = "Severe", "#c02727", "#FFFFFF"
-            else:
-                text, bg_color, txt_color = "Unknown", "#4E4E4E", "#FFFFFF"
+        text, bg_color, txt_color = "Severe", "#c02727", "#FFFFFF"
     style = {
         "textAlign": "center",
         "verticalAlign": "middle",
         "borderRadius": "5px",
         "fontWeight": "bold",
         "color": txt_color,
-        "backgroundColor": bg_color
+        "backgroundColor": bg_color,
+        "transition": "background-color 0.2s ease",
     }
     return text, style
 
