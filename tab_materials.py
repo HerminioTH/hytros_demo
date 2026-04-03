@@ -122,7 +122,7 @@ def create_steel_table():
     )
     return table
 
-def create_elastometer_table():
+def create_elastomer_table():
     table = html.Table(
         [
             html.Thead(
@@ -198,7 +198,7 @@ tab_materials = dcc.Tab(
                             html.Thead(
                                 html.Tr([
                                     html.Th("Steel-H2 compatibility", style=set_style(cw_1, textAlign="center")),
-                                    html.Th("Elastometer-H2 compatibility", style=set_style(cw_2, textAlign="center")),
+                                    html.Th("Elastomer-H2 compatibility", style=set_style(cw_2, textAlign="center")),
                                 ])
                             ),
                             html.Tbody([
@@ -211,9 +211,9 @@ tab_materials = dcc.Tab(
                                     ),
                                     html.Td(
                                         [
-                                            create_elastometer_table(),
+                                            create_elastomer_table(),
                                             html.Br(),
-                                            html.Div("Note: The elastometers listed above are all appropriate for H2 operations.", style={"textAlign": "center"}),
+                                            html.Div("Note: The elastomers listed above are all appropriate for H2 operations.", style={"textAlign": "center"}),
                                         ],
                                         style={"verticalAlign": "top"}),
                                 ])
