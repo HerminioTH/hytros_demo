@@ -127,7 +127,7 @@ def create_elastometer_table():
         [
             html.Thead(
                 html.Tr([
-                    html.Th("Type", style=set_style(cw_1, textAlign="right", bold="bold", fontsize=20)),
+                    html.Th("Type", style=set_style(55, textAlign="right", bold="bold", fontsize=20)),
                     html.Th("Performance", style=set_style(cw_2, textAlign="left", bold="bold", fontsize=20)),
                 ])
             ),
@@ -138,19 +138,29 @@ def create_elastometer_table():
                     html.Td(
                         html.Img(
                             src="/assets/colorbar.png",  # put image inside assets folder
-                            style={"width": "30%", "height": "auto"}
+                            style={"width": "35%", "height": "auto"}
                         ),
-                        rowSpan=3,   # merge B2 and B3 (since you have 3 body rows total)
+                        rowSpan=5,   # merge B2 and B3 (since you have 3 body rows total)
                         style={"textAlign": "left", "verticalAlign": "middle"}
                     ),
                 ]),
 
                 # Row 2 (start merged cell here)
                 html.Tr([
+                    html.Td("Fluoroelastomers (FMK)  --", style=style_1),
+                ]),
+
+                # Row 3 (start merged cell here)
+                html.Tr([
                     html.Td("Ethylene propylene diene monomer (EPDM) --", style=style_1),
                 ]),
 
-                # Row 3 (NO second column here!)
+                # Row 4 (start merged cell here)
+                html.Tr([
+                    html.Td("Hydrogenated nitrile butadiene rubber (HNBR)  --", style=style_1),
+                ]),
+
+                # Row 5 (NO second column here!)
                 html.Tr([
                     html.Td("Nitrile butadiene rubber (NBR) --", style=style_1),
                 ]),
@@ -203,7 +213,7 @@ tab_materials = dcc.Tab(
                                         [
                                             create_elastometer_table(),
                                             html.Br(),
-                                            html.Div("Note: The elastometers listed above are all appropriate for H2 operations."),
+                                            html.Div("Note: The elastometers listed above are all appropriate for H2 operations.", style={"textAlign": "center"}),
                                         ],
                                         style={"verticalAlign": "top"}),
                                 ])
