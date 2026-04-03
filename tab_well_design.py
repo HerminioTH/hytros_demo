@@ -68,6 +68,16 @@ def create_color_square(id_name="sq", color="#4E4E4E", size=24):
     )
     return square
 
+def separator():
+    return
+    # return html.Tr([
+    #             html.Td(
+    #                 "",
+    #                 colSpan=10,
+    #                 style={"borderTop": "1px dashed gray", "padding": "5"}
+    #             )
+    #         ])
+
 tab_well_design = dcc.Tab(
     label = "Pre-screening",
     value = "well-design",
@@ -89,6 +99,9 @@ tab_well_design = dcc.Tab(
                             ])
                         ),
                         html.Tbody([
+
+                            separator(),
+                            
                             html.Tr([
                                 html.Td("1", style=set_style(cw_1)),
                                 html.Td("Acessibility", style=set_style(cw_2)),
@@ -101,6 +114,9 @@ tab_well_design = dcc.Tab(
                             # id = "row-1",
                             # style = {"display": "table-row"}
                             ),
+
+                            separator(),
+                            
                             html.Tr([
                                 html.Td("2", style=set_style(cw_1)),
                                 html.Td("Age", style=set_style(cw_2)),
@@ -110,6 +126,9 @@ tab_well_design = dcc.Tab(
                                 html.Td(create_impact_dropdown(gid("well_design", "impact", 2)), style=set_style(cw_6)),
                                 html.Td(create_color_square(gid("well_design", "impact-color", 2), size=24)),
                             ]),
+
+                            separator(),
+                            
                             html.Tr([
                                 html.Td("3", style=set_style(cw_1)),
                                 html.Td("Type/function", style=set_style(cw_2)),
@@ -119,6 +138,9 @@ tab_well_design = dcc.Tab(
                                 html.Td(create_impact_dropdown(gid("well_design", "impact", 3)), style=set_style(cw_6)),
                                 html.Td(create_color_square(gid("well_design", "impact-color", 3), size=24)),
                             ]),
+
+                            separator(),
+                            
                             html.Tr([
                                 html.Td("4", style=set_style(cw_1)),
                                 html.Td("Depth", style=set_style(cw_2)),
@@ -128,6 +150,9 @@ tab_well_design = dcc.Tab(
                                 html.Td(create_impact_dropdown(gid("well_design", "impact", 4)), style=set_style(cw_6)),
                                 html.Td(create_color_square(gid("well_design", "impact-color", 4), size=24)),
                             ]),
+
+                            separator(),
+                            
                             html.Tr([
                                 html.Td("5", style=set_style(cw_1)),
                                 html.Td("Diameter", style=set_style(cw_2)),
@@ -137,6 +162,9 @@ tab_well_design = dcc.Tab(
                                 html.Td(create_impact_dropdown(gid("well_design", "impact", 5)), style=set_style(cw_6)),
                                 html.Td(create_color_square(gid("well_design", "impact-color", 5), size=24)),
                             ]),
+
+                            separator(),
+                            
                             html.Tr([
                                 html.Td("6", style=set_style(cw_1)),
                                 html.Td("Deviation", style=set_style(cw_2)),
@@ -146,6 +174,9 @@ tab_well_design = dcc.Tab(
                                 html.Td(create_impact_dropdown(gid("well_design", "impact", 6)), style=set_style(cw_6)),
                                 html.Td(create_color_square(gid("well_design", "impact-color", 6), size=24)),
                             ]),
+
+                            separator(),
+                            
                             html.Tr([
                                 html.Td("7", style=set_style(cw_1)),
                                 html.Td("Geological and geomechanical occurances", style=set_style(cw_2)),
@@ -155,6 +186,9 @@ tab_well_design = dcc.Tab(
                                 html.Td(create_impact_dropdown(gid("well_design", "impact", 7)), style=set_style(cw_6)),
                                 html.Td(create_color_square(gid("well_design", "impact-color", 7), size=24)),
                             ]),
+
+                            separator(),
+                            
                             html.Tr([
                                 html.Td("8", style=set_style(cw_1)),
                                 html.Td("Operational issues", style=set_style(cw_2)),
@@ -164,6 +198,9 @@ tab_well_design = dcc.Tab(
                                 html.Td(create_impact_dropdown(gid("well_design", "impact", 8)), style=set_style(cw_6)),
                                 html.Td(create_color_square(gid("well_design", "impact-color", 8), size=24)),
                             ]),
+
+                            separator(),
+                            
                         ]),
                     ],
                     style={

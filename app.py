@@ -85,8 +85,8 @@ app.layout = html.Div(
 
         dcc.Tabs(
             id="tabs",
-            value="tab-intro",
-            # value="tab-risk-matrix",
+            # value="tab-intro",
+            value="well-integrity",
             # value="mat-compat",
             children=[
                 tab_intro,
@@ -120,9 +120,11 @@ app.layout = html.Div(
     State({"tab": "well_integrity", "barrier": ALL}, "value"),
     State({"tab": "well_integrity", "retrievable": ALL}, "id"),
     State({"tab": "well_integrity", "retrievable": ALL}, "value"),
+    State({"tab": "well_integrity", "comment": ALL}, "id"),
+    State({"tab": "well_integrity", "comment": ALL}, "value"),
     prevent_initial_call=True,
 )
-def download_json(_, 
+def save_well(_, 
                   wdq_values,
                   wdq_ids,
                   wdi_values,
@@ -133,6 +135,8 @@ def download_json(_,
                   wib_values,
                   wir_ids,
                   wir_values,
+                  wic_ids,
+                  wic_values,
     ):
     '''
     wdq - well_design_question
@@ -156,6 +160,11 @@ def download_json(_,
     data_dict["well_integrity"]["retrievable"] = {}
     for ret_id, ret_value in zip(wir_ids, wir_values):
         data_dict["well_integrity"]["retrievable"][ret_id["retrievable"]] = ret_value
+        
+    data_dict["well_integrity"]["comments"] = {}
+    for comment_id, comment_value in zip(wic_ids, wic_values):
+        print(comment_id, comment_value)
+        data_dict["well_integrity"]["comments"][comment_id["comment"]] = comment_value
 
     data_dict["well_integrity"]["impact"] = {}
     for i, impact in enumerate(wii_values):
@@ -173,13 +182,14 @@ def download_json(_,
     Output({"tab": "well_design", "name": "impact", "i": ALL}, "value"),
     Output({"tab": "well_integrity", "barrier": ALL}, "value"),
     Output({"tab": "well_integrity", "retrievable": ALL}, "value"),
+    Output({"tab": "well_integrity", "comment": ALL}, "value"),
     Output({"tab": "well_integrity", "question": ALL}, "value"),
     Output({"tab": "well_integrity", "name": "impact", "i": ALL}, "value"),
     Input("upload-json", "contents"),
     State("upload-json", "filename"),
     prevent_initial_call=True,
 )
-def handle_upload(contents, filename):
+def load_well(contents, filename):
     if not contents:
         raise PreventUpdate
 
@@ -204,6 +214,10 @@ def handle_upload(contents, filename):
         for values in data["well_integrity"]["retrievable"].values():
             retrievables.append(values)
 
+        comments = []
+        for values in data["well_integrity"]["comments"].values():
+            comments.append(values)
+
         questions = []
         for values in data["well_integrity"]["questions"].values():
             questions.append(values)
@@ -219,7 +233,7 @@ def handle_upload(contents, filename):
         return msg, no_update, no_update, no_update, no_update, no_update, no_update
 
     msg = f"Loaded {filename} successfully."
-    return msg, answers, wd_impacts, barriers, retrievables, questions, wi_impacts
+    return msg, answers, wd_impacts, barriers, retrievables, comments, questions, wi_impacts
 
 
 

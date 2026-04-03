@@ -18,3 +18,7 @@ def rid(tab, retrievable):
 def qid(tab, question):
     id = {"tab": tab, "question": question}
     return id
+
+def cid(tab, comment):
+    id = {"tab": tab, "comment": comment}
+    return id

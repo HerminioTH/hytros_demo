@@ -1,5 +1,6 @@
 from dash import dcc, html, callback, Output, Input, MATCH
-from utils import bid, rid, qid, gid
+import dash_bootstrap_components as dbc
+from utils import bid, rid, qid, gid, cid
 
 cw_1 = 2
 cw_2 = 10
@@ -14,14 +15,14 @@ cw_10 = 1
 cw_11 = 1
 cw_12 = 1
 
-def set_style(width, textAlign="left", bold=None, border=False):
+def set_style(width, textAlign="left", verticalAlign="middle", bold=None, border=False):
     if border:
         border_style = "1px solid #999"
     else:
         border_style = "0px solid #999"
     style = {
         "textAlign": textAlign,
-        "verticalAlign": "middle",
+        "verticalAlign": verticalAlign,
         "border": border_style,
         "padding": "10px 0px",        # ← controls space inside cells
         "fontWeight": bold,
@@ -103,7 +104,7 @@ def create_color_square(id_name="sq", color="#4E4E4E", size=24):
     return square
 
 
-def calculate_mitigation_3q(q1, q2, q3, q_ffs, q_mat, is_retrievable):
+def calculate_mitigation_3q(q1, q2, q3, q_ffs, q_mat, is_retrievable="No"):
     if q1 == "Yes" and q2 == "Yes" and q3 == "Yes":
         text, bg_color, txt_color = "No or minor", "#43c543", "#000000"
     elif q_ffs == "" or q_mat == "":
@@ -234,8 +235,28 @@ def calculate_FFS_3q(q1, q2, q3):
         text = ""
     return text
 
+def separator():
+    return html.Tr([
+                html.Td(
+                    "",
+                    colSpan=10,
+                    style={"borderTop": "1px dashed gray", "padding": "5"}
+                )
+            ])
 
-
+def add_comment_row(id, colSpan=5):
+    return html.Tr([
+                        # html.Td("Add comment:", style=set_style(cw_7, textAlign="right", verticalAlign="top"), colSpan=2),
+                        html.Td(
+                            dcc.Textarea(
+                                id=id,
+                                placeholder="Add comment here...",
+                                style={"width": "60%", "height": "35px"}
+                            ),
+                            colSpan=colSpan,
+                            style={"padding": "8px", "textAlign": "left"}
+                        ),
+                    ])
 
 tab_well_integrity = dcc.Tab(
     label = "Screening",
@@ -246,6 +267,7 @@ tab_well_integrity = dcc.Tab(
             children=[
                 html.Table(
                     children=[
+
                         html.Thead(
                             html.Tr([
                                 html.Th("#", style=set_style(cw_1, textAlign="left")),
@@ -264,12 +286,20 @@ tab_well_integrity = dcc.Tab(
                         ),
                         html.Tbody([
 
+                            # separator(),
+                            separator(),
+                            html.Br(),
+
                             ################# Element 1 #################
+                            # Main row
                             html.Tr([
-                                html.Td("1)", style=set_style(cw_1, textAlign="left")),
-                                html.Td("Primary caprock", style=set_style(cw_2, textAlign="left")),
-                                html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-1")), style=set_style(cw_3, textAlign="center")),
-                                html.Td("N/A", style=set_style(cw_3, textAlign="left")),
+                                html.Td("1)", style=set_style(cw_1, textAlign="left", verticalAlign="top")),
+                                html.Td("Primary caprock", style=set_style(cw_2, textAlign="left", verticalAlign="top")),
+                                html.Td(
+                                    create_barrier_dropdown(bid("well_integrity", "barrier-1")),
+                                    style=set_style(cw_3, textAlign="center", verticalAlign="top")
+                                ),
+                                html.Td("N/A", style=set_style(cw_3, textAlign="left", verticalAlign="top")),
                                 html.Tr([
                                         html.Td("1. Are there impermeable formations that can constitute a (primary) caprock?", style=set_style(cw_6)),
                                         html.Td(create_answer_dropdown(qid("well_integrity", "q-1-1")), style=set_style(cw_8, textAlign="right"))
@@ -280,6 +310,7 @@ tab_well_integrity = dcc.Tab(
                                         html.Td(create_answer_dropdown(qid("well_integrity", "q-1-2")), style=set_style(cw_8, textAlign="right"))
                                     ]
                                 ),
+
                                 html.Td("", id="a-ffs-1", style=set_style(cw_7, textAlign="center")),
                                 html.Td("N/A", id="a-compat-1", style=set_style(cw_8, textAlign="center")),
                                 html.Td("", id=gid("well_integrity", "mitigation", 1), style=set_style(cw_9, textAlign="center")),
@@ -287,15 +318,20 @@ tab_well_integrity = dcc.Tab(
                                 html.Td(create_color_square(gid("well_integrity", "impact-color", 1)), style=set_style(cw_11, textAlign="center")),
                             ]),
 
+                            add_comment_row(id=cid("well_integrity", "comment-1"), colSpan=5),
+
+                            html.Br(),
+                            separator(),
+
                             ################# Element 2 #################
                             html.Td("", style=set_style(cw_1, textAlign="center")),
                             html.Td("", style=set_style(cw_1, textAlign="center")),
                             
                             html.Tr([
-                                html.Td("2)", style=set_style(cw_1, textAlign="left")),
-                                html.Td("Production casing / liner", style=set_style(cw_2, textAlign="left")),
-                                html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-2")), style=set_style(cw_3, textAlign="center")),
-                                html.Td(create_retrievable_dropdown(rid("well_integrity", "retrievable-2")), style=set_style(cw_4)),
+                                html.Td("2)", style=set_style(cw_1, textAlign="left", verticalAlign="top")),
+                                html.Td("Production casing / liner", style=set_style(cw_2, textAlign="left", verticalAlign="top")),
+                                html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-2")), style=set_style(cw_3, textAlign="center", verticalAlign="top")),
+                                html.Td(create_retrievable_dropdown(rid("well_integrity", "retrievable-2")), style=set_style(cw_4, verticalAlign="top")),
                                 html.Tr([
                                         html.Td("1. Is the casing inspected and free of any defects (e.g. corrosion) as per applicable requirements?", style=set_style(cw_6)),
                                         html.Td(create_answer_dropdown(qid("well_integrity", "q-2-1")), style=set_style(cw_8, textAlign="right"))
@@ -318,15 +354,20 @@ tab_well_integrity = dcc.Tab(
                                 html.Td(create_color_square(gid("well_integrity", "impact-color", 2)), style=set_style(cw_11, textAlign="center")),
                             ]),
 
+                            add_comment_row(id=cid("well_integrity", "comment-2"), colSpan=5),
+
+                            html.Br(),
+                            separator(),
+
                             ################# Element 3 #################
                             html.Td("", style=set_style(cw_1, textAlign="center")),
                             html.Td("", style=set_style(cw_1, textAlign="center")),
                             
                             html.Tr([
-                                html.Td("3)", style=set_style(cw_1, textAlign="left")),
-                                html.Td("Cement behind the production casing / Liner", style=set_style(cw_2, textAlign="left")),
-                                html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-3")), style=set_style(cw_3, textAlign="center")),
-                                html.Td(create_retrievable_dropdown(rid("well_integrity", "retrievable-3")), style=set_style(cw_4)),
+                                html.Td("3)", style=set_style(cw_1, textAlign="left", verticalAlign="top")),
+                                html.Td("Cement behind the production casing / Liner", style=set_style(cw_2, textAlign="left", verticalAlign="top")),
+                                html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-3")), style=set_style(cw_3, textAlign="center", verticalAlign="top")),
+                                html.Td(create_retrievable_dropdown(rid("well_integrity", "retrievable-3")), style=set_style(cw_4, verticalAlign="top")),
                                 html.Tr([
                                         html.Td("1. Is the production casing/liner(lap) cemented across the caprock?", style=set_style(cw_6)),
                                         html.Td(create_answer_dropdown(qid("well_integrity", "q-3-1")), style=set_style(cw_8, textAlign="right"))
@@ -348,6 +389,11 @@ tab_well_integrity = dcc.Tab(
                                 html.Td(create_impact_dropdown(gid("well_integrity", "impact", 3)), style=set_style(cw_10, textAlign="center")),
                                 html.Td(create_color_square(gid("well_integrity", "impact-color", 3)), style=set_style(cw_11, textAlign="center")),
                             ]),
+
+                            add_comment_row(id=cid("well_integrity", "comment-3"), colSpan=5),
+
+                            html.Br(),
+                            separator(),
                             
                             ################# Skip to 6 #################
                             html.Td("", style=set_style(cw_1, textAlign="center")),
@@ -359,10 +405,10 @@ tab_well_integrity = dcc.Tab(
 
                             ################# Element 4 #################
                             html.Tr([
-                                html.Td("4)", style=set_style(cw_1, textAlign="left")),
-                                html.Td("Overlapping casing behing the production casing / liner", style=set_style(cw_2, textAlign="left")),
-                                html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-4")), style=set_style(cw_3, textAlign="center")),
-                                html.Td(create_retrievable_dropdown(rid("well_integrity", "retrievable-4")), style=set_style(cw_4)),
+                                html.Td("4)", style=set_style(cw_1, textAlign="left", verticalAlign="top")),
+                                html.Td("Overlapping casing behing the production casing / liner", style=set_style(cw_2, textAlign="left", verticalAlign="top")),
+                                html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-4")), style=set_style(cw_3, textAlign="center", verticalAlign="top")),
+                                html.Td(create_retrievable_dropdown(rid("well_integrity", "retrievable-4")), style=set_style(cw_4, verticalAlign="top")),
                                 html.Tr([
                                         html.Td("1. Is the casing inspected and free of any defects (e.g. corrosion) as per applicable requirements?", style=set_style(cw_6)),
                                         html.Td(create_answer_dropdown(qid("well_integrity", "q-4-1")), style=set_style(cw_8, textAlign="right"))
@@ -385,15 +431,20 @@ tab_well_integrity = dcc.Tab(
                                 html.Td(create_color_square(gid("well_integrity", "impact-color", 4)), style=set_style(cw_11, textAlign="center")),
                             ]),
 
+                            add_comment_row(id=cid("well_integrity", "comment-4"), colSpan=5),
+
+                            html.Br(),
+                            separator(),
+
                             ################# Element 5 #################
                             html.Td("", style=set_style(cw_1, textAlign="center")),
                             html.Td("", style=set_style(cw_1, textAlign="center")),
                             
                             html.Tr([
-                                html.Td("5)", style=set_style(cw_1, textAlign="left")),
-                                html.Td("Cement behind the overlapping casing", style=set_style(cw_2, textAlign="left")),
-                                html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-5")), style=set_style(cw_3, textAlign="center")),
-                                html.Td(create_retrievable_dropdown(rid("well_integrity", "retrievable-5")), style=set_style(cw_4)),
+                                html.Td("5)", style=set_style(cw_1, textAlign="left", verticalAlign="top")),
+                                html.Td("Cement behind the overlapping casing", style=set_style(cw_2, textAlign="left", verticalAlign="top")),
+                                html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-5")), style=set_style(cw_3, textAlign="center", verticalAlign="top")),
+                                html.Td(create_retrievable_dropdown(rid("well_integrity", "retrievable-5")), style=set_style(cw_4, verticalAlign="top")),
                                 html.Tr([
                                         html.Td("1. Is the casing inspected and free of any defects (e.g. corrosion) as per applicable requirements?", style=set_style(cw_6)),
                                         html.Td(create_answer_dropdown(qid("well_integrity", "q-5-1")), style=set_style(cw_8, textAlign="right"))
@@ -416,15 +467,20 @@ tab_well_integrity = dcc.Tab(
                                 html.Td(create_color_square(gid("well_integrity", "impact-color", 5)), style=set_style(cw_11, textAlign="center")),
                             ]),
 
+                            add_comment_row(id=cid("well_integrity", "comment-5"), colSpan=5),
+
+                            html.Br(),
+                            separator(),
+
                             ################# Element 6 #################
                             html.Td("", style=set_style(cw_1, textAlign="center")),
                             html.Td("", style=set_style(cw_1, textAlign="center")),
                             
                             html.Tr([
-                                html.Td("6)", style=set_style(cw_1, textAlign="left")),
-                                html.Td("Secondary caprock", style=set_style(cw_2, textAlign="left")),
-                                html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-6")), style=set_style(cw_3, textAlign="center")),
-                                html.Td("N/A", style=set_style(cw_3, textAlign="left")),
+                                html.Td("6)", style=set_style(cw_1, textAlign="left", verticalAlign="top")),
+                                html.Td("Secondary caprock", style=set_style(cw_2, textAlign="left", verticalAlign="top")),
+                                html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-6")), style=set_style(cw_3, textAlign="center", verticalAlign="top")),
+                                html.Td("N/A", style=set_style(cw_3, textAlign="left", verticalAlign="top")),
                                 html.Tr([
                                         html.Td("1. Are there impermeable formations that can constitute an additional (secondary) caprock?", style=set_style(cw_6)),
                                         html.Td(create_answer_dropdown(qid("well_integrity", "q-6-1")), style=set_style(cw_8, textAlign="right"))
@@ -442,15 +498,20 @@ tab_well_integrity = dcc.Tab(
                                 html.Td(create_color_square(gid("well_integrity", "impact-color", 6)), style=set_style(cw_11, textAlign="center")),
                             ]),
 
+                            add_comment_row(id=cid("well_integrity", "comment-6"), colSpan=5),
+
+                            html.Br(),
+                            separator(),
+
                             ################# Element 7 #################
                             html.Td("", style=set_style(cw_1, textAlign="center")),
                             html.Td("", style=set_style(cw_1, textAlign="center")),
                             
                             html.Tr([
-                                html.Td("7)", style=set_style(cw_1, textAlign="left")),
-                                html.Td("Casing string across the secondary caprock", style=set_style(cw_2, textAlign="left")),
-                                html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-7")), style=set_style(cw_3, textAlign="center")),
-                                html.Td(create_retrievable_dropdown(rid("well_integrity", "retrievable-7")), style=set_style(cw_4)),
+                                html.Td("7)", style=set_style(cw_1, textAlign="left", verticalAlign="top")),
+                                html.Td("Casing string across the secondary caprock", style=set_style(cw_2, textAlign="left", verticalAlign="top")),
+                                html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-7")), style=set_style(cw_3, textAlign="center", verticalAlign="top")),
+                                html.Td(create_retrievable_dropdown(rid("well_integrity", "retrievable-7")), style=set_style(cw_4, verticalAlign="top")),
                                 html.Tr([
                                         html.Td("1. Is the casing inspected and free of any defects (e.g. corrosion) as per applicable requirements?", style=set_style(cw_6)),
                                         html.Td(create_answer_dropdown(qid("well_integrity", "q-7-1")), style=set_style(cw_8, textAlign="right"))
@@ -473,15 +534,20 @@ tab_well_integrity = dcc.Tab(
                                 html.Td(create_color_square(gid("well_integrity", "impact-color", 7)), style=set_style(cw_11, textAlign="center")),
                             ]),
 
+                            add_comment_row(id=cid("well_integrity", "comment-7"), colSpan=5),
+
+                            html.Br(),
+                            separator(),
+
                             ################# Element 8 #################
                             html.Td("", style=set_style(cw_1, textAlign="center")),
                             html.Td("", style=set_style(cw_1, textAlign="center")),
                             
                             html.Tr([
-                                html.Td("8)", style=set_style(cw_1, textAlign="left")),
-                                html.Td("Cement behind the casing string across the secondary caprock", style=set_style(cw_2, textAlign="left")),
-                                html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-8")), style=set_style(cw_3, textAlign="center")),
-                                html.Td(create_retrievable_dropdown(rid("well_integrity", "retrievable-8")), style=set_style(cw_4)),
+                                html.Td("8)", style=set_style(cw_1, textAlign="left", verticalAlign="top")),
+                                html.Td("Cement behind the casing string across the secondary caprock", style=set_style(cw_2, textAlign="left", verticalAlign="top")),
+                                html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-8")), style=set_style(cw_3, textAlign="center", verticalAlign="top")),
+                                html.Td(create_retrievable_dropdown(rid("well_integrity", "retrievable-8")), style=set_style(cw_4, verticalAlign="top")),
                                 html.Tr([
                                         html.Td("1. Is the casing cemented across the secondary caprock?", style=set_style(cw_6)),
                                         html.Td(create_answer_dropdown(qid("well_integrity", "q-8-1")), style=set_style(cw_8, textAlign="right"))
@@ -503,6 +569,11 @@ tab_well_integrity = dcc.Tab(
                                 html.Td(create_impact_dropdown(gid("well_integrity", "impact", 8)), style=set_style(cw_10, textAlign="center")),
                                 html.Td(create_color_square(gid("well_integrity", "impact-color", 8)), style=set_style(cw_11, textAlign="center")),
                             ]),
+
+                            add_comment_row(id=cid("well_integrity", "comment-8"), colSpan=5),
+
+                            html.Br(),
+                            separator(),
                             
                             ################# Skip to 11 #################
                             html.Td("", style=set_style(cw_1, textAlign="center")),
@@ -517,10 +588,10 @@ tab_well_integrity = dcc.Tab(
                             html.Td("", style=set_style(cw_1, textAlign="center")),
                             
                             html.Tr([
-                                html.Td("9)", style=set_style(cw_1, textAlign="left")),
-                                html.Td("Overlapping casing behind the production casing / liner", style=set_style(cw_2, textAlign="left")),
-                                html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-9")), style=set_style(cw_3, textAlign="center")),
-                                html.Td(create_retrievable_dropdown(rid("well_integrity", "retrievable-9")), style=set_style(cw_4)),
+                                html.Td("9)", style=set_style(cw_1, textAlign="left", verticalAlign="top")),
+                                html.Td("Overlapping casing behind the production casing / liner", style=set_style(cw_2, textAlign="left", verticalAlign="top")),
+                                html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-9")), style=set_style(cw_3, textAlign="center", verticalAlign="top")),
+                                html.Td(create_retrievable_dropdown(rid("well_integrity", "retrievable-9")), style=set_style(cw_4, verticalAlign="top")),
                                 html.Tr([
                                         html.Td("1. Is the casing inspected and free of any defects (e.g. corrosion) as per applicable requirements?", style=set_style(cw_6)),
                                         html.Td(create_answer_dropdown(qid("well_integrity", "q-9-1")), style=set_style(cw_8, textAlign="right"))
@@ -543,15 +614,20 @@ tab_well_integrity = dcc.Tab(
                                 html.Td(create_color_square(gid("well_integrity", "impact-color", 9)), style=set_style(cw_11, textAlign="center")),
                             ]),
 
+                            add_comment_row(id=cid("well_integrity", "comment-9"), colSpan=5),
+
+                            html.Br(),
+                            separator(),
+
                             ################# Element 10 #################
                             html.Td("", style=set_style(cw_1, textAlign="center")),
                             html.Td("", style=set_style(cw_1, textAlign="center")),
                             
                             html.Tr([
-                                html.Td("10)", style=set_style(cw_1, textAlign="left")),
-                                html.Td("Cement behind the overlapping casing", style=set_style(cw_2, textAlign="left")),
-                                html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-10")), style=set_style(cw_3, textAlign="center")),
-                                html.Td(create_retrievable_dropdown(rid("well_integrity", "retrievable-10")), style=set_style(cw_4)),
+                                html.Td("10)", style=set_style(cw_1, textAlign="left", verticalAlign="top")),
+                                html.Td("Cement behind the overlapping casing", style=set_style(cw_2, textAlign="left", verticalAlign="top")),
+                                html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-10")), style=set_style(cw_3, textAlign="center", verticalAlign="top")),
+                                html.Td(create_retrievable_dropdown(rid("well_integrity", "retrievable-10")), style=set_style(cw_4, verticalAlign="top")),
                                 html.Tr([
                                         html.Td("1. Is the overlapping casing cemented across the caprock?", style=set_style(cw_6)),
                                         html.Td(create_answer_dropdown(qid("well_integrity", "q-10-1")), style=set_style(cw_8, textAlign="right"))
@@ -574,15 +650,20 @@ tab_well_integrity = dcc.Tab(
                                 html.Td(create_color_square(gid("well_integrity", "impact-color", 10)), style=set_style(cw_11, textAlign="center")),
                             ]),
 
+                            add_comment_row(id=cid("well_integrity", "comment-10"), colSpan=5),
+
+                            html.Br(),
+                            separator(),
+
                             ################# Element 11 #################
                             html.Td("", style=set_style(cw_1, textAlign="center")),
                             html.Td("", style=set_style(cw_1, textAlign="center")),
                             
                             html.Tr([
-                                html.Td("11)", style=set_style(cw_1, textAlign="left")),
-                                html.Td("Wellhead", style=set_style(cw_2, textAlign="left")),
-                                html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-11")), style=set_style(cw_3, textAlign="center")),
-                                html.Td(create_retrievable_dropdown(rid("well_integrity", "retrievable-11")), style=set_style(cw_4)),
+                                html.Td("11)", style=set_style(cw_1, textAlign="left", verticalAlign="top")),
+                                html.Td("Wellhead", style=set_style(cw_2, textAlign="left", verticalAlign="top")),
+                                html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-11")), style=set_style(cw_3, textAlign="center", verticalAlign="top")),
+                                html.Td(create_retrievable_dropdown(rid("well_integrity", "retrievable-11")), style=set_style(cw_4, verticalAlign="top")),
                                 html.Tr([
                                         html.Td("1. Are all wellhead components inspected and free of any defect (e.g. corrosion) as per applicable requirements?", style=set_style(cw_6)),
                                         html.Td(create_answer_dropdown(qid("well_integrity", "q-11-1")), style=set_style(cw_8, textAlign="right"))
@@ -605,15 +686,20 @@ tab_well_integrity = dcc.Tab(
                                 html.Td(create_color_square(gid("well_integrity", "impact-color", 11)), style=set_style(cw_11, textAlign="center")),
                             ]),
 
+                            add_comment_row(id=cid("well_integrity", "comment-11"), colSpan=5),
+
+                            html.Br(),
+                            separator(),
+
                             ################# Element 12 #################
                             html.Td("", style=set_style(cw_1, textAlign="center")),
                             html.Td("", style=set_style(cw_1, textAlign="center")),
                             
                             html.Tr([
-                                html.Td("12)", style=set_style(cw_1, textAlign="left")),
-                                html.Td("Other non-retrievable completion e.g. sand screens", style=set_style(cw_2, textAlign="left")),
-                                html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-12")), style=set_style(cw_3, textAlign="center")),
-                                html.Td(create_retrievable_dropdown(rid("well_integrity", "retrievable-12")), style=set_style(cw_4)),
+                                html.Td("12)", style=set_style(cw_1, textAlign="left", verticalAlign="top")),
+                                html.Td("Other non-retrievable completion e.g. sand screens", style=set_style(cw_2, textAlign="left", verticalAlign="top")),
+                                html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-12")), style=set_style(cw_3, textAlign="center", verticalAlign="top")),
+                                html.Td("N/A", style=set_style(cw_3, textAlign="left", verticalAlign="top")),
                                 html.Tr([
                                         html.Td("1. Are all components inspected and free of any defect (e.g. corrosion) as per applicable requirements?", style=set_style(cw_6)),
                                         html.Td(create_answer_dropdown(qid("well_integrity", "q-12-1")), style=set_style(cw_8, textAlign="right"))
@@ -636,15 +722,20 @@ tab_well_integrity = dcc.Tab(
                                 html.Td(create_color_square(gid("well_integrity", "impact-color", 12)), style=set_style(cw_11, textAlign="center")),
                             ]),
 
+                            add_comment_row(id=cid("well_integrity", "comment-12"), colSpan=5),
+
+                            html.Br(),
+                            separator(),
+
                             ################# Element 13 #################
                             html.Td("", style=set_style(cw_1, textAlign="center")),
                             html.Td("", style=set_style(cw_1, textAlign="center")),
                             
                             html.Tr([
-                                html.Td("13)", style=set_style(cw_1, textAlign="left")),
-                                html.Td("Production packer", style=set_style(cw_2, textAlign="left")),
-                                html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-13")), style=set_style(cw_3, textAlign="center")),
-                                html.Td(create_retrievable_dropdown(rid("well_integrity", "retrievable-13")), style=set_style(cw_4)),
+                                html.Td("13)", style=set_style(cw_1, textAlign="left", verticalAlign="top")),
+                                html.Td("Production packer", style=set_style(cw_2, textAlign="left", verticalAlign="top")),
+                                html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-13")), style=set_style(cw_3, textAlign="center", verticalAlign="top")),
+                                html.Td(create_retrievable_dropdown(rid("well_integrity", "retrievable-13")), style=set_style(cw_4, verticalAlign="top")),
                                 html.Tr([
                                         html.Td("1. Has packer functionality been verified through testing as per applicable guideliness, standards or regulations?", style=set_style(cw_6)),
                                         html.Td(create_answer_dropdown(qid("well_integrity", "q-13-1")), style=set_style(cw_8, textAlign="right"))
@@ -667,15 +758,20 @@ tab_well_integrity = dcc.Tab(
                                 html.Td(create_color_square(gid("well_integrity", "impact-color", 13)), style=set_style(cw_11, textAlign="center")),
                             ]),
 
+                            add_comment_row(id=cid("well_integrity", "comment-13"), colSpan=5),
+
+                            html.Br(),
+                            separator(),
+
                             ################# Element 14 #################
                             html.Td("", style=set_style(cw_1, textAlign="center")),
                             html.Td("", style=set_style(cw_1, textAlign="center")),
                             
                             html.Tr([
-                                html.Td("14)", style=set_style(cw_1, textAlign="left")),
-                                html.Td("SSSV", style=set_style(cw_2, textAlign="left")),
-                                html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-14")), style=set_style(cw_3, textAlign="center")),
-                                html.Td(create_retrievable_dropdown(rid("well_integrity", "retrievable-14")), style=set_style(cw_4)),
+                                html.Td("14)", style=set_style(cw_1, textAlign="left", verticalAlign="top")),
+                                html.Td("SSSV", style=set_style(cw_2, textAlign="left", verticalAlign="top")),
+                                html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-14")), style=set_style(cw_3, textAlign="center", verticalAlign="top")),
+                                html.Td(create_retrievable_dropdown(rid("well_integrity", "retrievable-14")), style=set_style(cw_4, verticalAlign="top")),
                                 html.Tr([
                                         html.Td("1. Is the SSSV surface controlled? ", style=set_style(cw_6)),
                                         html.Td(create_answer_dropdown(qid("well_integrity", "q-14-1")), style=set_style(cw_8, textAlign="right"))
@@ -703,15 +799,20 @@ tab_well_integrity = dcc.Tab(
                                 html.Td(create_color_square(gid("well_integrity", "impact-color", 14)), style=set_style(cw_11, textAlign="center")),
                             ]),
 
+                            add_comment_row(id=cid("well_integrity", "comment-14"), colSpan=5),
+
+                            html.Br(),
+                            separator(),
+
                             ################# Element 15 #################
                             html.Td("", style=set_style(cw_1, textAlign="center")),
                             html.Td("", style=set_style(cw_1, textAlign="center")),
                             
                             html.Tr([
-                                html.Td("15)", style=set_style(cw_1, textAlign="left")),
-                                html.Td("Tubing", style=set_style(cw_2, textAlign="left")),
-                                html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-15")), style=set_style(cw_3, textAlign="center")),
-                                html.Td(create_retrievable_dropdown(rid("well_integrity", "retrievable-15")), style=set_style(cw_4)),
+                                html.Td("15)", style=set_style(cw_1, textAlign="left", verticalAlign="top")),
+                                html.Td("Tubing", style=set_style(cw_2, textAlign="left", verticalAlign="top")),
+                                html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-15")), style=set_style(cw_3, textAlign="center", verticalAlign="top")),
+                                html.Td(create_retrievable_dropdown(rid("well_integrity", "retrievable-15")), style=set_style(cw_4, verticalAlign="top")),
                                 html.Tr([
                                         html.Td("1. Is the tubing string inspected and free of any defect (e.g. corrosion) as per applicable requirements?", style=set_style(cw_6)),
                                         html.Td(create_answer_dropdown(qid("well_integrity", "q-15-1")), style=set_style(cw_8, textAlign="right"))
@@ -739,15 +840,20 @@ tab_well_integrity = dcc.Tab(
                                 html.Td(create_color_square(gid("well_integrity", "impact-color", 15)), style=set_style(cw_11, textAlign="center")),
                             ]),
 
+                            add_comment_row(id=cid("well_integrity", "comment-15"), colSpan=5),
+
+                            html.Br(),
+                            separator(),
+
                             ################# Element 16 #################
                             html.Td("", style=set_style(cw_1, textAlign="center")),
                             html.Td("", style=set_style(cw_1, textAlign="center")),
                             
                             html.Tr([
-                                html.Td("16)", style=set_style(cw_1, textAlign="left")),
-                                html.Td("X-mas tree and valves", style=set_style(cw_2, textAlign="left")),
-                                html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-16")), style=set_style(cw_3, textAlign="center")),
-                                html.Td(create_retrievable_dropdown(rid("well_integrity", "retrievable-16")), style=set_style(cw_4)),
+                                html.Td("16)", style=set_style(cw_1, textAlign="left", verticalAlign="top")),
+                                html.Td("X-mas tree and valves", style=set_style(cw_2, textAlign="left", verticalAlign="top")),
+                                html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-16")), style=set_style(cw_3, textAlign="center", verticalAlign="top")),
+                                html.Td(create_retrievable_dropdown(rid("well_integrity", "retrievable-16")), style=set_style(cw_4, verticalAlign="top")),
                                 html.Tr([
                                         html.Td("1. Are all x-mas tree components inspected and free of any defect (e.g. corrosion) as per applicable requirements?", style=set_style(cw_6)),
                                         html.Td(create_answer_dropdown(qid("well_integrity", "q-16-1")), style=set_style(cw_8, textAlign="right"))
@@ -770,15 +876,20 @@ tab_well_integrity = dcc.Tab(
                                 html.Td(create_color_square(gid("well_integrity", "impact-color", 16)), style=set_style(cw_11, textAlign="center")),
                             ]),
 
+                            add_comment_row(id=cid("well_integrity", "comment-16"), colSpan=5),
+
+                            html.Br(),
+                            separator(),
+
                             ################# Element 17 #################
                             html.Td("", style=set_style(cw_1, textAlign="center")),
                             html.Td("", style=set_style(cw_1, textAlign="center")),
                             
                             html.Tr([
-                                html.Td("17)", style=set_style(cw_1, textAlign="left")),
-                                html.Td("Wellhead casing spools and hangers", style=set_style(cw_2, textAlign="left")),
-                                html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-17")), style=set_style(cw_3, textAlign="center")),
-                                html.Td(create_retrievable_dropdown(rid("well_integrity", "retrievable-17")), style=set_style(cw_4)),
+                                html.Td("17)", style=set_style(cw_1, textAlign="left", verticalAlign="top")),
+                                html.Td("Wellhead casing spools and hangers", style=set_style(cw_2, textAlign="left", verticalAlign="top")),
+                                html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-17")), style=set_style(cw_3, textAlign="center", verticalAlign="top")),
+                                html.Td(create_retrievable_dropdown(rid("well_integrity", "retrievable-17")), style=set_style(cw_4, verticalAlign="top")),
                                 html.Tr([
                                         html.Td("1. Are all wellhead components inspected and free of any defect (e.g. corrosion) as per applicable requirements?", style=set_style(cw_6)),
                                         html.Td(create_answer_dropdown(qid("well_integrity", "q-17-1")), style=set_style(cw_8, textAlign="right"))
@@ -801,15 +912,20 @@ tab_well_integrity = dcc.Tab(
                                 html.Td(create_color_square(gid("well_integrity", "impact-color", 17)), style=set_style(cw_11, textAlign="center")),
                             ]),
 
+                            add_comment_row(id=cid("well_integrity", "comment-17"), colSpan=5),
+
+                            html.Br(),
+                            separator(),
+
                             ################# Element 18 #################
                             html.Td("", style=set_style(cw_1, textAlign="center")),
                             html.Td("", style=set_style(cw_1, textAlign="center")),
                             
                             html.Tr([
-                                html.Td("18)", style=set_style(cw_1, textAlign="left")),
-                                html.Td("Any other completion e.g.. Sliding side doors, side pocket mandrels, landing nipples etc", style=set_style(cw_2, textAlign="left")),
-                                html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-18")), style=set_style(cw_3, textAlign="center")),
-                                html.Td(create_retrievable_dropdown(rid("well_integrity", "retrievable-18")), style=set_style(cw_4)),
+                                html.Td("18)", style=set_style(cw_1, textAlign="left", verticalAlign="top")),
+                                html.Td("Any other completion e.g.. Sliding side doors, side pocket mandrels, landing nipples etc?", style=set_style(cw_2, textAlign="left", verticalAlign="top")),
+                                html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-18")), style=set_style(cw_3, textAlign="center", verticalAlign="top")),
+                                html.Td(create_retrievable_dropdown(rid("well_integrity", "retrievable-18")), style=set_style(cw_4, verticalAlign="top")),
                                 html.Tr([
                                         html.Td("1. Are all components inspected and free of any defect (e.g. corrosion) as per applicable requirements?", style=set_style(cw_6)),
                                         html.Td(create_answer_dropdown(qid("well_integrity", "q-18-1")), style=set_style(cw_8, textAlign="right"))
@@ -831,6 +947,47 @@ tab_well_integrity = dcc.Tab(
                                 html.Td(create_impact_dropdown(gid("well_integrity", "impact", 18)), style=set_style(cw_10, textAlign="center")),
                                 html.Td(create_color_square(gid("well_integrity", "impact-color", 18)), style=set_style(cw_11, textAlign="center")),
                             ]),
+
+                            add_comment_row(id=cid("well_integrity", "comment-18"), colSpan=5),
+
+                            html.Br(),
+                            separator(),
+
+                            ################# Element 19 #################
+                            html.Td("", style=set_style(cw_1, textAlign="center")),
+                            html.Td("", style=set_style(cw_1, textAlign="center")),
+                            
+                            html.Tr([
+                                html.Td("19)", style=set_style(cw_1, textAlign="left", verticalAlign="top")),
+                                html.Td("Any other components of the well not covered by the framework?", style=set_style(cw_2, textAlign="left", verticalAlign="top")),
+                                html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-19")), style=set_style(cw_3, textAlign="center", verticalAlign="top")),
+                                html.Td(create_retrievable_dropdown(rid("well_integrity", "retrievable-19")), style=set_style(cw_4, verticalAlign="top")),
+                                html.Tr([
+                                        html.Td("1. Are all components inspected and free of any defect (e.g. corrosion) as per applicable requirements?", style=set_style(cw_6)),
+                                        html.Td(create_answer_dropdown(qid("well_integrity", "q-19-1")), style=set_style(cw_8, textAlign="right"))
+                                    ]
+                                ),
+                                html.Tr([
+                                        html.Td("2. Have all components been verified through functional testing (e.g. pressure testing) as required by applicable standards, guidelines, or regulations?", style=set_style(cw_6)),
+                                        html.Td(create_answer_dropdown(qid("well_integrity", "q-19-2")), style=set_style(cw_8, textAlign="right"))
+                                    ]
+                                ),
+                                html.Tr([
+                                        html.Td("3. Are the materials compatible with expected operating conditions?", style=set_style(cw_6)),
+                                        html.Td(create_answer_dropdown(qid("well_integrity", "q-19-3")), style=set_style(cw_8, textAlign="right"))
+                                    ]
+                                ),
+                                html.Td("", id="a-ffs-19", style=set_style(cw_7, textAlign="center")),
+                                html.Td("", id="a-compat-19", style=set_style(cw_8, textAlign="center")),
+                                html.Td("", id=gid("well_integrity", "mitigation", 19), style=set_style(cw_9, textAlign="center")),
+                                html.Td(create_impact_dropdown(gid("well_integrity", "impact", 19)), style=set_style(cw_10, textAlign="center")),
+                                html.Td(create_color_square(gid("well_integrity", "impact-color", 19)), style=set_style(cw_11, textAlign="center")),
+                            ]),
+
+                            add_comment_row(id=cid("well_integrity", "comment-19"), colSpan=5),
+
+                            html.Br(),
+                            separator(),
                         ])
                     ],
                     style={
@@ -1302,10 +1459,9 @@ def material_compatibility_12(q123):
     Input(component_id=qid("well_integrity", "q-12-3"), component_property="value"),
     Input(component_id="a-ffs-12", component_property="children"),
     Input(component_id="a-compat-12", component_property="children"),
-    Input(component_id=rid("well_integrity", "retrievable-12"), component_property="value")
 )
-def mitigation_12(q1, q2, q3, q_ffs, q_mat, is_retrievable):
-    text, style = calculate_mitigation_3q(q1, q2, q3, q_ffs, q_mat, is_retrievable)
+def mitigation_12(q1, q2, q3, q_ffs, q_mat):
+    text, style = calculate_mitigation_3q(q1, q2, q3, q_ffs, q_mat)
     return text, style
 
 

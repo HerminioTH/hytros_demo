@@ -6,19 +6,6 @@ import pandas as pd
 import numpy as np
 
 
-# tab_risk_matrix = dcc.Tab(
-#     label="Results",
-#     value="tab-risk-matrix",
-#     children=[
-#         html.Br(),
-#         dcc.Graph(
-#             id="risk-matrix",
-#             # figure=fig,
-#             style={"height": "500px", "width": "700px"}
-#         ),
-#     ]
-# )
-
 cw_1 = 20
 cw_2 = 80
 
@@ -35,66 +22,6 @@ def set_style(width, textAlign="left", bold=None, fontsize=24):
     }
     return style
 
-def create_criteria_table():
-    style_0 = {
-        "width": "1px"
-    }
-    def get_style(bg_color="#FFFFFF", txt_color="#000000"):
-        style_1 = {
-            "textAlign": "right",
-            "padding": "10px 5px",
-            "width": "1px",
-            "fontWeight": "bold",
-            "backgroundColor": bg_color,
-            "color": txt_color,
-        }
-        return style_1
-    style_2 = {
-        "padding": "10px 20px",
-        "width": "20px",
-        "fontWeight": "normal"
-    }
-    table = html.Table(
-        [
-            html.Tbody([
-                # html.Tr([
-                #     html.Td("", style=style_0),
-                #     html.Td("Mitigation", style=get_style()),
-                #     html.Td("Defines the level of additional work that is required to remediate the assessed element. ", style=style_2),
-                # ]),
-                html.Tr([
-                    html.Td("", style=style_0),
-                    # html.Td("No or minor", style={"width": "5px", "backgroundColor": "#c02727", "fontWeight": "bold", "textAlign": "right"}),
-                    html.Td("No or minor", style=get_style("#43c543", "#000000")),
-                    html.Td("No remediations and well operations are required; only some additional engineering " \
-                    "review work could be expected for the well in its current state e.g. processing and analysis on data. ", style=style_2),
-                ]),
-                html.Tr([
-                    html.Td("", style=style_0),
-                    html.Td("Moderate", style=get_style("#fff130", "#000000")),
-                    html.Td("Remediation, additional assessment and verification or risk management strategy could " \
-                    "be expected. This could include detailed engineering assessment, techno-economical analysis and/or interventions that " \
-                    "are typically done on retrievable components. ", style=style_2),
-                ]),
-                html.Tr([
-                    html.Td("", style=style_0),
-                    html.Td("Severe", style=get_style("#c02727", "#FFFFFF")),
-                    html.Td("Remediation and a comprehensive risk management strategy could be expected. This typically " \
-                    "involves technically challenging operations on non-retrievable components. ", style=style_2),
-                ]),
-                html.Tr([
-                    html.Td("", style=style_0),
-                    html.Td("Unknown", style=get_style("#4E4E4E", "#FFFFFF")),
-                    html.Td("Critical information is missing for assessment with the screening tool. It is advised to look for additional data, " \
-                    "acquire additional data (e.g. by running logs) or look for offset data, and then reassess the well with the " \
-                    "screening tool.", style=style_2),
-                ]),
-            ])
-        ],
-        style={"width": "100%", "border": "1px solid #999"}
-        # style={"width": "700px", "border": "1px solid #999"}
-    )
-    return table
 
 tab_risk_matrix = dcc.Tab(
     label="Results",
@@ -197,7 +124,8 @@ def build_dataframe(wi_mit, wi_impact):
             "15. Tubing",
             "16. X-mas tree and valves",
             "17. Wellhead casing spools and hangers",
-            "18. Any other completion..."
+            "18. Any other completion...",
+            "19. Any other components of...",
 
         ]
     }
@@ -260,7 +188,8 @@ def build_dataframe(wi_mit, wi_impact):
                 width=2          # edge thickness
             )  
         ),
-        selector=dict(type="scatter")
+        selector=dict(type="scatter"),
+        hovertemplate="%{customdata[0]}<extra></extra>"
     )
 
     fig.update_xaxes(
