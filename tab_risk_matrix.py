@@ -159,6 +159,8 @@ def build_dataframe(wi_mit, wi_impact):
         data=go.Heatmap(
             x=[1, 2, 3],
             y=[1, 2, 3],
+            # x=[0, 1, 2],
+            # y=[0, 1, 2],
             z=[
                 [0.0, 0.0, 0.0],
                 [0.0, 0.5, 0.5],
@@ -191,6 +193,24 @@ def build_dataframe(wi_mit, wi_impact):
         selector=dict(type="scatter"),
         hovertemplate="%{customdata[0]}<extra></extra>"
     )
+
+    # fig.update_xaxes(
+    #     range=[-0.5, 3.5],
+    #     tickmode="array",
+    #     tickvals=[0, 1, 2, 3],
+    #     ticktext=["Unknown", "Low", "Medium", "High"],
+    #     showgrid=False,
+    #     zeroline=False
+    # )
+
+    # fig.update_yaxes(
+    #     range=[-0.5, 3.5],
+    #     tickmode="array",
+    #     tickvals=[0, 1, 2, 3],
+    #     ticktext=["Unknown", "No or minor", "Moderate", "Severe"],
+    #     showgrid=False,
+    #     zeroline=False
+    # )
 
     fig.update_xaxes(
         range=[-0.5, 3.5],

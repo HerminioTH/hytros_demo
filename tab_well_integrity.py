@@ -406,7 +406,7 @@ tab_well_integrity = dcc.Tab(
                             ################# Element 4 #################
                             html.Tr([
                                 html.Td("4)", style=set_style(cw_1, textAlign="left", verticalAlign="top")),
-                                html.Td("Overlapping casing behing the production casing / liner", style=set_style(cw_2, textAlign="left", verticalAlign="top")),
+                                html.Td("Overlapping casing behind the production casing / liner", style=set_style(cw_2, textAlign="left", verticalAlign="top")),
                                 html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-4")), style=set_style(cw_3, textAlign="center", verticalAlign="top")),
                                 html.Td(create_retrievable_dropdown(rid("well_integrity", "retrievable-4")), style=set_style(cw_4, verticalAlign="top")),
                                 html.Tr([
@@ -737,7 +737,7 @@ tab_well_integrity = dcc.Tab(
                                 html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-13")), style=set_style(cw_3, textAlign="center", verticalAlign="top")),
                                 html.Td(create_retrievable_dropdown(rid("well_integrity", "retrievable-13")), style=set_style(cw_4, verticalAlign="top")),
                                 html.Tr([
-                                        html.Td("1. Has packer functionality been verified through testing as per applicable guideliness, standards or regulations?", style=set_style(cw_6)),
+                                        html.Td("1. Has packer functionality been verified through testing as per applicable guidelines, standards or regulations?", style=set_style(cw_6)),
                                         html.Td(create_answer_dropdown(qid("well_integrity", "q-13-1")), style=set_style(cw_8, textAlign="right"))
                                     ]
                                 ),
@@ -1686,6 +1686,42 @@ def material_compatibility_18(q183):
     Input(component_id=rid("well_integrity", "retrievable-18"), component_property="value")
 )
 def mitigation_18(q1, q2, q3, q_ffs, q_mat, is_retrievable):
+    text, style = calculate_mitigation_3q(q1, q2, q3, q_ffs, q_mat, is_retrievable)
+    return text, style
+
+
+
+################# Element 19 #################
+@callback(
+    Output(component_id="a-ffs-19", component_property="children"),
+    # Output(component_id="a-ffs-19", component_property="style"),
+    Input(component_id=qid("well_integrity", "q-19-1"), component_property="value"),
+    Input(component_id=qid("well_integrity", "q-19-2"), component_property="value"),
+)
+def qualified_FFS_19(q1, q2):
+    text = calculate_FFS_2q(q1, q2)
+    return text
+
+
+@callback(
+    Output(component_id="a-compat-19", component_property="children"),
+    Input(component_id=qid("well_integrity", "q-19-3"), component_property="value"),
+)
+def material_compatibility_19(q193):
+    return q193
+
+
+@callback(
+    Output(component_id=gid("well_integrity", "mitigation", 19), component_property="children"),
+    Output(component_id=gid("well_integrity", "mitigation", 19), component_property="style"),
+    Input(component_id=qid("well_integrity", "q-19-1"), component_property="value"),
+    Input(component_id=qid("well_integrity", "q-19-2"), component_property="value"),
+    Input(component_id=qid("well_integrity", "q-19-3"), component_property="value"),
+    Input(component_id="a-ffs-19", component_property="children"),
+    Input(component_id="a-compat-19", component_property="children"),
+    Input(component_id=rid("well_integrity", "retrievable-19"), component_property="value")
+)
+def mitigation_19(q1, q2, q3, q_ffs, q_mat, is_retrievable):
     text, style = calculate_mitigation_3q(q1, q2, q3, q_ffs, q_mat, is_retrievable)
     return text, style
 

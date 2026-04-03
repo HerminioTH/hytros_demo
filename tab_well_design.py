@@ -144,7 +144,7 @@ tab_well_design = dcc.Tab(
                             html.Tr([
                                 html.Td("4", style=set_style(cw_1)),
                                 html.Td("Depth", style=set_style(cw_2)),
-                                html.Td("Is chage in target depth required? For example, drilling or sidetracking to reach deeper zones, or perforating, milling shallower intervals. ", style=set_style(cw_3)),
+                                html.Td("Is change in target depth required? For example, drilling or sidetracking to reach deeper zones, or perforating, milling shallower intervals. ", style=set_style(cw_3)),
                                 html.Td(create_answer_dropdown(fid("well_design", "question-4")), style=set_style(cw_4)),
                                 html.Td("Unknown", style=set_style(cw_5), id=gid("well_design", "mitigation", 4)),
                                 html.Td(create_impact_dropdown(gid("well_design", "impact", 4)), style=set_style(cw_6)),
@@ -179,8 +179,8 @@ tab_well_design = dcc.Tab(
                             
                             html.Tr([
                                 html.Td("7", style=set_style(cw_1)),
-                                html.Td("Geological and geomechanical occurances", style=set_style(cw_2)),
-                                html.Td("Are there indication of geological or geomehcanical mechanisms (e.g. tectonic forces, presence of fractures and faults etc) that could have an affect on the components of the well that provide structural integrity i.e. wellhead, conductor casing?", style=set_style(cw_3)),
+                                html.Td("Geological and geomechanical occurences", style=set_style(cw_2)),
+                                html.Td("Are there indication of geological or geomechanical mechanisms (e.g. tectonic forces, presence of fractures and faults etc) that could have an affect on the components of the well that provide structural integrity i.e. wellhead, conductor casing?", style=set_style(cw_3)),
                                 html.Td(create_answer_dropdown(fid("well_design", "question-7")), style=set_style(cw_4)),
                                 html.Td("Unknown", style=set_style(cw_5), id=gid("well_design", "mitigation", 7)),
                                 html.Td(create_impact_dropdown(gid("well_design", "impact", 7)), style=set_style(cw_6)),

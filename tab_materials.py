@@ -108,7 +108,7 @@ def create_steel_table():
                     html.Td("", id=fid("tab_material", "cell-10"), style=style_2),
                 ]),
                 html.Tr([
-                    html.Td("Yield strenght (MPa):", style=style_1),
+                    html.Td("Yield strength (MPa):", style=style_1),
                     html.Td("", id=fid("tab_material", "cell-11"), style=style_2),
                 ]),
                 html.Tr([
