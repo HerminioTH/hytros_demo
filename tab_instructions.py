@@ -14,16 +14,16 @@ tab_instructions = dcc.Tab(
 
             The screening is performed in two steps:
 
-            1. **Well design – pre-screening:**
+            1. **Pre-screening (well design):**
             A high-level review of well construction and operational aspects.
 
-            2. **Well integrity – detailed screening:**
+            2. **Screening (well integrity):**
             A detailed assessment of well barrier elements (WBEs).
 
 
             For each step, a set of qualitative criteria (questions) is defined. Criteria are answered as *Yes*, *No*, or *Unknown*.
 
-            For Well Integrity, responses reflect whether each WBE:
+            For *Screening*, responses reflect whether each WBE:
             - is Qualified / Fit-for-Service (FFS), and
             - demonstrates material compatibility
 
