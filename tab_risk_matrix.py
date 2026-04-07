@@ -22,118 +22,10 @@ def set_style(width, textAlign="left", bold=None, fontsize=24):
     }
     return style
 
-
-tab_risk_matrix = dcc.Tab(
-    label="Results",
-    value="tab-risk-matrix",
-    children=[
-        html.Br(),
-        
-        html.Div(
-            style={"width": "100%", "margin": "16px auto", "fontFamily": "system-ui", "textAlign": "center"},
-            children=[
-                html.Table(
-                    children=[
-                        html.Thead(
-                            html.Tr([
-                                html.Th("Risk matrix", style=set_style(cw_1, textAlign="center")),
-                                html.Th("Criteria", style=set_style(cw_2, textAlign="center")),
-                            ])
-                        ),
-                        html.Tbody([
-                            html.Tr([
-                                html.Td(
-                                    [
-                                        dcc.Graph(
-                                            id="risk-matrix",
-                                            style={"height": "500px", "width": "700px", "verticalAlign": "top"}
-                                        ),
-                                    ],
-                                    style={"verticalAlign": "top"}
-                                ),
-                                html.Td(
-                                    [
-                                        html.Br(),
-                                        html.Br(),
-                                        html.Br(),
-                                        html.Br(),
-                                        html.Img(
-                                            src="/assets/mitigation_impact.png",  # put image inside assets folder
-                                            style={"width": "70%", "height": "auto", "textAlign": "right"}
-                                        ),
-                                    ],
-                                    style={"verticalAlign": "top"}),
-                            ])
-                        ]),
-                    ],
-                    style={
-                        "width": "100%",
-                    }
-                )
-            ]
-        )
-    ]
-)
-
-@callback(
-    Output(component_id="risk-matrix", component_property="figure"),
-    Input(component_id=gid("well_integrity", "mitigation", ALL),  component_property="children"),
-    Input(component_id={"tab": "well_integrity", "name": "impact", "i": ALL},  component_property="value"),
-)
-def build_dataframe(wi_mit, wi_impact):
-    mitigation = wi_mit
-    impact = wi_impact
-
-    mitigation_dict = {
-        "Severe": 3,
-        "Moderate": 2,
-        "No or minor": 1,
-        "Unknown": 0,
-        "": 0
-    }
-    impact_dict = {
-        "Low": 1,
-        "Medium": 2,
-        "High": 3,
-        "": 0,
-        None: 0
-    }
-
-    data_dict = {
-        "Mitigation Label": mitigation,
-        "Impact Label": impact,
-        "Category": ["Well Integrity" for i in range(len(wi_mit))],
-        "Category Number": [i+1 for i in range(len(wi_mit))],
-        "Mitigation": [mitigation_dict[x] for x in mitigation],
-        "Impact": [impact_dict[x] for x in impact],
-        "Questions": [
-            "1. Primary caprock",
-            "2. Production casing/liner",
-            "3. Cement behind the production casing/liner",
-            "4. Overlapping casing behing the production casing/liner",
-            "5. Cement behind the overlapping casing",
-            "6. Secondary caprock",
-            "7. Casing string across the secondary caprock",
-            "8. Cement behind the casing string...",
-            "9. Overlapping casing behind the production casing/liner",
-            "10. Cement behind the overlapping casing",
-            "11. Wellhead",
-            "12. Other non-retrievable completion e.g. sand screens",
-            "13. Production packer",
-            "14. SSSV",
-            "15. Tubing",
-            "16. X-mas tree and valves",
-            "17. Wellhead casing spools and hangers",
-            "18. Any other completion...",
-            "19. Any other components of...",
-
-        ]
-    }
-
-    df = pd.DataFrame(data_dict)
-
+def explode_points(df):
     df_count = df.groupby(["Mitigation", "Impact"]).size().reset_index(name="count")
-
+    df["Mitigation"] = df["Mitigation"].astype(float)
+    df["Impact"] = df["Impact"].astype(float)
     r = 0.12  # explosion radius in data units (tune)
     for line in df_count.values:
         mit, imp, _ = line
@@ -147,8 +39,7 @@ def build_dataframe(wi_mit, wi_impact):
                 df.loc[ind, "Impact"] += r * np.cos(angle)
                 df.loc[ind, "Mitigation"] += r * np.sin(angle)
 
-
-
+def build_heatmap(df, title="Risk Matrix", color="#354cb3"):
     green_yellow_red = [
         [0.0, "#35b335"],
         [0.5, "#fff130"],
@@ -183,6 +74,7 @@ def build_dataframe(wi_mit, wi_impact):
 
     fig.update_traces(
         marker=dict(
+            color=color,
             size=14,
             opacity=1.0,
             line=dict(
@@ -193,25 +85,6 @@ def build_dataframe(wi_mit, wi_impact):
         selector=dict(type="scatter"),
         hovertemplate="%{customdata[0]}<extra></extra>"
     )
-
-    # fig.update_xaxes(
-    #     range=[-0.5, 3.5],
-    #     tickmode="array",
-    #     tickvals=[0, 1, 2, 3],
-    #     ticktext=["Unknown", "Low", "Medium", "High"],
-    #     showgrid=False,
-    #     zeroline=False
-    # )
-
-    # fig.update_yaxes(
-    #     range=[-0.5, 3.5],
-    #     tickmode="array",
-    #     tickvals=[0, 1, 2, 3],
-    #     ticktext=["Unknown", "No or minor", "Moderate", "Severe"],
-    #     showgrid=False,
-    #     zeroline=False
-    # )
-
     fig.update_xaxes(
         range=[-0.5, 3.5],
         tickmode="array",
@@ -220,7 +93,6 @@ def build_dataframe(wi_mit, wi_impact):
         showgrid=False,
         zeroline=False
     )
-
     fig.update_yaxes(
         range=[-0.5, 3.5],
         tickmode="array",
@@ -229,11 +101,15 @@ def build_dataframe(wi_mit, wi_impact):
         showgrid=False,
         zeroline=False
     )
-
     fig.update_layout(
         plot_bgcolor="lightgray",   # inside the axes
-        # title="Risk Matrix",
-        # title_x=0.5,
+        title=f"<b>{title}</b>",
+        title_x=0.5,
+        font=dict(
+            # family="Arial",
+            size=14,
+            color="black"
+        ),
         xaxis=dict(
             title=dict(
                 text="Impact",
@@ -246,7 +122,165 @@ def build_dataframe(wi_mit, wi_impact):
                 font=dict(size=16)
             )
         ),
-        # showlegend=False
+        showlegend=False
     )
+    return fig
+
+
+
+tab_risk_matrix = dcc.Tab(
+    label="Results",
+    value="tab-risk-matrix",
+    children=[
+        html.Div(
+            style={"width": "100%", "margin": "16px auto", "fontFamily": "system-ui", "textAlign": "center"},
+            children=[
+                html.Table(
+                    children=[
+                        html.Tbody([
+                            html.Tr([
+                                html.Td(
+                                    [
+                                        dcc.Graph(
+                                            id="risk-matrix-prescreening",
+                                            style={"height": "500px", "width": "700px", "verticalAlign": "top"}
+                                        ),
+                                    ],
+                                    style={"verticalAlign": "top"}
+                                ),
+                                html.Td(
+                                    [
+                                        dcc.Graph(
+                                            id="risk-matrix-screening",
+                                            style={"height": "500px", "width": "700px", "verticalAlign": "top"}
+                                        ),
+                                    ],
+                                    style={"verticalAlign": "top"}
+                                ),
+                            ])
+                        ]),
+                    ],
+                    style={
+                        "width": "100%",
+                    }
+                ),
+                html.Img(
+                    src="/assets/mitigation_impact_3.png",  # put image inside assets folder
+                    style={"width": "90%", "height": "auto", "textAlign": "center"}
+                ),
+            ]
+        )
+    ]
+)
+
+@callback(
+    Output(component_id="risk-matrix-prescreening", component_property="figure"),
+    Input(component_id=gid("well_design", "mitigation", ALL),  component_property="children"),
+    Input(component_id={"tab": "well_design", "name": "impact", "i": ALL},  component_property="value"),
+)
+def risk_matrix_prescreening(wd_mit, wd_impact):
+    mitigation = wd_mit
+    impact = wd_impact
+
+    mitigation_dict = {
+        "Severe": 3,
+        "Moderate": 2,
+        "No or minor": 1,
+        "Unknown": 0,
+        "": 0
+    }
+    impact_dict = {
+        "Low": 1,
+        "Medium": 2,
+        "High": 3,
+        "": 0,
+        None: 0
+    }
+
+    data_dict = {
+        "Mitigation Label": mitigation,
+        "Impact Label": impact,
+        "Category": ["Screening" for i in range(len(wd_mit))],
+        "Category Number": [i+1 for i in range(len(wd_mit))],
+        "Mitigation": [mitigation_dict[x] for x in mitigation],
+        "Impact": [impact_dict[x] for x in impact],
+        "Questions": [
+            "1. Acessibility",
+            "2. Age",
+            "3. Type/function",
+            "4. Depth",
+            "5. Diameter",
+            "6. Deviation",
+            "7. Geological and geomechanical occurences",
+            "8. Operational issues",
+        ]
+    }
+
+    df = pd.DataFrame(data_dict)
+
+    explode_points(df)
+    fig = build_heatmap(df, title="Pre-screening", color="lightcoral")
+    return fig
+
+
+
+@callback(
+    Output(component_id="risk-matrix-screening", component_property="figure"),
+    Input(component_id=gid("well_integrity", "mitigation", ALL),  component_property="children"),
+    Input(component_id={"tab": "well_integrity", "name": "impact", "i": ALL},  component_property="value"),
+)
+def risk_matrix_screening(wi_mit, wi_impact):
+    mitigation = wi_mit
+    impact = wi_impact
+
+    mitigation_dict = {
+        "Severe": 3,
+        "Moderate": 2,
+        "No or minor": 1,
+        "Unknown": 0,
+        "": 0
+    }
+    impact_dict = {
+        "Low": 1,
+        "Medium": 2,
+        "High": 3,
+        "": 0,
+        None: 0
+    }
+
+    data_dict = {
+        "Mitigation Label": mitigation,
+        "Impact Label": impact,
+        "Category": ["Screening" for i in range(len(wi_mit))],
+        "Category Number": [i+1 for i in range(len(wi_mit))],
+        "Mitigation": [mitigation_dict[x] for x in mitigation],
+        "Impact": [impact_dict[x] for x in impact],
+        "Questions": [
+            "1. Primary caprock",
+            "2. Production casing/liner",
+            "3. Cement behind the production casing/liner",
+            "4. Overlapping casing behing the production casing/liner",
+            "5. Cement behind the overlapping casing",
+            "6. Secondary caprock",
+            "7. Casing string across the secondary caprock",
+            "8. Cement behind the casing string...",
+            "9. Overlapping casing behind the production casing/liner",
+            "10. Cement behind the overlapping casing",
+            "11. Wellhead",
+            "12. Other non-retrievable completion e.g. sand screens",
+            "13. Production packer",
+            "14. SSSV",
+            "15. Tubing",
+            "16. X-mas tree and valves",
+            "17. Wellhead casing spools and hangers",
+            "18. Any other completion...",
+            "19. Any other components of...",
+        ]
+    }
+
+    df = pd.DataFrame(data_dict)
+
+    explode_points(df)
+    fig = build_heatmap(df, title="Screening", color="#354cb3")
 
     return fig
