@@ -228,7 +228,6 @@ def risk_matrix_prescreening(wd_mit, wd_impact):
 
     # Remove all lines for which both Mitigation and Impact are 0 (Unknown)
     df = df[~((df["Mitigation"] == 0) & (df["Impact"] == 0))]
-    print(df)
 
     explode_points(df)
     fig = build_heatmap(df, title="Pre-screening", color="lightcoral")
@@ -244,7 +243,6 @@ def risk_matrix_prescreening(wd_mit, wd_impact):
 def risk_matrix_screening(wi_mit, wi_impact):
     mitigation = wi_mit
     impact = wi_impact
-    print(mitigation)
 
     mitigation_dict = {
         "Severe": 3,
