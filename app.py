@@ -72,10 +72,10 @@ app.layout = html.Div(
                         ),
                     ]
                 ),
-
-                html.Div(id="upload-status"),
             ],
         ),
+
+        html.Div(id="upload-status", style={"textAlign": "right"}),
 
         dcc.Download(id="download-json"),
 
@@ -173,7 +173,7 @@ def save_well(_,
     content = json.dumps(data_dict, indent=4, ensure_ascii=False)
     return {
         "content": content,
-        "filename": "app_data.json"
+        "filename": "well_data.json"
     }
 
 @callback(
@@ -185,11 +185,14 @@ def save_well(_,
     Output({"tab": "well_integrity", "comment": ALL}, "value"),
     Output({"tab": "well_integrity", "question": ALL}, "value"),
     Output({"tab": "well_integrity", "name": "impact", "i": ALL}, "value"),
+    Output("upload-json", "contents"),
+    Output("upload-json", "filename"),
     Input("upload-json", "contents"),
     State("upload-json", "filename"),
     prevent_initial_call=True,
 )
 def load_well(contents, filename):
+    print(filename)
     if not contents:
         raise PreventUpdate
 
@@ -225,15 +228,27 @@ def load_well(contents, filename):
         wi_impacts = []
         for values in data["well_integrity"]["impact"].values():
             wi_impacts.append(values)
+        
+        msg = f"Loaded {filename} successfully."
+
+        return (
+            msg,
+            answers, wd_impacts, barriers, retrievables,
+            comments, questions, wi_impacts,
+            None, None,   # reset upload component
+        )
 
     except Exception as e:
         msg = f"Failed to read JSON from '{filename or 'file'}': {e}"
-        print(msg)
         # return msg, no_update
-        return msg, no_update, no_update, no_update, no_update, no_update, no_update
-
-    msg = f"Loaded {filename} successfully."
-    return msg, answers, wd_impacts, barriers, retrievables, comments, questions, wi_impacts
+        answers, wd_impacts, barriers, retrievables, comments, questions, wi_impacts = no_update, no_update, no_update, no_update, no_update, no_update, no_update
+        # return msg, no_update, no_update, no_update, no_update, no_update, no_update
+        return (
+            msg,
+            no_update, no_update, no_update, no_update,
+            no_update, no_update, no_update,
+            None, None,
+        )
 
 
 
