@@ -86,10 +86,13 @@ def build_heatmap(df, title="Risk Matrix", color="#354cb3"):
         hovertemplate="%{customdata[0]}<extra></extra>"
     )
     fig.update_xaxes(
-        range=[-0.5, 3.5],
+        # range=[-0.5, 3.5],
+        range=[0.5, 3.5],
         tickmode="array",
-        tickvals=[0, 1, 2, 3],
-        ticktext=["Unknown", "Low", "Medium", "High"],
+        # tickvals=[0, 1, 2, 3],
+        # ticktext=["Unknown", "Low", "Medium", "High"],
+        tickvals=[1, 2, 3],
+        ticktext=["Low", "Medium", "High"],
         showgrid=False,
         zeroline=False
     )
@@ -102,6 +105,8 @@ def build_heatmap(df, title="Risk Matrix", color="#354cb3"):
         zeroline=False
     )
     fig.update_layout(
+        width=600,
+        height=550,
         plot_bgcolor="lightgray",   # inside the axes
         title=f"<b>{title}</b>",
         title_x=0.5,
@@ -164,6 +169,9 @@ tab_risk_matrix = dcc.Tab(
                         "width": "100%",
                     }
                 ),
+                html.Br(),
+                html.Br(),
+                html.Br(),
                 html.Img(
                     src="/assets/mitigation_impact_3.png",  # put image inside assets folder
                     style={"width": "90%", "height": "auto", "textAlign": "center"}
@@ -218,6 +226,10 @@ def risk_matrix_prescreening(wd_mit, wd_impact):
 
     df = pd.DataFrame(data_dict)
 
+    # Remove all lines for which both Mitigation and Impact are 0 (Unknown)
+    df = df[~((df["Mitigation"] == 0) & (df["Impact"] == 0))]
+    print(df)
+
     explode_points(df)
     fig = build_heatmap(df, title="Pre-screening", color="lightcoral")
     return fig
@@ -232,6 +244,7 @@ def risk_matrix_prescreening(wd_mit, wd_impact):
 def risk_matrix_screening(wi_mit, wi_impact):
     mitigation = wi_mit
     impact = wi_impact
+    print(mitigation)
 
     mitigation_dict = {
         "Severe": 3,
@@ -279,6 +292,9 @@ def risk_matrix_screening(wi_mit, wi_impact):
     }
 
     df = pd.DataFrame(data_dict)
+
+    # Remove all lines for which both Mitigation and Impact are 0 (Unknown)
+    df = df[~((df["Mitigation"] == 0) & (df["Impact"] == 0))]
 
     explode_points(df)
     fig = build_heatmap(df, title="Screening", color="#354cb3")

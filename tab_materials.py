@@ -265,7 +265,7 @@ def show_details(material):
             "source": "_"
         },
         "K55 (API 5CT)": {
-            "result": "Validated",
+            "result": "Qualified",
             "condition": "Field & Lab, 100C,100bar, 100%H2 1000h exposure",
             "final_state": "No structural damage; good integrity",
             "failure_mode": "Corrosion at surface, no strength loss",
@@ -280,7 +280,7 @@ def show_details(material):
             "source": "HyStories (Loder, 2023); RAG (2017); Boersheim et al. (2019)"
         },
         "J55 (API 5CT)": {
-            "result": "Validated but slight effect on steel",
+            "result": "Qualified but slight effect on steel",
             "condition": "Field & Lab, 100C,100bar, 100%H2 1000h exposure",
             "final_state": "Slight ductility reduction; integrity maintained",
             "failure_mode": "None significant; no HIC or HE",
@@ -295,7 +295,7 @@ def show_details(material):
             "source": "Iorio et al. (2023); RAG (2017); Boersheim et al. (2019)"
         },
         "L80 (API 5CT)": {
-            "result": "Validated",
+            "result": "Qualified",
             "condition": "Field & Lab, 100C,100bar, 100%H2 1000h exposure",
             "final_state": "Maintained mechanical integrity",
             "failure_mode": "Slight ductility reduction; no cracking",
@@ -310,7 +310,7 @@ def show_details(material):
             "source": "HyStories (Loder, 2023); Vallourec (2023); Iorio et al. (2023); Trautmann (2020); RAG (2017)"
         },
         "N80 (API 5CT)": {
-            "result": "Validated",
+            "result": "Qualified",
             "condition": "Lab, 100C,100bar, 100%H2 1000h exposure",
             "final_state": "Ultimate tensile strength unaffected",
             "failure_mode": "Surface corrosion only",
@@ -325,7 +325,7 @@ def show_details(material):
             "source": "Boersheim et al. (2019)"
         },
         "P110 (API 5CT)": {
-            "result": "Not validated",
+            "result": "Not Qualified",
             "condition": "Lab, 100C,100bar, 100%H2 1000h exposure",
             "final_state": "Most affected by H₂; lower ductility",
             "failure_mode": "Hydrogen embrittlement; reduced toughness",
@@ -340,7 +340,7 @@ def show_details(material):
             "source": "Vallourec (2023); Trautmann (2020); Iorio et al. (2023); RAG (2017)"
         },
         "T95 (API 5CT)": {
-            "result": "Validated but slight effect on steel",
+            "result": "Qualified but slight effect on steel",
             "condition": "Lab, 100C,100bar, 100%H2 1000h exposure",
             "final_state": "Minor ductility loss; integrity retained",
             "failure_mode": "No major HE or cracking",
@@ -355,7 +355,7 @@ def show_details(material):
             "source": "Iorio et al. (2023)"
         },
         "42CrMo4 (QT/QTT)": {
-            "result": "Not validated",
+            "result": "Not Qualified",
             "condition": "Lab, 100C,100bar, 100%H2 1000h exposure",
             "final_state": "Below embrittlement threshold",
             "failure_mode": "Prone to HE (martensitic)",
@@ -370,7 +370,7 @@ def show_details(material):
             "source": "RAG (2017); Trautmann (2020)"
         },
         "P235": {
-            "result": "Validated",
+            "result": "Qualified",
             "condition": "Field (Pilot), 10% H2",
             "final_state": "Performed well under blended gas",
             "failure_mode": "None reported",
@@ -385,7 +385,7 @@ def show_details(material):
             "source": "RAG (2017)"
         },
         "L360": {
-            "result": "Validated",
+            "result": "Qualified",
             "condition": "Field (Pilot), 10% H2",
             "final_state": "Maintained integrity",
             "failure_mode": "None reported",
@@ -400,7 +400,7 @@ def show_details(material):
             "source": "RAG (2017)"
         },
         "AISI 316 (stainless) (Cr 16-18%, Ni 10-14%, Mb 2-3%)": {
-            "result": "Validated, but slight effect on steel",
+            "result": "Qualified, but slight effect on steel",
             "condition": "—",
             "final_state": "High H₂ uptake but resistant",
             "failure_mode": "Not tested in this report",
@@ -415,7 +415,7 @@ def show_details(material):
             "source": "Trautmann et al 2020"
         },
         "IN718 (Ni-base superalloy)": {
-            "result": "Not validated",
+            "result": "Not Qualified",
             "condition": "Field, 42C, 200bar, 100%H2, 11months",
             "final_state": "High hydrogen trapping tendency",
             "failure_mode": "None reported, higher uptake",
@@ -430,7 +430,7 @@ def show_details(material):
             "source": "HyStock (Roordink et al., 2025)"
         },
         "34CrMo4": {
-            "result": "Validated (Note: higher than required to comply to standards)",
+            "result": "Qualified (Note: higher than required to comply to standards)",
             "condition": "Laboratory,vallourec steel, 100% H2, 1000h",
             "final_state": "KIH ~115 MPa√m (meets ASME B31.12)",
             "failure_mode": "KIH higher han required to comply to standards",
@@ -445,7 +445,7 @@ def show_details(material):
             "source": "Vallourec (2023)"
         },
         "HAZ X65": {
-            "result": "Validated (Note: higher than required to comply to standards)",
+            "result": "Qualified (Note: higher than required to comply to standards)",
             "condition": "Laboratory,vallourec steel, 100% H2, 1000h",
             "final_state": "KIH ~90 MPa√m",
             "failure_mode": "KIH higher han required to comply to standards",
@@ -460,7 +460,7 @@ def show_details(material):
             "source": "Vallourec (2023)"
         },
         "BM X65": {
-            "result": "Validated (Note: higher than required to comply to standards)",
+            "result": "Qualified (Note: higher than required to comply to standards)",
             "condition": "Laboratory,vallourec steel, 100% H2, 1000h",
             "final_state": "KIH ~100 MPa√m",
             "failure_mode": "KIH higher han required to comply to standards",
@@ -475,7 +475,7 @@ def show_details(material):
             "source": "Vallourec (2023)"
         },
         "WM X65": {
-            "result": "Validated (Note: higher than required to comply to standards)",
+            "result": "Qualified (Note: higher than required to comply to standards)",
             "condition": "Laboratory,vallourec steel, 100% H2, 1000h",
             "final_state": "KIH ~95 MPa√m",
             "failure_mode": "KIH higher han required to comply to standards",
@@ -490,7 +490,7 @@ def show_details(material):
             "source": "Vallourec (2023)"
         },
         "BM X80": {
-            "result": "Validated (Note: higher than required to comply to standards)",
+            "result": "Qualified (Note: higher than required to comply to standards)",
             "condition": "Laboratory,vallourec steel, 100% H2, 1000h",
             "final_state": "KIH ~85 MPa√m",
             "failure_mode": "KIH higher han required to comply to standards",
@@ -505,7 +505,7 @@ def show_details(material):
             "source": "Vallourec (2023)"
         },
         "VM55W": {
-            "result": "Validated (Note: higher than required to comply to standards)",
+            "result": "Qualified (Note: higher than required to comply to standards)",
             "condition": "Laboratory,vallourec steel, 100% H2, 1000h",
             "final_state": "KIH ~75 MPa√m",
             "failure_mode": "KIH higher han required to comply to standards",
@@ -520,7 +520,7 @@ def show_details(material):
             "source": "Vallourec (2023)"
         },
         "VM80W": {
-            "result": "Validated (Note: higher than required to comply to standards)",
+            "result": "Qualified (Note: higher than required to comply to standards)",
             "condition": "Laboratory,vallourec steel, 100% H2, 1000h",
             "final_state": "KIH ~90 MPa√m",
             "failure_mode": "KIH higher han required to comply to standards",
@@ -535,7 +535,7 @@ def show_details(material):
             "source": "Vallourec (2023)"
         },
         "VM80S": {
-            "result": "Validated (Note: higher than required to comply to standards)",
+            "result": "Qualified (Note: higher than required to comply to standards)",
             "condition": "Laboratory,vallourec steel, 100% H2, 1000h",
             "final_state": "KIH ~95 MPa√m",
             "failure_mode": "KIH higher han required to comply to standards",
@@ -550,7 +550,7 @@ def show_details(material):
             "source": "Vallourec (2023)"
         },
         "VM95SS": {
-            "result": "Validated (Note: higher than required to comply to standards)",
+            "result": "Qualified (Note: higher than required to comply to standards)",
             "condition": "Laboratory,vallourec steel, 100% H2, 1000h",
             "final_state": "KIH ~100 MPa√m",
             "failure_mode": "KIH higher han required to comply to standards",
