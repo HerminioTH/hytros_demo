@@ -35,7 +35,7 @@ tab_instructions = dcc.Tab(
             For retrievable WBEs, if either criterion is not positive, the required mitigation is classified as Moderate.
 
             The user then selects the impact level, reflecting the consequences for operations should the identified issues not 
-            be addressed. Definitions and guidance are provided in the Criteria Sheet.
+            be addressed. Definitions and guidance are provided in the *Results* tab.
             """,
             style={"textAlign": "left"}
         ),

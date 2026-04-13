@@ -2,10 +2,10 @@ from dash import dcc, html, callback, Output, Input, MATCH
 import dash_bootstrap_components as dbc
 from utils import bid, rid, qid, gid, cid
 
-cw_1 = 2
-cw_2 = 10
+cw_1 = 1
+cw_2 = 5
 cw_3 = 3
-cw_4 = 3
+cw_4 = 4
 cw_5 = 1
 cw_6 = 30
 cw_7 = 1
@@ -265,6 +265,14 @@ tab_well_integrity = dcc.Tab(
         html.Div(
             style={"maxWidth": "2000px", "margin": "16px auto", "fontFamily": "system-ui"},
             children=[
+
+                dcc.Markdown(
+                    """
+                    NOTE: Criteria for each category and element are further elaborated in the report “D5.3.2 – Well reuse screening framework” which can be downloaded from the “Intro” tab.
+                    """,
+                    style={"textAlign": "left"}
+                ),
+
                 html.Table(
                     children=[
 
@@ -273,7 +281,7 @@ tab_well_integrity = dcc.Tab(
                                 html.Th("#", style=set_style(cw_1, textAlign="left")),
                                 html.Th("Element", style=set_style(cw_2, textAlign="left")),
                                 html.Th("Barrier", style=set_style(cw_3, textAlign="left")),
-                                html.Th("Retrievable", style=set_style(cw_4)),
+                                html.Th("Retrievability", style=set_style(cw_4)),
                                 # html.Th("#", style=set_style(cw_5, textAlign="center")),
                                 html.Th("Criteria", style=set_style(cw_6)),
                                 # html.Th("Answer", style=set_style(cw_7)),
@@ -299,7 +307,7 @@ tab_well_integrity = dcc.Tab(
                                     create_barrier_dropdown(bid("well_integrity", "barrier-1")),
                                     style=set_style(cw_3, textAlign="center", verticalAlign="top")
                                 ),
-                                html.Td("N/A", style=set_style(cw_3, textAlign="left", verticalAlign="top")),
+                                html.Td("Non-retrievable", style=set_style(cw_3, textAlign="left", verticalAlign="top")),
                                 html.Tr([
                                         html.Td("1. Are there impermeable formations that can constitute a (primary) caprock?", style=set_style(cw_6)),
                                         html.Td(create_answer_dropdown(qid("well_integrity", "q-1-1")), style=set_style(cw_8, textAlign="right"))
@@ -331,7 +339,8 @@ tab_well_integrity = dcc.Tab(
                                 html.Td("2)", style=set_style(cw_1, textAlign="left", verticalAlign="top")),
                                 html.Td("Production casing / liner", style=set_style(cw_2, textAlign="left", verticalAlign="top")),
                                 html.Td(create_barrier_dropdown(bid("well_integrity", "barrier-2")), style=set_style(cw_3, textAlign="center", verticalAlign="top")),
-                                html.Td(create_retrievable_dropdown(rid("well_integrity", "retrievable-2")), style=set_style(cw_4, verticalAlign="top")),
+                                # html.Td(create_retrievable_dropdown(rid("well_integrity", "retrievable-2")), style=set_style(cw_4, verticalAlign="top")),
+                                html.Td("Non-retrievable", style=set_style(cw_4, verticalAlign="top")),
                                 html.Tr([
                                         html.Td("1. Is the casing inspected and free of any defects (e.g. corrosion) as per applicable requirements?", style=set_style(cw_6)),
                                         html.Td(create_answer_dropdown(qid("well_integrity", "q-2-1")), style=set_style(cw_8, textAlign="right"))

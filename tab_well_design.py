@@ -85,6 +85,14 @@ tab_well_design = dcc.Tab(
         html.Div(
             style={"maxWidth": "2000px", "margin": "16px auto", "fontFamily": "system-ui"},
             children=[
+
+                dcc.Markdown(
+                    """
+                    NOTE: Criteria for each category and element are further elaborated in the report “D5.3.2 – Well reuse screening framework” which can be downloaded from the “Intro” tab.
+                    """,
+                    style={"textAlign": "left"}
+                ),
+
                 html.Table(
                     [
                         html.Thead(
@@ -241,7 +249,7 @@ def mitigation_2(status):
     style = set_style(cw_5)
     mapping = {
         "Yes": {"bg_color": "#fff130", "tx_color": "#000000", "text": "Moderate"},
-        "No": {"bg_color": "#ffffff", "tx_color": "#FFFFFF", "text": ""},
+        "No": {"bg_color": "#43c543", "tx_color": "#000000", "text": "No or minor"},
         "Unknown": {"bg_color": "#4E4E4E", "tx_color": "#FFFFFF", "text": "Unknown"},
         "": {"bg_color": "#FFFFFF", "tx_color": "#FFFFFF", "text": ""},
     }
@@ -261,7 +269,7 @@ def mitigation_3(status):
     style = set_style(cw_5)
     mapping = {
         "Yes": {"bg_color": "#fff130", "tx_color": "#000000", "text": "Moderate"},
-        "No": {"bg_color": "#ffffff", "tx_color": "#FFFFFF", "text": ""},
+        "No": {"bg_color": "#43c543", "tx_color": "#000000", "text": "No or minor"},
         "Unknown": {"bg_color": "#4E4E4E", "tx_color": "#FFFFFF", "text": "Unknown"},
         "": {"bg_color": "#FFFFFF", "tx_color": "#FFFFFF", "text": ""},
     }
@@ -321,7 +329,7 @@ def mitigation_6(status):
     style = set_style(cw_5)
     mapping = {
         "Yes": {"bg_color": "#fff130", "tx_color": "#000000", "text": "Moderate"},
-        "No": {"bg_color": "#ffffff", "tx_color": "#FFFFFF", "text": ""},
+        "No": {"bg_color": "#43c543", "tx_color": "#000000", "text": "No or minor"},
         "Unknown": {"bg_color": "#4E4E4E", "tx_color": "#FFFFFF", "text": "Unknown"},
         "": {"bg_color": "#FFFFFF", "tx_color": "#FFFFFF", "text": ""},
     }
@@ -361,7 +369,7 @@ def mitigation_8(status):
     style = set_style(cw_5)
     mapping = {
         "Yes": {"bg_color": "#fff130", "tx_color": "#000000", "text": "Moderate"},
-        "No": {"bg_color": "#ffffff", "tx_color": "#FFFFFF", "text": ""},
+        "No": {"bg_color": "#43c543", "tx_color": "#000000", "text": "No or minor"},
         "Unknown": {"bg_color": "#4E4E4E", "tx_color": "#FFFFFF", "text": "Unknown"},
         "": {"bg_color": "#FFFFFF", "tx_color": "#FFFFFF", "text": ""},
     }
