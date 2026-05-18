@@ -368,7 +368,8 @@ def mitigation_7(status):
 def mitigation_8(status):
     style = set_style(cw_5)
     mapping = {
-        "Yes": {"bg_color": "#fff130", "tx_color": "#000000", "text": "Moderate"},
+        # "Yes": {"bg_color": "#fff130", "tx_color": "#000000", "text": "Moderate"},
+        "Yes": {"bg_color": "#c02727", "tx_color": "#FFFFFF", "text": "Severe"},
         "No": {"bg_color": "#43c543", "tx_color": "#000000", "text": "No or minor"},
         "Unknown": {"bg_color": "#4E4E4E", "tx_color": "#FFFFFF", "text": "Unknown"},
         "": {"bg_color": "#FFFFFF", "tx_color": "#FFFFFF", "text": ""},

@@ -37,7 +37,7 @@ app.layout = html.Div(
             },
             children=[
                 html.H2(
-                    "HyTROS Screening Framework",
+                    "HyTROS Screening Tool",
                     style={"margin": "0"}
                 ),
                 html.Img(

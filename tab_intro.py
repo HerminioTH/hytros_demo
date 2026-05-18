@@ -11,7 +11,7 @@ tab_intro = dcc.Tab(
 
             dcc.Markdown(
                 """
-                ### **HyTROS Screening Framework Tool**
+                ### **HyTROS Screening Tool**
                 #### Reusing wells for Underground Hydrogen Storage (UHS)
                 """,
                 style={"textAlign": "left"}
