@@ -70,7 +70,7 @@ tab_intro = dcc.Tab(
 
                 **Contact**
 
-                Vedran Zikovic – vedran.zikovic@tno.nl
+                Vedran Zikovic – [vedran.zikovic@tno.nl](mailto:vedran.zikovic@tno.nl)
                  
                 """,
                 style={"textAlign": "left"}
