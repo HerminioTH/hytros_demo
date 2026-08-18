@@ -134,7 +134,7 @@ def create_elastomer_table():
             html.Tbody([
                 # Row 1
                 html.Tr([
-                    html.Td("Perfluoroelastomers (FFKM) --", style=style_1),
+                    html.Td("*Perfluoroelastomers (FFKM) --", style=style_1),
                     html.Td(
                         html.Img(
                             src="/assets/colorbar.png",  # put image inside assets folder
@@ -147,7 +147,7 @@ def create_elastomer_table():
 
                 # Row 2 (start merged cell here)
                 html.Tr([
-                    html.Td("Fluoroelastomers (FMK)  --", style=style_1),
+                    html.Td("*Fluoroelastomers (FKM)  --", style=style_1),
                 ]),
 
                 # Row 3 (start merged cell here)
@@ -213,7 +213,12 @@ tab_materials = dcc.Tab(
                                         [
                                             create_elastomer_table(),
                                             html.Br(),
-                                            html.Div("Note: The elastomers listed above are all appropriate for H2 operations.", style={"textAlign": "center"}),
+                                            html.Div(
+                                                "Note: The elastomers listed above are all appropriate for H2 operations. However," \
+                                                " the materials marked with an asterisk (*) contain PFAS, which might not be" \
+                                                " recommended/allowed for certain applications or locations.",
+                                                style={"textAlign": "left"}
+                                            ),
                                         ],
                                         style={"verticalAlign": "top"}),
                                 ])
